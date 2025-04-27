@@ -1,0 +1,43 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Curso Microbiota"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Introducción a R y RStudio
+        href: Instalacion.qmd
+      - text: Estructuras de datos
+        href: Estructuras.qmd
+      - text: Análisis ecológicos
+        menu: 
+          - href: AnalisisBacterias.qmd 
+            text: Bacterias
+          - href: AnalisisHongos.qmd 
+            text: Hongos
+
+    right: 
+      - icon: github 
+        aria-label: GitHub
+        href: https://github.com/anitalasa
+        
+      - text: "<img src='images/orcid.png' title='ORCID' alt='ORCID' style='height:20px;'>"
+        href: https://orcid.org/0000-0003-3783-7157
+        
+      - text: "<img src='images/internet.png' title='web research group' alt='web research group' style='height:20px;'>"
+        href: https://grupos.eez.csic.es/mae/
+        
+
+format:
+  html:
+    theme: minty
+    css: styles.css
+    toc: true
+    code-fold: false
+    code-tools: true
+
+editor: visual
+

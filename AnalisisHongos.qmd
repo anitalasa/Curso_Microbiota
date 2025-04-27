@@ -1,0 +1,10 @@
+---
+title: "Análisis comunidades fúngicas"
+format:
+  html:
+    toc: true
+execute:
+  eval: false
+editor_options: 
+  chunk_output_type: console
+---

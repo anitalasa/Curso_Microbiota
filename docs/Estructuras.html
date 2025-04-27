@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Principios básicos y estructuras de datos – Curso Microbiota</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Curso Microbiota</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Instalacion.html"> 
+<span class="menu-text">Introducción a R y RStudio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./Estructuras.html" aria-current="page"> 
+<span class="menu-text">Estructuras de datos</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-análisis-ecológicos" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Análisis ecológicos</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-análisis-ecológicos">    
+        <li>
+    <a class="dropdown-item" href="./AnalisisBacterias.html">
+ <span class="dropdown-text">Bacterias</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./AnalisisHongos.html">
+ <span class="dropdown-text">Hongos</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/anitalasa"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://orcid.org/0000-0003-3783-7157"> 
+<span class="menu-text"><img src="images/orcid.png" title="ORCID" alt="ORCID" style="height:20px;"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://grupos.eez.csic.es/mae/"> 
+<span class="menu-text"><img src="images/internet.png" title="web research group" alt="web research group" style="height:20px;"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#consideraciones-previas" id="toc-consideraciones-previas" class="nav-link active" data-scroll-target="#consideraciones-previas">0. Consideraciones previas</a>
+  <ul class="collapse">
+  <li><a href="#ejecución-de-código" id="toc-ejecución-de-código" class="nav-link" data-scroll-target="#ejecución-de-código">0.1 Ejecución de código</a></li>
+  <li><a href="#comentar-scripts" id="toc-comentar-scripts" class="nav-link" data-scroll-target="#comentar-scripts">0.2 Comentar scripts</a></li>
+  <li><a href="#recuperar-comandos-ejecutados" id="toc-recuperar-comandos-ejecutados" class="nav-link" data-scroll-target="#recuperar-comandos-ejecutados">0.3 Recuperar comandos ejecutados</a></li>
+  <li><a href="#directorio-de-trabajo" id="toc-directorio-de-trabajo" class="nav-link" data-scroll-target="#directorio-de-trabajo">0.4 Directorio de trabajo</a></li>
+  <li><a href="#visualizar-elementos" id="toc-visualizar-elementos" class="nav-link" data-scroll-target="#visualizar-elementos">0.5 Visualizar elementos</a></li>
+  <li><a href="#búsqueda-de-ayuda" id="toc-búsqueda-de-ayuda" class="nav-link" data-scroll-target="#búsqueda-de-ayuda">0.6 Búsqueda de ayuda</a></li>
+  </ul></li>
+  <li><a href="#instalación-de-paquetes-de-r" id="toc-instalación-de-paquetes-de-r" class="nav-link" data-scroll-target="#instalación-de-paquetes-de-r">1. Instalación de paquetes de R</a></li>
+  <li><a href="#clases-en-r" id="toc-clases-en-r" class="nav-link" data-scroll-target="#clases-en-r">2. Clases en R</a>
+  <ul class="collapse">
+  <li><a href="#numérico-integer-y-entero-integer" id="toc-numérico-integer-y-entero-integer" class="nav-link" data-scroll-target="#numérico-integer-y-entero-integer">2.1 Numérico (<em>integer</em>) y entero (<em>integer</em>)</a></li>
+  <li><a href="#carácter-character" id="toc-carácter-character" class="nav-link" data-scroll-target="#carácter-character">2.2 Carácter (<em>character</em>)</a></li>
+  <li><a href="#factor" id="toc-factor" class="nav-link" data-scroll-target="#factor">2.3 Factor</a></li>
+  <li><a href="#lógico" id="toc-lógico" class="nav-link" data-scroll-target="#lógico">2.4 Lógico</a></li>
+  <li><a href="#perdido-y-vacío" id="toc-perdido-y-vacío" class="nav-link" data-scroll-target="#perdido-y-vacío">2.5 Perdido y vacío</a></li>
+  <li><a href="#asignaciones-cambios-de-clase-y-determinación-del-tipo-de-clase" id="toc-asignaciones-cambios-de-clase-y-determinación-del-tipo-de-clase" class="nav-link" data-scroll-target="#asignaciones-cambios-de-clase-y-determinación-del-tipo-de-clase">Asignaciones, cambios de clase y determinación del tipo de clase</a></li>
+  </ul></li>
+  <li><a href="#tipos-de-objetos-o-estructuras-en-r" id="toc-tipos-de-objetos-o-estructuras-en-r" class="nav-link" data-scroll-target="#tipos-de-objetos-o-estructuras-en-r">3. Tipos de objetos o estructuras en R</a>
+  <ul class="collapse">
+  <li><a href="#vectores" id="toc-vectores" class="nav-link" data-scroll-target="#vectores">3.1 Vectores</a>
+  <ul class="collapse">
+  <li><a href="#operaciones-con-vectores" id="toc-operaciones-con-vectores" class="nav-link" data-scroll-target="#operaciones-con-vectores">3.1.1 Operaciones con vectores</a></li>
+  </ul></li>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices">3.2 Matrices</a></li>
+  <li><a href="#array" id="toc-array" class="nav-link" data-scroll-target="#array">Array</a></li>
+  <li><a href="#dataframes" id="toc-dataframes" class="nav-link" data-scroll-target="#dataframes">Dataframes</a></li>
+  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas">Listas</a></li>
+  <li><a href="#objetos-phyloseq" id="toc-objetos-phyloseq" class="nav-link" data-scroll-target="#objetos-phyloseq">objetos phyloseq</a></li>
+  </ul></li>
+  <li><a href="#read-tables-excels-etc" id="toc-read-tables-excels-etc" class="nav-link" data-scroll-target="#read-tables-excels-etc">read tables, excels, etc</a></li>
+  <li><a href="#x.-guardar" id="toc-x.-guardar" class="nav-link" data-scroll-target="#x.-guardar">X. Guardar</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Principios básicos y estructuras de datos</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="consideraciones-previas" class="level1">
+<h1>0. Consideraciones previas</h1>
+<section id="ejecución-de-código" class="level2">
+<h2 class="anchored" data-anchor-id="ejecución-de-código">0.1 Ejecución de código</h2>
+<p>Para <strong>ejecutar el código</strong> escrito en el editor de código, podemos hacerlo de dos maneras:</p>
+<ol type="a">
+<li>Seleccionando la línea de código a ejecutar o poniendo el cursor en dicha linea, y pulsando el botón <em>run</em> situado en la parte superior derecha del editor.</li>
+<li>Poniendo el cursor en la línea a ejecutar y pulsando <em>ctrl</em> + <em>enter</em></li>
+</ol>
+</section>
+<section id="comentar-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="comentar-scripts">0.2 Comentar scripts</h2>
+<p>Para poder comentar código, pondremos el símbolo <strong>#</strong> delante del comentario a realizar. Así pues, todo el texto y símbolos precedidos por <strong>#</strong> no serán ejecutados. Veamos un ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#a=2+32 podemos ver en nuestro Environment que la variable 'a' no se ha creado</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span> <span class="co">#si corremos esta línea, veremos que la variable b si se ha creado</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="recuperar-comandos-ejecutados" class="level2">
+<h2 class="anchored" data-anchor-id="recuperar-comandos-ejecutados">0.3 Recuperar comandos ejecutados</h2>
+<p>En R podemos saber qué comandos hemos ejecutado anteriormente de dos maneras:</p>
+<ol type="a">
+<li>Si nos situamos en la consola y le damos al botón <em>^</em> de nuestro teclado, podremos ver la orden inmediatamente anterior</li>
+<li>¿otra forma?</li>
+</ol>
+</section>
+<section id="directorio-de-trabajo" class="level2">
+<h2 class="anchored" data-anchor-id="directorio-de-trabajo">0.4 Directorio de trabajo</h2>
+<p>En nuestro directorio de trabajo es donde quedarán todos los archivos que guardemos (si lo hacemos con código).</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Antes de empezar a trabajar es <strong>MUY IMPORTANTE</strong> establecer el directorio de trabajo. Debemos tener cuidado, de lo contrario, podemos trabajar en otro directorio y sobreescribir ficheros, variables, etc.</p>
+</div>
+</div>
+<p>Podemos establecer nuestro lugar de trabajo de dos maneras:</p>
+<ol type="a">
+<li>Click en <em>Session</em> (panel superior) &gt; <em>Set working directory</em> &gt; <em>Choose directory</em>, y elegimos la carpeta de trabajo.</li>
+<li>Con el siguiente comando:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/radik/Desktop/Curso Microbiota R/CursoMicrobiota"</span>)<span class="co">#setwd(directoriodeinteres)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para comprobar en qué directorio nos encontramos, lo haremos por código:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()<span class="co">#no introducimos ningun argumento</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualizar-elementos" class="level2">
+<h2 class="anchored" data-anchor-id="visualizar-elementos">0.5 Visualizar elementos</h2>
+<p>Durante el desarrollo de nuestros scripts nos puede resultar útil y necesario visualizar el contenido de los elementos que tenemos en nuestro ambiente.</p>
+<p>Si queremos visualizar los elementos en la pantalla del editor de scripts, lo haremos así</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(b)<span class="co">#podemos visualizar todo tipo de variables</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       <span class="co">#¡OJO! la 'V' tiene que ir en mayuscula; R es sensible a las mayusculas y minusculas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si queremos visualizar el elemento <strong>completo</strong>, escribiremos el nombre del elemento directamente <strong>en la consola</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si nos enfrentamos a un elemento de gran tamaño (una lista, una tabla con muchas filas), y <strong>solo</strong> queremos ver el <strong>encabezamiento</strong>, usaremos este comando:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si queremos solo visualizar el final del elemento, lo haremos con el comando <em>tail()</em>, tal que así:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="búsqueda-de-ayuda" class="level2">
+<h2 class="anchored" data-anchor-id="búsqueda-de-ayuda">0.6 Búsqueda de ayuda</h2>
+<p>Habrá ocasiones en las que deseemos conocer información sobre un comando o una función concreta de un paquete (por ejemplo, qué tipo de variables de entrada acepta, cómo funciona, valores de salida, etc.). Para acceder a la <em>documentación</em> de la función concreta, existen varias maneras de proceder:</p>
+<ol type="a">
+<li>Con <strong>comandos</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>?<span class="fu">install.packages</span>() <span class="co">#despues del simbolo '?' escribimos el nombre de la funcion de interes</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">"install.packages"</span>)<span class="co">#es exactamente lo mismo, nos devuelve la misma información</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">"vegan"</span>)<span class="co">#nos proporciona toda la informacion de un paquete de interes (su descripcion, versiones y listado de funciones que incluye)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A continuación se abrirá en el visor inferior derecho, en la pestaña <em>Help</em> toda la información sobre el uso de dicha función (Figura 1).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Help_comm.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figura 1. Búsqueda de ayuda en R con comandos</figcaption>
+</figure>
+</div>
+<ol start="2" type="a">
+<li><strong>Interactivamente</strong> Debemos ir al panel inferior derecho y en la pestaña <em>Help</em>, buscar en la lupa el nombre de nuestra función de interés, tal y como se indica en la Figura 2.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Help.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figura 2. Búsqueda de ayuda en R.</figcaption>
+</figure>
+</div>
+<ol start="3" type="a">
+<li>Buscar en <strong>Google u otro buscador</strong> la documentación oficial.</li>
+</ol>
+<p>Toda la información que nos da el comando <em>?</em> o el panel de ayuda (opciones <strong>a</strong> y <strong>b</strong>) está disponible en Google, y en foros de grandísima utilidad como <a href="https://stackoverflow.com/questions"><strong>Stack overflow</strong></a>.</p>
+<ol start="4" type="a">
+<li><strong>Inteligencia Artificial</strong></li>
+</ol>
+<p>Se desaconseja enormemente el uso de cualquier tipo de chatbot para búsquedas sencillas que Google u otros buscadores pueden realizar. ¡Ahorremos energía!</p>
+</section>
+</section>
+<section id="instalación-de-paquetes-de-r" class="level1">
+<h1>1. Instalación de paquetes de R</h1>
+<p>R base incluye varios paquetes con funciones básicas, pero no son suficientes para nuestros análisis. Por ello, necesitamos instalar <strong>paquetes</strong> (conjuntos de funciones con un objetivo similar) que han sido desarrollados por otros usuarios (o por nosotros mismos) que están disponibles en repositorios públicos, como <a href="https://cran.r-project.org/" title="Web del repositorio CRAN">CRAN</a>. La descarga e instalación de los paquetes puede realizarse de dos maneras:</p>
+<ol type="a">
+<li>Mediante <strong>código</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>) <span class="co">#incluir el nombre del paquete siempre entre " "</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Una vez que hemos instalado de los repositorios los paquetes, debemos cargar las librerías y todo su contenido. Para ello:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)<span class="co">#OJO! Aquí no es necesario entrecomillar el nombre del paquete</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cada vez que habramos una sesión de R Studio, debemos cargar las librerías, de lo contrario, no encontrará las funciones cuando las llamemos. Pero <em>NO</em> es necesario que instalemos de nuevo los paquetes. Una vez que hemos instalado los paquetes estos ya quedan en nuestro ordenador, y aunque cerremos la sesión de R Studio, los paquetes quedarán en nuestro PC.</p>
+</div>
+</div>
+<ol start="2" type="a">
+<li><strong>Interactivamente</strong> Para ello, iremos al panel inferior derecho y haremos click en la pestaña <em>Packages</em>. Haremos click en el botón <em>Install</em> (debado de la cinta de pestañas, a la izquierda). Se nos abrirá una pantalla (Figura 3).</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Install.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figura 3. Panel de instalación de paquetes de R.</figcaption>
+</figure>
+</div>
+<p>En la opción <em>packages</em> introduciremos el nombre del paquete a instalar. Dejaremos seleccionada la opción <em>install dependencies</em>.</p>
+<p>Una vez instalados, debemos cargar los paquetes. Para ello, buscaremos el nombre de nuestro paquete en el listado. Si no lo encontramos, lo buscamos con la lupa, tal y como se muestra en la Figura 4.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/LoadPackages.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figura 4. Búsqueda de los paquetes instalados y selección de los mismos.</figcaption>
+</figure>
+</div>
+<p>Es importante que seleccioneis el paquete que buscabais para que se cargue la librería. Para comprobar que se ha cargado, podéis comprobar que en la consola os sale la orden ‘<em>library(paquetecargado)</em>’, tal y como se hace por código.</p>
+</section>
+<section id="clases-en-r" class="level1">
+<h1>2. Clases en R</h1>
+<p>En R tenemos muchas clases o tipos de datos diferentes. La Tabla 1 resume las clases principales.</p>
+<table class="caption-top table">
+<caption>Tabla 1. Clases en R. Entre paréntesis se indica la nomenclatura de cada clase en R.</caption>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Numérico</strong> (<em>numeric</em>)</td>
+<td>2.5</td>
+</tr>
+<tr class="even">
+<td><strong>Entero</strong> (<em>integer</em>)</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><strong>Carácter</strong> (<em>character</em>)</td>
+<td>Hola</td>
+</tr>
+<tr class="even">
+<td><strong>Factor</strong> (<em>factor</em>)</td>
+<td>Color (Blanco/negro)</td>
+</tr>
+<tr class="odd">
+<td><strong>Lógico</strong> (<em>logic</em>)</td>
+<td>TRUE/FALSE</td>
+</tr>
+<tr class="even">
+<td><strong>Perdido</strong> (<em>na</em>)</td>
+<td>NA</td>
+</tr>
+<tr class="odd">
+<td><strong>Vacío</strong> (<em>null</em>)</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+<section id="numérico-integer-y-entero-integer" class="level2">
+<h2 class="anchored" data-anchor-id="numérico-integer-y-entero-integer">2.1 Numérico (<em>integer</em>) y entero (<em>integer</em>)</h2>
+<p><strong>Entero</strong>: datos numéricos sin parte decimal. <strong>Numérico</strong>: contienen una parte decimal, fraccionaria</p>
+<p>No es objeto de este curso repasar las operaciones matemáticas en R, pero se pueden consultar en <a href="https://posit.cloud/learn/recipes/basics/BasicB1" title="Operaciones matemáticas">este link</a>.</p>
+</section>
+<section id="carácter-character" class="level2">
+<h2 class="anchored" data-anchor-id="carácter-character">2.2 Carácter (<em>character</em>)</h2>
+<p>Se encuentran compuestos por letras, números, espacios, signos de puntuación y/o símbolos especiales. A las cadenas de caracteres se les conoce como <strong>strings</strong>.</p>
+<p>Aparecen y se indican entrecomillados.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Una única cifra (o un conjunto de cifras) pueden ser de tipo carácter. Debemos tener cuidado con esto, ya que podemos querer que R trate a una(s) cifra(s) como carácter(es), por ejemplo, para que no sea posible aplicar operaciones matemáticas sobre ellas. Puede ser interesante en el caso de tratar los <strong>nombres de las muestras</strong> en un proyecto de microbiota/bioinformática.</p>
+</div>
+</div>
+</section>
+<section id="factor" class="level2">
+<h2 class="anchored" data-anchor-id="factor">2.3 Factor</h2>
+<p>Se trata de variables categóricas, es decir, que tienen un número concreto de <strong>niveles</strong> (<em>levels</em>). Es decir, son clasificadores, variables de agrupación. Un ejemplo: etapa de desarrollo (factor), con 5 niveles: semilla, plántula, joven, adulto, senescente.</p>
+<div class="collout-note">
+<p>No nos debemos dejar llevar por la apariencia. A simple vista, podemos ver que el contenido de una columna aparenta que se trata de variables de tipo carácter porque están compuestas por letras y/o números, pero puede que se trate de factores. Al fin y al cabo, las variables de tipo factor pueden estar compuestas por caracteres.</p>
+</div>
+</section>
+<section id="lógico" class="level2">
+<h2 class="anchored" data-anchor-id="lógico">2.4 Lógico</h2>
+<p>Se trata de clases que solo pueden tomar dos valores: <em>TRUE</em> o <em>FALSE</em>, es decir, si cumplen o no una condición. También se conocen como <strong>clases booleanas</strong>.</p>
+</section>
+<section id="perdido-y-vacío" class="level2">
+<h2 class="anchored" data-anchor-id="perdido-y-vacío">2.5 Perdido y vacío</h2>
+<p><strong>Perdido</strong> (<em>na</em>): se trata de datos perdidos, por ejemplo, datos que no han sido registrados o que han sido omitidos. Son datos faltantes. Se suelen representar como NA.</p>
+<p><strong>Vacío</strong> (<em>null</em>): representan la ausencia de datos, es decir, un comando nos puede devolver NULL cuando intente recuperar un dato y no lo encuentre (por ejemplo, porque lo hemos borrado).</p>
+</section>
+<section id="asignaciones-cambios-de-clase-y-determinación-del-tipo-de-clase" class="level2">
+<h2 class="anchored" data-anchor-id="asignaciones-cambios-de-clase-y-determinación-del-tipo-de-clase">Asignaciones, cambios de clase y determinación del tipo de clase</h2>
+<p>Cuando queramos crear una variable y asignarle un valor, usaremos el operador ‘<em>=</em>’ o ‘<em>&lt;-</em>’</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">"hola que tal"</span> <span class="co">#creo una variable que contiene ese texto</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="st">"hola que tal"</span> <span class="co">#idem</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#NOTA: no importa si antes y después de los operadores incluimos un espacio.</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>a<span class="sc">==</span>b <span class="co">#¡¡¡OJO!!! Dos simbolos '=' seguidos NO es para realizar una asignacion, sino para preguntarle si los dos elementos son iguales</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(a,b) <span class="co">#a==b es equivalente a identical(a,b)</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span><span class="sc">==</span><span class="dv">8</span> <span class="co">#le estamos preguntando si 7 es igual a 8, nos debe devolver FALSE</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">!=</span> <span class="dv">8</span> <span class="co">#el operador '!=' significa "diferente de". En este caso debe devolver TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para saber de qué clase es nuestro objeto:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para determinar o cambiar de clase:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fu">as.character</span>(<span class="st">"hola"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="fu">as.factor</span>(<span class="st">"hola"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>desarrollo<span class="ot">=</span><span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"semilla"</span>,<span class="st">"semilla"</span>,<span class="st">"plantula"</span>,<span class="st">"joven"</span>,<span class="st">"adulto"</span>,<span class="st">"joven"</span>,<span class="st">"senescente"</span>))<span class="co"># 'c' indica que vamos a introducir un vector, donde cada elemento del mismo equivale a un nivel del factor. Lo veremos en el apartado 3.</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(desarrollo)<span class="co">#nos muestra los niveles de un factor</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fu">as.integer</span>(<span class="fl">2.1+3.2</span>)<span class="co">#vemos que al llamar a la variable 'a' nos devuelve el valor 5</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="fu">as.numeric</span>(<span class="fl">2.1+3.2</span>)<span class="co">#ahora, la variable nos devuelve 5.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si quieres conocer más cosas sobre los <strong>operadores en R</strong>, haz click en [este link] (https://bookdown.org/jboscomendoza/r-principiantes4/operadores.html) donde vienen muchos más detalles.</p>
+</section>
+</section>
+<section id="tipos-de-objetos-o-estructuras-en-r" class="level1">
+<h1>3. Tipos de objetos o estructuras en R</h1>
+<p>Las clases son tipos de datos, pero estos pueden estar almacenados en diferentes tipos de <strong>objetos</strong> o <strong>elementos</strong>. Así pues, podemos tener diferentes tipos de objetos que almacenen diferentes datos de diferentes clases. Veamos los ejemplos.</p>
+<section id="vectores" class="level2">
+<h2 class="anchored" data-anchor-id="vectores">3.1 Vectores</h2>
+<p>Se trata de una colección de elementos o conjunto de datos <strong>del mismo tipo</strong> o clase. Es la estructura mínima de R.</p>
+<p>Para crearlos, debemos preceder a la lista de elementos del vector la letra <em>c</em>, y los elementos tienen que estar entrecomillados:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>compra <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"pan"</span>, <span class="st">"harina"</span>, <span class="st">"pollo"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(compra)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>precios<span class="ot">=</span><span class="fu">c</span>(<span class="st">"1.50"</span>,<span class="st">"3.75"</span>,<span class="st">"6.98"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>mixto<span class="ot">=</span><span class="fu">c</span>(<span class="st">"7.4"</span>,<span class="st">"hola"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mixto)<span class="co">#OJO! el valor 7.4 lo toma como carácter, pues todos los elementos han de ser del mismo tipo/clase</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>boo<span class="ot">=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>)<span class="co">#como no están entrecomillados, los toma como booleano</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(boo)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>no_boo<span class="ot">=</span><span class="fu">c</span>(<span class="st">"TRUE"</span>,<span class="st">"FALSE"</span>,<span class="st">"FALSE"</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(no_boo)<span class="co">#es para preguntarle directamente si es un vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para saber de forma rápida y visual de qué tipo son mis vectores, basta con buscarlos en el panel de Environment, tal y como se aprecia en la Figura 5:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Vectors.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figura 5. Apariencia de Environment.</figcaption>
+</figure>
+</div>
+<p>Podemos fusionar vectores, incluso de diferentes tipos. R de forma automática realizará una <strong>coerción</strong>, una <em>fusión</em> de los mismos. R determina automáticamente la clase resultante, que será la más universal (generalmente, caracter). Comprobémoslo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>precios_compra<span class="ot">=</span><span class="fu">c</span>(precios,compra)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(precios_compra)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>precios_compra <span class="co">#coloca uno inmediatamente después del otro.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="operaciones-con-vectores" class="level3">
+<h3 class="anchored" data-anchor-id="operaciones-con-vectores">3.1.1 Operaciones con vectores</h3>
+<ol type="a">
+<li>Podemos conocer la <strong>longitud</strong> de los vectores:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(precios_compra) <span class="co">#longitud: 6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li>Conocer el elemento que ocupa una <strong>posición</strong> del vector. Basta con poner la posición entre corchetes, tras el nombre del vector</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>] <span class="co">#que acceda al elemento en la posición 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="a">
+<li><strong>Modificar</strong> un vector. Debemos asignar el nuevo valor a la posición que queremos modificar:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#queremos cambiar el segundo precio, por 0.49:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>]<span class="ot">=</span><span class="st">"0.49"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>precios_compra <span class="co">#comprobamos todo el contenido del vector</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>] <span class="co">#comprobamos el contenido en la posición 2</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#añadir elementos a un vector (añadir también es 'modificar' un vector)</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">7</span>]<span class="ot">=</span> <span class="st">"gelducha"</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>precios_compra</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="a">
+<li>Preguntas al vector</li>
+</ol>
+<p>Podemos interaccionar con los vectores, y preguntarles si un elemento es igual, mayor, menos que otro valor; cuál es la cifra máxima y mínima de un vector numérico, entre otras.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>precios[<span class="dv">3</span>] <span class="sc">&gt;</span>  <span class="fl">6.97</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(precios) <span class="co">#NO nos devuelve el valor máximo, sino la POSICIÓN que ocupa el valor máximo</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Ejercicio: escribe en UNA sola línea de código el valor máximo del 'precios'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="matrices" class="level2">
+<h2 class="anchored" data-anchor-id="matrices">3.2 Matrices</h2>
+</section>
+<section id="array" class="level2">
+<h2 class="anchored" data-anchor-id="array">Array</h2>
+</section>
+<section id="dataframes" class="level2">
+<h2 class="anchored" data-anchor-id="dataframes">Dataframes</h2>
+</section>
+<section id="listas" class="level2">
+<h2 class="anchored" data-anchor-id="listas">Listas</h2>
+</section>
+<section id="objetos-phyloseq" class="level2">
+<h2 class="anchored" data-anchor-id="objetos-phyloseq">objetos phyloseq</h2>
+</section>
+</section>
+<section id="read-tables-excels-etc" class="level1">
+<h1>read tables, excels, etc</h1>
+<p>#guardar objetos, rds, rdata</p>
+</section>
+<section id="x.-guardar" class="level1">
+<h1>X. Guardar</h1>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Principios básicos y estructuras de datos"</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: false</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># 0. Consideraciones previas</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.1 Ejecución de código</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>Para **ejecutar el código** escrito en el editor de código, podemos hacerlo de dos maneras:</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>a.  Seleccionando la línea de código a ejecutar o poniendo el cursor en dicha linea, y pulsando el botón *run* situado en la parte superior derecha del editor.</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>b.  Poniendo el cursor en la línea a ejecutar y pulsando *ctrl* + *enter*</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.2 Comentar scripts</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>Para poder comentar código, pondremos el símbolo **#** delante del comentario a realizar. Así pues, todo el texto y símbolos precedidos por **#** no serán ejecutados. Veamos un ejemplo:</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co">#a=2+32 podemos ver en nuestro Environment que la variable 'a' no se ha creado</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span> <span class="co">#si corremos esta línea, veremos que la variable b si se ha creado</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.3 Recuperar comandos ejecutados</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>En R podemos saber qué comandos hemos ejecutado anteriormente de dos maneras:</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>a)  Si nos situamos en la consola y le damos al botón *\^* de nuestro teclado, podremos ver la orden inmediatamente anterior</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>b)  ¿otra forma?</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.4 Directorio de trabajo</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>En nuestro directorio de trabajo es donde quedarán todos los archivos que guardemos (si lo hacemos con código).</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>Antes de empezar a trabajar es **MUY IMPORTANTE** establecer el directorio de trabajo. Debemos tener cuidado, de lo contrario, podemos trabajar en otro directorio y sobreescribir ficheros, variables, etc.</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>Podemos establecer nuestro lugar de trabajo de dos maneras:</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>a)  Click en *Session* (panel superior) \&gt; *Set working directory* \&gt; *Choose directory*, y elegimos la carpeta de trabajo.</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>b)  Con el siguiente comando:</span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/radik/Desktop/Curso Microbiota R/CursoMicrobiota"</span>)<span class="co">#setwd(directoriodeinteres)</span></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>Para comprobar en qué directorio nos encontramos, lo haremos por código:</span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()<span class="co">#no introducimos ningun argumento</span></span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.5 Visualizar elementos</span></span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>Durante el desarrollo de nuestros scripts nos puede resultar útil y necesario visualizar el contenido de los elementos que tenemos en nuestro ambiente.</span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>Si queremos visualizar los elementos en la pantalla del editor de scripts, lo haremos así</span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(b)<span class="co">#podemos visualizar todo tipo de variables</span></span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>       <span class="co">#¡OJO! la 'V' tiene que ir en mayuscula; R es sensible a las mayusculas y minusculas</span></span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>Si queremos visualizar el elemento **completo**, escribiremos el nombre del elemento directamente **en la consola**:</span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a>b</span>
+<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a>Si nos enfrentamos a un elemento de gran tamaño (una lista, una tabla con muchas filas), y **solo** queremos ver el **encabezamiento**, usaremos este comando:</span>
+<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(b)</span>
+<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a>Si queremos solo visualizar el final del elemento, lo haremos con el comando *tail()*, tal que así:</span>
+<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(b)</span>
+<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.6 Búsqueda de ayuda</span></span>
+<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a>Habrá ocasiones en las que deseemos conocer información sobre un comando o una función concreta de un paquete (por ejemplo, qué tipo de variables de entrada acepta, cómo funciona, valores de salida, etc.). Para acceder a la *documentación* de la función concreta, existen varias maneras de proceder:</span>
+<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a>a)  Con **comandos**</span>
+<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=F}</span></span>
+<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a><span class="in">?install.packages() #despues del simbolo '?' escribimos el nombre de la funcion de interes</span></span>
+<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a><span class="in">help("install.packages")#es exactamente lo mismo, nos devuelve la misma información</span></span>
+<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a><span class="in">help(package="vegan")#nos proporciona toda la informacion de un paquete de interes (su descripcion, versiones y listado de funciones que incluye)</span></span>
+<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a>A continuación se abrirá en el visor inferior derecho, en la pestaña *Help* toda la información sobre el uso de dicha función (Figura 1).</span>
+<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 1. Búsqueda de ayuda en R con comandos](images/Help_comm.jpg)</span></span>
+<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a>b)  **Interactivamente** Debemos ir al panel inferior derecho y en la pestaña *Help*, buscar en la lupa el nombre de nuestra función de interés, tal y como se indica en la Figura 2.</span>
+<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-123"><a href="#cb20-123" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 2. Búsqueda de ayuda en R.](images/Help.jpg)</span></span>
+<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a>c)  Buscar en **Google u otro buscador** la documentación oficial.</span>
+<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a>Toda la información que nos da el comando *?* o el panel de ayuda (opciones **a** y **b**) está disponible en Google, y en foros de grandísima utilidad como [**Stack overflow**](https://stackoverflow.com/questions).</span>
+<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a>d)  **Inteligencia Artificial**</span>
+<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a>Se desaconseja enormemente el uso de cualquier tipo de chatbot para búsquedas sencillas que Google u otros buscadores pueden realizar. ¡Ahorremos energía!</span>
+<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a><span class="fu"># 1. Instalación de paquetes de R</span></span>
+<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a>R base incluye varios paquetes con funciones básicas, pero no son suficientes para nuestros análisis. Por ello, necesitamos instalar **paquetes** (conjuntos de funciones con un objetivo similar) que han sido desarrollados por otros usuarios (o por nosotros mismos) que están disponibles en repositorios públicos, como <span class="co">[</span><span class="ot">CRAN</span><span class="co">](https://cran.r-project.org/ "Web del repositorio CRAN")</span>. La descarga e instalación de los paquetes puede realizarse de dos maneras:</span>
+<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a>a)  Mediante **código**</span>
+<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
+<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a><span class="in">install.packages("ggplot2") #incluir el nombre del paquete siempre entre " "</span></span>
+<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a>Una vez que hemos instalado de los repositorios los paquetes, debemos cargar las librerías y todo su contenido. Para ello:</span>
+<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)<span class="co">#OJO! Aquí no es necesario entrecomillar el nombre del paquete</span></span>
+<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a>::: callout-warning</span>
+<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a>Cada vez que habramos una sesión de R Studio, debemos cargar las librerías, de lo contrario, no encontrará las funciones cuando las llamemos. Pero *NO* es necesario que instalemos de nuevo los paquetes. Una vez que hemos instalado los paquetes estos ya quedan en nuestro ordenador, y aunque cerremos la sesión de R Studio, los paquetes quedarán en nuestro PC.</span>
+<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a>b)  **Interactivamente** Para ello, iremos al panel inferior derecho y haremos click en la pestaña *Packages*. Haremos click en el botón *Install* (debado de la cinta de pestañas, a la izquierda). Se nos abrirá una pantalla (Figura 3).</span>
+<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 3. Panel de instalación de paquetes de R.](images/Install.jpg)</span></span>
+<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a>En la opción *packages* introduciremos el nombre del paquete a instalar. Dejaremos seleccionada la opción *install dependencies*.</span>
+<span id="cb20-160"><a href="#cb20-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-161"><a href="#cb20-161" aria-hidden="true" tabindex="-1"></a>Una vez instalados, debemos cargar los paquetes. Para ello, buscaremos el nombre de nuestro paquete en el listado. Si no lo encontramos, lo buscamos con la lupa, tal y como se muestra en la Figura 4.</span>
+<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-163"><a href="#cb20-163" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 4. Búsqueda de los paquetes instalados y selección de los mismos.](images/LoadPackages.jpg)</span></span>
+<span id="cb20-164"><a href="#cb20-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-165"><a href="#cb20-165" aria-hidden="true" tabindex="-1"></a>Es importante que seleccioneis el paquete que buscabais para que se cargue la librería. Para comprobar que se ha cargado, podéis comprobar que en la consola os sale la orden '*library(paquetecargado)*', tal y como se hace por código.</span>
+<span id="cb20-166"><a href="#cb20-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a><span class="fu"># 2. Clases en R</span></span>
+<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-169"><a href="#cb20-169" aria-hidden="true" tabindex="-1"></a>En R tenemos muchas clases o tipos de datos diferentes. La Tabla 1 resume las clases principales.</span>
+<span id="cb20-170"><a href="#cb20-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-171"><a href="#cb20-171" aria-hidden="true" tabindex="-1"></a>| Clase                      | Ejemplo              |</span>
+<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a>|----------------------------|----------------------|</span>
+<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a>| **Numérico** (*numeric*)   | 2.5                  |</span>
+<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a>| **Entero** (*integer*)     | 2                    |</span>
+<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a>| **Carácter** (*character*) | Hola                 |</span>
+<span id="cb20-176"><a href="#cb20-176" aria-hidden="true" tabindex="-1"></a>| **Factor** (*factor*)      | Color (Blanco/negro) |</span>
+<span id="cb20-177"><a href="#cb20-177" aria-hidden="true" tabindex="-1"></a>| **Lógico** (*logic*)       | TRUE/FALSE           |</span>
+<span id="cb20-178"><a href="#cb20-178" aria-hidden="true" tabindex="-1"></a>| **Perdido** (*na*)         | NA                   |</span>
+<span id="cb20-179"><a href="#cb20-179" aria-hidden="true" tabindex="-1"></a>| **Vacío** (*null*)         | NULL                 |</span>
+<span id="cb20-180"><a href="#cb20-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-181"><a href="#cb20-181" aria-hidden="true" tabindex="-1"></a>: Tabla 1. Clases en R. Entre paréntesis se indica la nomenclatura de cada clase en R.</span>
+<span id="cb20-182"><a href="#cb20-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-183"><a href="#cb20-183" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.1 Numérico (*integer*) y entero (*integer*)</span></span>
+<span id="cb20-184"><a href="#cb20-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-185"><a href="#cb20-185" aria-hidden="true" tabindex="-1"></a>**Entero**: datos numéricos sin parte decimal. **Numérico**: contienen una parte decimal, fraccionaria</span>
+<span id="cb20-186"><a href="#cb20-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-187"><a href="#cb20-187" aria-hidden="true" tabindex="-1"></a>No es objeto de este curso repasar las operaciones matemáticas en R, pero se pueden consultar en <span class="co">[</span><span class="ot">este link</span><span class="co">](https://posit.cloud/learn/recipes/basics/BasicB1 "Operaciones matemáticas")</span>.</span>
+<span id="cb20-188"><a href="#cb20-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-189"><a href="#cb20-189" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.2 Carácter (*character*)</span></span>
+<span id="cb20-190"><a href="#cb20-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-191"><a href="#cb20-191" aria-hidden="true" tabindex="-1"></a>Se encuentran compuestos por letras, números, espacios, signos de puntuación y/o símbolos especiales. A las cadenas de caracteres se les conoce como **strings**.</span>
+<span id="cb20-192"><a href="#cb20-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-193"><a href="#cb20-193" aria-hidden="true" tabindex="-1"></a>Aparecen y se indican entrecomillados.</span>
+<span id="cb20-194"><a href="#cb20-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-195"><a href="#cb20-195" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb20-196"><a href="#cb20-196" aria-hidden="true" tabindex="-1"></a>Una única cifra (o un conjunto de cifras) pueden ser de tipo carácter. Debemos tener cuidado con esto, ya que podemos querer que R trate a una(s) cifra(s) como carácter(es), por ejemplo, para que no sea posible aplicar operaciones matemáticas sobre ellas. Puede ser interesante en el caso de tratar los **nombres de las muestras** en un proyecto de microbiota/bioinformática.</span>
+<span id="cb20-197"><a href="#cb20-197" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-198"><a href="#cb20-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-199"><a href="#cb20-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.3 Factor</span></span>
+<span id="cb20-200"><a href="#cb20-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-201"><a href="#cb20-201" aria-hidden="true" tabindex="-1"></a>Se trata de variables categóricas, es decir, que tienen un número concreto de **niveles** (*levels*). Es decir, son clasificadores, variables de agrupación. Un ejemplo: etapa de desarrollo (factor), con 5 niveles: semilla, plántula, joven, adulto, senescente.</span>
+<span id="cb20-202"><a href="#cb20-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-203"><a href="#cb20-203" aria-hidden="true" tabindex="-1"></a>::: collout-note</span>
+<span id="cb20-204"><a href="#cb20-204" aria-hidden="true" tabindex="-1"></a>No nos debemos dejar llevar por la apariencia. A simple vista, podemos ver que el contenido de una columna aparenta que se trata de variables de tipo carácter porque están compuestas por letras y/o números, pero puede que se trate de factores. Al fin y al cabo, las variables de tipo factor pueden estar compuestas por caracteres.</span>
+<span id="cb20-205"><a href="#cb20-205" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-206"><a href="#cb20-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-207"><a href="#cb20-207" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.4 Lógico</span></span>
+<span id="cb20-208"><a href="#cb20-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-209"><a href="#cb20-209" aria-hidden="true" tabindex="-1"></a>Se trata de clases que solo pueden tomar dos valores: *TRUE* o *FALSE*, es decir, si cumplen o no una condición. También se conocen como **clases booleanas**.</span>
+<span id="cb20-210"><a href="#cb20-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-211"><a href="#cb20-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.5 Perdido y vacío</span></span>
+<span id="cb20-212"><a href="#cb20-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-213"><a href="#cb20-213" aria-hidden="true" tabindex="-1"></a>**Perdido** (*na*): se trata de datos perdidos, por ejemplo, datos que no han sido registrados o que han sido omitidos. Son datos faltantes. Se suelen representar como NA.</span>
+<span id="cb20-214"><a href="#cb20-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-215"><a href="#cb20-215" aria-hidden="true" tabindex="-1"></a>**Vacío** (*null*): representan la ausencia de datos, es decir, un comando nos puede devolver NULL cuando intente recuperar un dato y no lo encuentre (por ejemplo, porque lo hemos borrado).</span>
+<span id="cb20-216"><a href="#cb20-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-217"><a href="#cb20-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## Asignaciones, cambios de clase y determinación del tipo de clase</span></span>
+<span id="cb20-218"><a href="#cb20-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-219"><a href="#cb20-219" aria-hidden="true" tabindex="-1"></a>Cuando queramos crear una variable y asignarle un valor, usaremos el operador '*=*' o '*&lt;-*'</span>
+<span id="cb20-220"><a href="#cb20-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-223"><a href="#cb20-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-224"><a href="#cb20-224" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">"hola que tal"</span> <span class="co">#creo una variable que contiene ese texto</span></span>
+<span id="cb20-225"><a href="#cb20-225" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="st">"hola que tal"</span> <span class="co">#idem</span></span>
+<span id="cb20-226"><a href="#cb20-226" aria-hidden="true" tabindex="-1"></a><span class="co">#NOTA: no importa si antes y después de los operadores incluimos un espacio.</span></span>
+<span id="cb20-227"><a href="#cb20-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-228"><a href="#cb20-228" aria-hidden="true" tabindex="-1"></a>a<span class="sc">==</span>b <span class="co">#¡¡¡OJO!!! Dos simbolos '=' seguidos NO es para realizar una asignacion, sino para preguntarle si los dos elementos son iguales</span></span>
+<span id="cb20-229"><a href="#cb20-229" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(a,b) <span class="co">#a==b es equivalente a identical(a,b)</span></span>
+<span id="cb20-230"><a href="#cb20-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-231"><a href="#cb20-231" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span><span class="sc">==</span><span class="dv">8</span> <span class="co">#le estamos preguntando si 7 es igual a 8, nos debe devolver FALSE</span></span>
+<span id="cb20-232"><a href="#cb20-232" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">!=</span> <span class="dv">8</span> <span class="co">#el operador '!=' significa "diferente de". En este caso debe devolver TRUE</span></span>
+<span id="cb20-233"><a href="#cb20-233" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-234"><a href="#cb20-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-235"><a href="#cb20-235" aria-hidden="true" tabindex="-1"></a>Para saber de qué clase es nuestro objeto:</span>
+<span id="cb20-236"><a href="#cb20-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-239"><a href="#cb20-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-240"><a href="#cb20-240" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span>
+<span id="cb20-241"><a href="#cb20-241" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(b)</span>
+<span id="cb20-242"><a href="#cb20-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-243"><a href="#cb20-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-244"><a href="#cb20-244" aria-hidden="true" tabindex="-1"></a>Para determinar o cambiar de clase:</span>
+<span id="cb20-245"><a href="#cb20-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-248"><a href="#cb20-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-249"><a href="#cb20-249" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fu">as.character</span>(<span class="st">"hola"</span>)</span>
+<span id="cb20-250"><a href="#cb20-250" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="fu">as.factor</span>(<span class="st">"hola"</span>)</span>
+<span id="cb20-251"><a href="#cb20-251" aria-hidden="true" tabindex="-1"></a>desarrollo<span class="ot">=</span><span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"semilla"</span>,<span class="st">"semilla"</span>,<span class="st">"plantula"</span>,<span class="st">"joven"</span>,<span class="st">"adulto"</span>,<span class="st">"joven"</span>,<span class="st">"senescente"</span>))<span class="co"># 'c' indica que vamos a introducir un vector, donde cada elemento del mismo equivale a un nivel del factor. Lo veremos en el apartado 3.</span></span>
+<span id="cb20-252"><a href="#cb20-252" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(desarrollo)<span class="co">#nos muestra los niveles de un factor</span></span>
+<span id="cb20-253"><a href="#cb20-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-254"><a href="#cb20-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-255"><a href="#cb20-255" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fu">as.integer</span>(<span class="fl">2.1+3.2</span>)<span class="co">#vemos que al llamar a la variable 'a' nos devuelve el valor 5</span></span>
+<span id="cb20-256"><a href="#cb20-256" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="fu">as.numeric</span>(<span class="fl">2.1+3.2</span>)<span class="co">#ahora, la variable nos devuelve 5.3</span></span>
+<span id="cb20-257"><a href="#cb20-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-258"><a href="#cb20-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-259"><a href="#cb20-259" aria-hidden="true" tabindex="-1"></a>Si quieres conocer más cosas sobre los **operadores en R**, haz click en <span class="co">[</span><span class="ot">este link</span><span class="co">]</span> (https://bookdown.org/jboscomendoza/r-principiantes4/operadores.html) donde vienen muchos más detalles.</span>
+<span id="cb20-260"><a href="#cb20-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-261"><a href="#cb20-261" aria-hidden="true" tabindex="-1"></a><span class="fu"># 3. Tipos de objetos o estructuras en R</span></span>
+<span id="cb20-262"><a href="#cb20-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-263"><a href="#cb20-263" aria-hidden="true" tabindex="-1"></a>Las clases son tipos de datos, pero estos pueden estar almacenados en diferentes tipos de **objetos** o **elementos**. Así pues, podemos tener diferentes tipos de objetos que almacenen diferentes datos de diferentes clases. Veamos los ejemplos.</span>
+<span id="cb20-264"><a href="#cb20-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-265"><a href="#cb20-265" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.1 Vectores</span></span>
+<span id="cb20-266"><a href="#cb20-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-267"><a href="#cb20-267" aria-hidden="true" tabindex="-1"></a>Se trata de una colección de elementos o conjunto de datos **del mismo tipo** o clase. Es la estructura mínima de R.</span>
+<span id="cb20-268"><a href="#cb20-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-269"><a href="#cb20-269" aria-hidden="true" tabindex="-1"></a>Para crearlos, debemos preceder a la lista de elementos del vector la letra *c*, y los elementos tienen que estar entrecomillados:</span>
+<span id="cb20-270"><a href="#cb20-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-273"><a href="#cb20-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-274"><a href="#cb20-274" aria-hidden="true" tabindex="-1"></a>compra <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"pan"</span>, <span class="st">"harina"</span>, <span class="st">"pollo"</span>)</span>
+<span id="cb20-275"><a href="#cb20-275" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(compra)</span>
+<span id="cb20-276"><a href="#cb20-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-277"><a href="#cb20-277" aria-hidden="true" tabindex="-1"></a>precios<span class="ot">=</span><span class="fu">c</span>(<span class="st">"1.50"</span>,<span class="st">"3.75"</span>,<span class="st">"6.98"</span>)</span>
+<span id="cb20-278"><a href="#cb20-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-279"><a href="#cb20-279" aria-hidden="true" tabindex="-1"></a>mixto<span class="ot">=</span><span class="fu">c</span>(<span class="st">"7.4"</span>,<span class="st">"hola"</span>)</span>
+<span id="cb20-280"><a href="#cb20-280" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mixto)<span class="co">#OJO! el valor 7.4 lo toma como carácter, pues todos los elementos han de ser del mismo tipo/clase</span></span>
+<span id="cb20-281"><a href="#cb20-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-282"><a href="#cb20-282" aria-hidden="true" tabindex="-1"></a>boo<span class="ot">=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>)<span class="co">#como no están entrecomillados, los toma como booleano</span></span>
+<span id="cb20-283"><a href="#cb20-283" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(boo)</span>
+<span id="cb20-284"><a href="#cb20-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-285"><a href="#cb20-285" aria-hidden="true" tabindex="-1"></a>no_boo<span class="ot">=</span><span class="fu">c</span>(<span class="st">"TRUE"</span>,<span class="st">"FALSE"</span>,<span class="st">"FALSE"</span>)</span>
+<span id="cb20-286"><a href="#cb20-286" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(no_boo)<span class="co">#es para preguntarle directamente si es un vector</span></span>
+<span id="cb20-287"><a href="#cb20-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-288"><a href="#cb20-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-289"><a href="#cb20-289" aria-hidden="true" tabindex="-1"></a>Para saber de forma rápida y visual de qué tipo son mis vectores, basta con buscarlos en el panel de Environment, tal y como se aprecia en la Figura 5:</span>
+<span id="cb20-290"><a href="#cb20-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-291"><a href="#cb20-291" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 5. Apariencia de Environment.](images/Vectors.jpg)</span></span>
+<span id="cb20-292"><a href="#cb20-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-293"><a href="#cb20-293" aria-hidden="true" tabindex="-1"></a>Podemos fusionar vectores, incluso de diferentes tipos. R de forma automática realizará una **coerción**, una *fusión* de los mismos. R determina automáticamente la clase resultante, que será la más universal (generalmente, caracter). Comprobémoslo:</span>
+<span id="cb20-294"><a href="#cb20-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-297"><a href="#cb20-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-298"><a href="#cb20-298" aria-hidden="true" tabindex="-1"></a>precios_compra<span class="ot">=</span><span class="fu">c</span>(precios,compra)</span>
+<span id="cb20-299"><a href="#cb20-299" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(precios_compra)</span>
+<span id="cb20-300"><a href="#cb20-300" aria-hidden="true" tabindex="-1"></a>precios_compra <span class="co">#coloca uno inmediatamente después del otro.</span></span>
+<span id="cb20-301"><a href="#cb20-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-302"><a href="#cb20-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-303"><a href="#cb20-303" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.1.1 Operaciones con vectores</span></span>
+<span id="cb20-304"><a href="#cb20-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-305"><a href="#cb20-305" aria-hidden="true" tabindex="-1"></a>a) Podemos conocer la **longitud** de los vectores:</span>
+<span id="cb20-306"><a href="#cb20-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-309"><a href="#cb20-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-310"><a href="#cb20-310" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(precios_compra) <span class="co">#longitud: 6</span></span>
+<span id="cb20-311"><a href="#cb20-311" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-312"><a href="#cb20-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-313"><a href="#cb20-313" aria-hidden="true" tabindex="-1"></a>b) Conocer el elemento que ocupa una **posición** del vector. Basta con poner la posición entre corchetes, tras el nombre del vector</span>
+<span id="cb20-314"><a href="#cb20-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-317"><a href="#cb20-317" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-318"><a href="#cb20-318" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>] <span class="co">#que acceda al elemento en la posición 2</span></span>
+<span id="cb20-319"><a href="#cb20-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-320"><a href="#cb20-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-321"><a href="#cb20-321" aria-hidden="true" tabindex="-1"></a>c) **Modificar** un vector. Debemos asignar el nuevo valor a la posición que queremos modificar:</span>
+<span id="cb20-322"><a href="#cb20-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-325"><a href="#cb20-325" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-326"><a href="#cb20-326" aria-hidden="true" tabindex="-1"></a><span class="co">#queremos cambiar el segundo precio, por 0.49:</span></span>
+<span id="cb20-327"><a href="#cb20-327" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>]<span class="ot">=</span><span class="st">"0.49"</span></span>
+<span id="cb20-328"><a href="#cb20-328" aria-hidden="true" tabindex="-1"></a>precios_compra <span class="co">#comprobamos todo el contenido del vector</span></span>
+<span id="cb20-329"><a href="#cb20-329" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>] <span class="co">#comprobamos el contenido en la posición 2</span></span>
+<span id="cb20-330"><a href="#cb20-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-331"><a href="#cb20-331" aria-hidden="true" tabindex="-1"></a><span class="co">#añadir elementos a un vector (añadir también es 'modificar' un vector)</span></span>
+<span id="cb20-332"><a href="#cb20-332" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">7</span>]<span class="ot">=</span> <span class="st">"gelducha"</span></span>
+<span id="cb20-333"><a href="#cb20-333" aria-hidden="true" tabindex="-1"></a>precios_compra</span>
+<span id="cb20-334"><a href="#cb20-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-335"><a href="#cb20-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-336"><a href="#cb20-336" aria-hidden="true" tabindex="-1"></a>c) Preguntas al vector</span>
+<span id="cb20-337"><a href="#cb20-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-338"><a href="#cb20-338" aria-hidden="true" tabindex="-1"></a>Podemos interaccionar con los vectores, y preguntarles si un elemento es igual, mayor, menos que otro valor; cuál es la cifra máxima y mínima de un vector numérico, entre otras.</span>
+<span id="cb20-339"><a href="#cb20-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-342"><a href="#cb20-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-343"><a href="#cb20-343" aria-hidden="true" tabindex="-1"></a>precios[<span class="dv">3</span>] <span class="sc">&gt;</span>  <span class="fl">6.97</span></span>
+<span id="cb20-344"><a href="#cb20-344" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(precios) <span class="co">#NO nos devuelve el valor máximo, sino la POSICIÓN que ocupa el valor máximo</span></span>
+<span id="cb20-345"><a href="#cb20-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-346"><a href="#cb20-346" aria-hidden="true" tabindex="-1"></a><span class="co">#Ejercicio: escribe en UNA sola línea de código el valor máximo del 'precios'</span></span>
+<span id="cb20-347"><a href="#cb20-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-348"><a href="#cb20-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-349"><a href="#cb20-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-350"><a href="#cb20-350" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb20-351"><a href="#cb20-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-352"><a href="#cb20-352" aria-hidden="true" tabindex="-1"></a><span class="in">precios[which.max(precios)]</span></span>
+<span id="cb20-353"><a href="#cb20-353" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-354"><a href="#cb20-354" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.2 Matrices</span></span>
+<span id="cb20-355"><a href="#cb20-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-356"><a href="#cb20-356" aria-hidden="true" tabindex="-1"></a><span class="fu">## Array</span></span>
+<span id="cb20-357"><a href="#cb20-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-358"><a href="#cb20-358" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dataframes</span></span>
+<span id="cb20-359"><a href="#cb20-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-360"><a href="#cb20-360" aria-hidden="true" tabindex="-1"></a><span class="fu">## Listas</span></span>
+<span id="cb20-361"><a href="#cb20-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-362"><a href="#cb20-362" aria-hidden="true" tabindex="-1"></a><span class="fu">## objetos phyloseq</span></span>
+<span id="cb20-363"><a href="#cb20-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-364"><a href="#cb20-364" aria-hidden="true" tabindex="-1"></a><span class="fu"># read tables, excels, etc</span></span>
+<span id="cb20-365"><a href="#cb20-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-366"><a href="#cb20-366" aria-hidden="true" tabindex="-1"></a>#guardar objetos, rds, rdata</span>
+<span id="cb20-367"><a href="#cb20-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-368"><a href="#cb20-368" aria-hidden="true" tabindex="-1"></a><span class="fu"># X. Guardar</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

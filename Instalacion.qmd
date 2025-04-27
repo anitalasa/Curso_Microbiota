@@ -1,0 +1,15 @@
+---
+title: "Instalación de R y RStudio"
+format:
+  html:
+    toc: true
+execute:
+  eval: false
+editor_options: 
+  chunk_output_type: console
+---
+
+En esta página podrás encontrar las instrucciones para descargarte R y RStudio e instalarlos. Seguiremos la presentación propuesta [aquí](IntroR_RStudio.pptx){download="true"}
+
+
+Si no puedes descargar el archivo, prueba a descargártelo desde [SACO] (https://saco.csic.es/f/449179104)

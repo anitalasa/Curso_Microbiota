@@ -1,0 +1,48 @@
+---
+title: "Intro"
+format:
+  html:
+    toc: true
+execute:
+  eval: false
+editor_options: 
+  chunk_output_type: console
+---
+
+# 1. INTRODUCCIÓN
+
+¡Bienvenidos al curso "**Análisis de microbiomas a partir de lecturas de secuenciación masiva**". En este curso aprenderás aspectos ecológicos teóricos sobre la microbiota asociada a las plantas, tecnologías de secuenciación masiva, así como aspectos técnicos relacionados con el procesamiento de la lecturas obtenidas por secuación masiva con la plataforma Illumina MiSeq, y el análisis estadístico posterior.
+
+Prácticamente todo el procesamiento y análisis serán realizados con el lenguaje R y en RStudio, por lo que una parte del curso se centrará en aprendizaje del manejo de dichar herramientas.
+
+# 2. CRONOGRAMA ORIENTATIVO
+
+El curso seguirá el orden cronológico real de un proyecto de microbiota, por lo que lo hemos dividido tal y como se resume en la Tabla 1.
+
+| Día       | Contenido                        | Profesor                        |
+|----------------|-----------------------------|----------------------------|
+| **Día 1** | Introducción teórica 1           | Manuel Fernández-López          |
+|           | Introducción a R y RStudio       | Ana V. Lasa                     |
+| **Día 2** | Introducción teórica 2           | Manuel Fernández-López          |
+|           | Principales estructuras de datos | Ana V. Lasa                     |
+| **Día 3** | Procesamiento de lecturas: DADA2 | Antonio José Fernández-González |
+| **Día 4** | Análisis de ecología microbiana  | Ana V. Lasa                     |
+| **Día 5** | Redes de co-occurrencia          | Antonio José Fernández-González |
+
+: Tabla 1. Organigrama aproximado del curso.
+
+::: callout-note
+La distribución de contenidos de las clases puede verse sujeta a modificaciones de acuerdo al nivel de conocimientos de los alumnos
+:::
+
+# 3. ÍNDICE DE ESTE REPOSITORIO
+
+En este repositorio encontrarás información para seguir las clases impartidas por Ana V. Lasa, por lo que está dividido en varias partes:
+
+-**Introducción a R**: en [esta web](Instalacion.qmd) se incluyen las directrices para instalar R y RStudio.
+
+-**Principales estructuras de datos**: [aquí](Estructuras.qmd), se explicarán aspectos generales de programación en R, y las diferentes clases y tipos de objetos a emplear durante este curso.
+
+-**Análisis ecológico de comunidades bacterianas**: en [este apartado](AnalisisBacterias.qmd) describiremos todos los pasos a seguir para analizar diferentes aspectos ecológicos de las comunidades bacterianas.
+
+-**Análisis ecológico de comunidades fúngicas**: en [este apartado](AnalisisHongos) describiremos todos los pasos a seguir para analizar diferentes aspectos ecológicos de las comunidades fúngicas.
