@@ -205,14 +205,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#operaciones-con-vectores" id="toc-operaciones-con-vectores" class="nav-link" data-scroll-target="#operaciones-con-vectores">3.1.1 Operaciones con vectores</a></li>
   </ul></li>
-  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices">3.2 Matrices</a></li>
-  <li><a href="#array" id="toc-array" class="nav-link" data-scroll-target="#array">Array</a></li>
-  <li><a href="#dataframes" id="toc-dataframes" class="nav-link" data-scroll-target="#dataframes">Dataframes</a></li>
-  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas">Listas</a></li>
-  <li><a href="#objetos-phyloseq" id="toc-objetos-phyloseq" class="nav-link" data-scroll-target="#objetos-phyloseq">objetos phyloseq</a></li>
+  <li><a href="#matrices-y-arrays" id="toc-matrices-y-arrays" class="nav-link" data-scroll-target="#matrices-y-arrays">3.2 Matrices y arrays</a>
+  <ul class="collapse">
+  <li><a href="#creación-de-matriz-por-fusión-de-vectores" id="toc-creación-de-matriz-por-fusión-de-vectores" class="nav-link" data-scroll-target="#creación-de-matriz-por-fusión-de-vectores">3.2.1 Creación de matriz por fusión de vectores</a></li>
   </ul></li>
-  <li><a href="#read-tables-excels-etc" id="toc-read-tables-excels-etc" class="nav-link" data-scroll-target="#read-tables-excels-etc">read tables, excels, etc</a></li>
-  <li><a href="#x.-guardar" id="toc-x.-guardar" class="nav-link" data-scroll-target="#x.-guardar">X. Guardar</a></li>
+  <li><a href="#dataframes" id="toc-dataframes" class="nav-link" data-scroll-target="#dataframes">3.3 Dataframes</a>
+  <ul class="collapse">
+  <li><a href="#acceso-a-los-elementos-del-dataframe" id="toc-acceso-a-los-elementos-del-dataframe" class="nav-link" data-scroll-target="#acceso-a-los-elementos-del-dataframe">3.3.1 Acceso a los elementos del dataframe</a></li>
+  <li><a href="#crear-dataframes" id="toc-crear-dataframes" class="nav-link" data-scroll-target="#crear-dataframes">3.3.2 Crear dataframes</a></li>
+  <li><a href="#subset-de-elementos" id="toc-subset-de-elementos" class="nav-link" data-scroll-target="#subset-de-elementos">3.3.3 Subset de elementos</a></li>
+  <li><a href="#otras-operaciones" id="toc-otras-operaciones" class="nav-link" data-scroll-target="#otras-operaciones">3.3.4 Otras operaciones</a></li>
+  <li><a href="#operadores-pipes" id="toc-operadores-pipes" class="nav-link" data-scroll-target="#operadores-pipes">3.3.5 Operadores ‘Pipes’</a></li>
+  </ul></li>
+  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas">3.4 Listas</a>
+  <ul class="collapse">
+  <li><a href="#creación-y-acceso-a-las-listas" id="toc-creación-y-acceso-a-las-listas" class="nav-link" data-scroll-target="#creación-y-acceso-a-las-listas">3.4.1 Creación y acceso a las listas</a></li>
+  </ul></li>
+  <li><a href="#carga-y-guardado-de-objetos" id="toc-carga-y-guardado-de-objetos" class="nav-link" data-scroll-target="#carga-y-guardado-de-objetos">3.5 Carga y guardado de objetos</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -584,34 +594,246 @@ Note
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Ejercicio: escribe en UNA sola línea de código el valor máximo del 'precios'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<ol start="4" type="a">
+<li>Operaciones matemáticas: puesto que no emplearemos demasiadas operaciones matemáticas, no procede explicarlas en detalle. Tan solo que para aplicar una función matemática a todos los elementos de un vector basta con indicarlo tal que así:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>resta<span class="ot">=</span> precios <span class="sc">-</span> <span class="dv">1</span> <span class="co">#debe guardarse el resultado en un nuevo vector</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>precios</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>resta</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>log_todos<span class="ot">=</span><span class="fu">log</span>(precios) <span class="co">#hay funciones que se aplican al conjunto de elementos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ejercicio: crea un vector llamado ‘productos’ que contenga estos elementos: manzanas, pan, leche, huevos, queso. Crea otro llamado ‘importe’ que contenga estos elementos numéricos: 1.2, 2.5, 1.0, 3.0, 4.5. Calcula el importe de la compra total si compramos de unidades de cada producto, y dime cuál es el producto más barato.</p>
 </section>
 </section>
-<section id="matrices" class="level2">
-<h2 class="anchored" data-anchor-id="matrices">3.2 Matrices</h2>
+<section id="matrices-y-arrays" class="level2">
+<h2 class="anchored" data-anchor-id="matrices-y-arrays">3.2 Matrices y arrays</h2>
+<p>-<strong>Matrices</strong>: se pueden considerar como <strong>vectores multidimensionales</strong>. Tienen una estructura <em>rectangular</em>, y no <em>lineal</em> como la que tienen los vectores. Todos los elementos de la matriz han de ser de la misma clase. Solo tienen dos dimensiones: ancho x largo</p>
+<p>-<strong>Arrays</strong>: son matrices de múltiples dimensiones, por ejemplo, cúbicas. No trabajaremos con arrays.</p>
+<p>Creemos una matriz:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>matriz_34<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">4</span>)<span class="co"># 3 filas y 4 columnas</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>matriz_34 <span class="co">#podemos observar que va ordenando en columnas en vez de en filas.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="creación-de-matriz-por-fusión-de-vectores" class="level3">
+<h3 class="anchored" data-anchor-id="creación-de-matriz-por-fusión-de-vectores">3.2.1 Creación de matriz por fusión de vectores</h3>
+<p>Existen dos funciones muy comunes para crear matrices a partir de vectores: <strong>cbind</strong> y <strong>rbind</strong></p>
+<p>-<strong>cbind</strong>: <em>column binding</em>, esta función fusiona vectores por columnas, es decir, anexando una columna <strong>al lado</strong> de la otra</p>
+<p>-<strong>rbind</strong>: <em>row binding</em>, fusiona vectores por filas, es decir, anexando un vector <strong>debajo</strong> de otro</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>altura<span class="ot">=</span><span class="fu">c</span>(<span class="fl">7.5</span>, <span class="fl">12.8</span>, <span class="fl">11.7</span>, <span class="fl">7.1</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>peso<span class="ot">=</span><span class="fu">c</span>(<span class="dv">96</span>, <span class="dv">74</span>, <span class="dv">85</span>, <span class="fl">75.3</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>col_fusion<span class="ot">=</span><span class="fu">cbind</span>(altura,peso)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>col_fusion <span class="co">#vemos que la columna 1 equivale a la altura, y la segunda al peso</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>row_fusion<span class="ot">=</span><span class="fu">rbind</span>(altura, peso)<span class="co">#justo se disponen al reves</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(col_fusion);<span class="fu">class</span>(row_fusion) <span class="co">#nos dice "matrix" y "array" porque una matrix no es más que un array de 2dim</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Podemos <strong>renombrar</strong> los nombres de las columnas y/o las filas, puesto que en este ejemplo vemos que no son muy explicativos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#comprobamos los nombres de columna y fila en cada variable</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(col_fusion)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(col_fusion)<span class="co">#NULL</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(row_fusion)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(row_fusion)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Cambiamos el nombre de las filas/columnas por unos más definitorios:</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(col_fusion)<span class="ot">=</span><span class="fu">c</span>(<span class="st">"Arbol1"</span>, <span class="st">"Arbol2"</span>, <span class="st">"Arbol3"</span>, <span class="st">"Arbol4"</span>); col_fusion</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(row_fusion)<span class="ot">=</span><span class="fu">c</span>(<span class="st">"Arbol1"</span>, <span class="st">"Arbol2"</span>, <span class="st">"Arbol3"</span>, <span class="st">"Arbol4"</span>); row_fusion</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La notación de las posiciones en una matriz será, <strong>siempre</strong>: [filas,columnas]</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>row_fusion[<span class="dv">1</span>,<span class="dv">2</span>]<span class="co"># fila 1, columna 2: valor 12.8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si queremos designar todas las filas o todas las columnas, podemos poner dejar la posición vacía, tal que:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#quiero ver toda la primera fila (todas sus columnas)</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>row_fusion[<span class="dv">1</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para seleccionar posiciones en un rango concreto, basta con indicar el rango separado por dos puntos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#quiero ver las columnas 2 y 3 de row_fusion</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>row_fusion[,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para <strong>no seleccionar</strong> columnas o filas concretas, debemos indicarlo con el signo <strong>-</strong> delante de la posición de las columnas o filas correspondientes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#quiero quitar la columna 1 de row_fusion</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>row_fusion2<span class="ot">=</span>row_fusion[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>row_fusion2 <span class="co">#vemos que falta la columna 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Podemos conocer las <strong>dimensiones</strong> de una matriz/array del siguiente modo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(row_fusion) <span class="co">#MUY interesante: nos devuelve el numero de filas, y el numero de columnas. Esta estructura se repetirá en el apartado 3.3 Dataframes</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(col_fusion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ejercicio: Crea una matriz de 4 filas (una por estudiante) y 3 columnas (una por asignatura) que contenga las calificaciones de unos alumnos: 7, 8, 6, 5, 9, 7, 8, 6, 9, 6, 7, 8. Añade el nombre a los estudiantes (Rafa, Lazaro, Patricia, Carmen), y a las materias (RStudio, Estadistica, Ecologia). Calcula el promedio de las notas de Rafa Calcula el promedio de las notas de todos los alumnos en Estadistica</p>
+<p>¿Qué estudiante obtuvo la mejor nota en Ecologia?</p>
+<p>Descalificamos a todos los alumnos con 1 punto por llegar tarde a clase, ¿qué notas tendrán los alumnos en todas las asignaturas?</p>
 </section>
-<section id="array" class="level2">
-<h2 class="anchored" data-anchor-id="array">Array</h2>
 </section>
 <section id="dataframes" class="level2">
-<h2 class="anchored" data-anchor-id="dataframes">Dataframes</h2>
+<h2 class="anchored" data-anchor-id="dataframes">3.3 Dataframes</h2>
+<p>Son estructuras de datos rectangulares (2 dimensiones) que pueden estar compuestas por datos <strong>heterogéneos</strong>, es decir, por datos de cualquier clase. Podrían considerarse como la agrupación de vectores, pues los datos incluidos en la misma columna (considerando cada columna como si fuera un vector) han de ser de la misma clase. Son una de las estructuras más empleadas en ciencias de datos.</p>
+<p>Generalmente, los datos se distribuyen de la siguiente manera: -<strong>Filas</strong>: en cada fila tendremos las <strong>instancias</strong>, esto es, los datos relativos a cada individuo objeto de estudio. En el caso de comunidades microbianas, cada fila corresponde a la información de cada uno de los taxones. -<strong>Columnas</strong>: en cada columna se indican los valores de cada una de las variables medida o registrada para cada individuo. En el caso de comunidades microbianas, en cada columna tendremos el recuento o número de secuencias detectadas en cada una de las réplicas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)<span class="co">#dataframe incluido en todas las distribuciones de R</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(iris)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(iris)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#vemos que contiene los valores de 5 variables determinadas para 150 plantas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="acceso-a-los-elementos-del-dataframe" class="level3">
+<h3 class="anchored" data-anchor-id="acceso-a-los-elementos-del-dataframe">3.3.1 Acceso a los elementos del dataframe</h3>
+<p>Existen varias maneras de acceder a cada uno de los vectores que componen el dataframe:</p>
+<ol type="a">
+<li>Mediante el signo <strong>$</strong>, precediendo el nombre de la columna deseada:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>especie<span class="ot">=</span>iris<span class="sc">$</span>Species</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li>Mediante <em>corchetes</em>, incluyendo el número de columna concreta:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>sepalo_l<span class="ot">=</span>iris[<span class="dv">1</span>]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>sepalos<span class="ot">=</span>iris[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="a">
+<li>Mediante <em>corchetes</em>, incluyendo el nombre de la columna concreta entrecomillado:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>sepalo_w<span class="ot">=</span>iris[<span class="st">"Sepal.Width"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="crear-dataframes" class="level3">
+<h3 class="anchored" data-anchor-id="crear-dataframes">3.3.2 Crear dataframes</h3>
+<p>Se pueden crear de muchas maneras:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#a partir de una matriz:</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>df1<span class="ot">=</span><span class="fu">as.data.frame</span>(matriz_34)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df1)<span class="ot">=</span><span class="fu">c</span>(<span class="st">"Pan"</span>,<span class="st">"Huevos"</span>,<span class="st">"Leche"</span>,<span class="st">"Mejillones"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="subset-de-elementos" class="level3">
+<h3 class="anchored" data-anchor-id="subset-de-elementos">3.3.3 Subset de elementos</h3>
+<p>Podemos crear una nueva variable seleccionando elementos concretos de un dataframe.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ejemplo: seleccionar todos aquellos individuos clasificados como 'setosa'</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>setosa<span class="ot">=</span><span class="fu">subset</span>(iris, Species<span class="sc">==</span> <span class="st">"setosa"</span>)<span class="co">#se queda con todos los valores de todas las variables de aquellas filas que cumplen una condicion concreta</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ejemplo: seleccionar todos aquellos individuos clasificados como 'virginica', y que ademas, la longitud del sepalo sea &gt; 6.5</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>v_65<span class="ot">=</span> <span class="fu">subset</span>(iris, Species<span class="sc">==</span> <span class="st">"virginica"</span> <span class="sc">&amp;</span> Sepal.Length <span class="sc">&gt;</span> <span class="fl">6.5</span>)<span class="co"># el simbolo '&amp;' se emplea para indicar una 'adición' de condiciones</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="otras-operaciones" class="level3">
+<h3 class="anchored" data-anchor-id="otras-operaciones">3.3.4 Otras operaciones</h3>
+<p>Los dataframes se pueden manipular en multitud de maneras diferentes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#trasposición: </span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>t_v_65<span class="ot">=</span><span class="fu">t</span>(v_65)<span class="co">#vemos que las columnas pasan ahora a ser filas</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">#reemplazo de caracteres:</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>v_65<span class="sc">$</span>Species<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"virginica"</span>, <span class="st">"virgi."</span>, v_65<span class="sc">$</span>Species)<span class="co">#gsub atributos: caracter a reemplazar, reemplazo, elemento donde realizar el reemplazo</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co">#concatenacion de strings:</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>v_65<span class="sc">$</span>full_sepal<span class="ot">=</span><span class="fu">paste0</span>(v_65<span class="sc">$</span>Sepal.Length, <span class="st">"_"</span>,v_65<span class="sc">$</span>Sepal.Width)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#aplicar operaciones matematicas a una seleccion de objetos:</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co">#que calcule la media de todas las variables en base a un factor de agrupacion concreto (por ejemplo, la media de las 4 variables para cada tipo de planta)</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>media_todas<span class="ot">=</span><span class="fu">aggregate</span>(<span class="fu">cbind</span>(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) <span class="sc">~</span> Species,</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> iris,</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">FUN =</span> mean)</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>mediana_petal_w_3<span class="ot">=</span><span class="fu">aggregate</span>(Petal.Width <span class="sc">~</span> Species,<span class="co">#indicamos la variable numerica y el factor de agrupacion</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> <span class="fu">subset</span>(iris, Sepal.Width <span class="sc">&lt;</span> <span class="dv">3</span>), <span class="co">#en este punto selecciona los individuos que cumplen la condicion dada</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">FUN =</span> median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ejercicio: Filtra el conjunto iris para quedarte solo con las flores que tienen un Petal.Length mayor a 4.5. Luego, calcula la media de Sepal.Width para cada especie (Species) en este subconjunto filtrado.</p>
+</section>
+<section id="operadores-pipes" class="level3">
+<h3 class="anchored" data-anchor-id="operadores-pipes">3.3.5 Operadores ‘Pipes’</h3>
+<p>En el ejercicio anterior hemos realizado las operaciones en dos líneas, generando una nueva variable de filtrado. Para evitar la creación de nuevas variables que quizá nunca más las vamos a utilizar, se suelen usar los operadores de tipo ‘tubería’ o <strong>‘pipes’</strong> (<strong>%&gt;%</strong>)</p>
+<p>Estos permiten encadenar varias operaciones de manera clara, de tal forma que el resultado de la primera operación, es el <em>input</em> o la entrada de la segunda operación, y así sucesivamente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>seto<span class="ot">=</span><span class="fu">subset</span>(iris, Species <span class="sc">==</span> <span class="st">"setosa"</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(seto)<span class="co">#obtenemos un resumen detallado de los estadisticos descriptivos principales</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#en una sola linea podriamos tambien escribirlo asi:</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">subset</span>(iris, Species <span class="sc">==</span> <span class="st">"setosa"</span>))</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">#de forma mas clara, en orden secuencial:</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">subset</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span>) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()<span class="co">#primero, toma el dataframe 'iris'. Segundo, realiza una seleccion. Tercero, haz el resumen estadistico.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Vemos que es una forma de evitar paréntesis anidados que pueden llevarnos a errores.</p>
+</section>
 </section>
 <section id="listas" class="level2">
-<h2 class="anchored" data-anchor-id="listas">Listas</h2>
+<h2 class="anchored" data-anchor-id="listas">3.4 Listas</h2>
+<p>Las listas son los elementos más flexibles de R pues son estructuras que permiten almacenar todo tipo de datos diferentes, heterogéneos.</p>
+<p>No tienen porqué tener estructura rectangular como los dataframes. Se asemejan más a un contenedor subdividido en diferentes compartimentos. Por lo tanto, una lista tiene <strong>solamente una dimensión</strong>.</p>
+<section id="creación-y-acceso-a-las-listas" class="level3">
+<h3 class="anchored" data-anchor-id="creación-y-acceso-a-las-listas">3.4.1 Creación y acceso a las listas</h3>
+<p>Para tener un <em>índice</em> del contenido de la lista, usaremos paréntesis cuadrados:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creamos la lista</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>vector <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>matriz <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>df<span class="ot">=</span> <span class="fu">data.frame</span>(<span class="st">"num"</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">"letra"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>lista <span class="ot">=</span><span class="fu">list</span>(<span class="st">"un_vector"</span> <span class="ot">=</span> vector, <span class="st">"una_matriz"</span> <span class="ot">=</span> matriz, <span class="st">"un_df"</span> <span class="ot">=</span> df)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>lista<span class="co">#nos muestra el nombre de los tres elementos, y su contenido</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(lista)<span class="co">#nos permite ver algo similar a un indice</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para acceder a cada elemento de la lista, podemos:</p>
+<ol type="a">
+<li>Indicar el número del elemento o el nombre del mismo entre corchetes:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>lista[<span class="dv">1</span>]<span class="co">#vemos el contenido y el nombre del vector. A veces, se le denomina 'sublista'</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>lista[[<span class="dv">1</span>]]<span class="co">#vemos directamente el contenido del vector, sin el nombre del mismo</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lista)<span class="co">#esta funcion nos permite ver el nombre de todos los elementos de la lista</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>lista[<span class="st">"un_vector"</span>]</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>lista[[<span class="st">"un_vector"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li>Indicar el símbolo <strong>$</strong> seguido del nombre del elemento de la lista</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>lista<span class="sc">$</span>un_vector</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#si el elemento a visualizar es un dataframe, y queremos ver una columna concreta de dicho dataframe, usaremos el simbolo $ dos veces:</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>lista<span class="sc">$</span>un_df<span class="sc">$</span>letra <span class="co">#nos muestra el contenido de la columna llamada 'letra' del dataframe llamado 'un_df'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ejercicio: Crea una lista llamada alumno que contenga:</p>
+<p>Nombre: “Laura” Edad: 22 Notas: un vector de 3 notas: 8.5, 9.0, 7.8 Aprobado: TRUE</p>
+<p>Luego, accede al vector de notas y calcula la media de las notas</p>
+<p>Ejercicio: Crea una lista llamada empresa que contenga:</p>
+<p>Nombre de la empresa: “EEZ-Spinoff” Años de funcionamiento: 5 Empleados: una sublista con los nombres de 3 empleados: “Ana”, “Pedro”, “Luis” Facturación anual: un vector con las facturaciones de los últimos 3 años: 1.5, 2.0, 2.8</p>
+<p>Accede a la sublista de empleados y muestra el nombre del segundo empleado. Calcula la facturación media de los últimos 3 años.</p>
 </section>
-<section id="objetos-phyloseq" class="level2">
-<h2 class="anchored" data-anchor-id="objetos-phyloseq">objetos phyloseq</h2>
 </section>
-</section>
-<section id="read-tables-excels-etc" class="level1">
-<h1>read tables, excels, etc</h1>
-<p>#guardar objetos, rds, rdata</p>
-</section>
-<section id="x.-guardar" class="level1">
-<h1>X. Guardar</h1>
+<section id="carga-y-guardado-de-objetos" class="level2">
+<h2 class="anchored" data-anchor-id="carga-y-guardado-de-objetos">3.5 Carga y guardado de objetos</h2>
+<p>Para cargar tablas o archivos en R, se emplean diferentes funciones de R base, las cuales dependerán del tipo de objeto.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cargar objetos desde nuestro directorio:</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>datos_excel<span class="ot">=</span><span class="fu">read.csv</span>(<span class="st">"archivo.csv"</span>, <span class="at">header =</span> T, <span class="at">sep =</span> <span class="st">","</span>)<span class="co">#un csv separado por comas </span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>datos_txt <span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"ruta/al/archivo.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)<span class="co">#un archivo de texto separado por tabuladores</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>objeto_rds <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"ruta/al/archivo.rds"</span>) <span class="co">#un objeto RDS de R, guardado con el comando saveRDS()</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"ruta/al/archivo.RData"</span>) <span class="co">#cargar un objeto rda con todas sus variables</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Guardar objetos</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(iris, <span class="at">file =</span> <span class="st">"iris.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(iris, <span class="at">file =</span> <span class="st">"iris.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(mi_objeto, <span class="at">file =</span> <span class="st">"mi_objeto.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1086,340 +1308,664 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Principios básicos y estructuras de datos"</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: false</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># 0. Consideraciones previas</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.1 Ejecución de código</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>Para **ejecutar el código** escrito en el editor de código, podemos hacerlo de dos maneras:</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>a.  Seleccionando la línea de código a ejecutar o poniendo el cursor en dicha linea, y pulsando el botón *run* situado en la parte superior derecha del editor.</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>b.  Poniendo el cursor en la línea a ejecutar y pulsando *ctrl* + *enter*</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.2 Comentar scripts</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>Para poder comentar código, pondremos el símbolo **#** delante del comentario a realizar. Así pues, todo el texto y símbolos precedidos por **#** no serán ejecutados. Veamos un ejemplo:</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co">#a=2+32 podemos ver en nuestro Environment que la variable 'a' no se ha creado</span></span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span> <span class="co">#si corremos esta línea, veremos que la variable b si se ha creado</span></span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.3 Recuperar comandos ejecutados</span></span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>En R podemos saber qué comandos hemos ejecutado anteriormente de dos maneras:</span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>a)  Si nos situamos en la consola y le damos al botón *\^* de nuestro teclado, podremos ver la orden inmediatamente anterior</span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>b)  ¿otra forma?</span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.4 Directorio de trabajo</span></span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>En nuestro directorio de trabajo es donde quedarán todos los archivos que guardemos (si lo hacemos con código).</span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>Antes de empezar a trabajar es **MUY IMPORTANTE** establecer el directorio de trabajo. Debemos tener cuidado, de lo contrario, podemos trabajar en otro directorio y sobreescribir ficheros, variables, etc.</span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>Podemos establecer nuestro lugar de trabajo de dos maneras:</span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>a)  Click en *Session* (panel superior) \&gt; *Set working directory* \&gt; *Choose directory*, y elegimos la carpeta de trabajo.</span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>b)  Con el siguiente comando:</span>
-<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/radik/Desktop/Curso Microbiota R/CursoMicrobiota"</span>)<span class="co">#setwd(directoriodeinteres)</span></span>
-<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>Para comprobar en qué directorio nos encontramos, lo haremos por código:</span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()<span class="co">#no introducimos ningun argumento</span></span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.5 Visualizar elementos</span></span>
-<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>Durante el desarrollo de nuestros scripts nos puede resultar útil y necesario visualizar el contenido de los elementos que tenemos en nuestro ambiente.</span>
-<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>Si queremos visualizar los elementos en la pantalla del editor de scripts, lo haremos así</span>
-<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(b)<span class="co">#podemos visualizar todo tipo de variables</span></span>
-<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>       <span class="co">#¡OJO! la 'V' tiene que ir en mayuscula; R es sensible a las mayusculas y minusculas</span></span>
-<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>Si queremos visualizar el elemento **completo**, escribiremos el nombre del elemento directamente **en la consola**:</span>
-<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a>b</span>
-<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a>Si nos enfrentamos a un elemento de gran tamaño (una lista, una tabla con muchas filas), y **solo** queremos ver el **encabezamiento**, usaremos este comando:</span>
-<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(b)</span>
-<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a>Si queremos solo visualizar el final del elemento, lo haremos con el comando *tail()*, tal que así:</span>
-<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(b)</span>
-<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.6 Búsqueda de ayuda</span></span>
-<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a>Habrá ocasiones en las que deseemos conocer información sobre un comando o una función concreta de un paquete (por ejemplo, qué tipo de variables de entrada acepta, cómo funciona, valores de salida, etc.). Para acceder a la *documentación* de la función concreta, existen varias maneras de proceder:</span>
-<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a>a)  Con **comandos**</span>
-<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=F}</span></span>
-<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a><span class="in">?install.packages() #despues del simbolo '?' escribimos el nombre de la funcion de interes</span></span>
-<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a><span class="in">help("install.packages")#es exactamente lo mismo, nos devuelve la misma información</span></span>
-<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a><span class="in">help(package="vegan")#nos proporciona toda la informacion de un paquete de interes (su descripcion, versiones y listado de funciones que incluye)</span></span>
-<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a>A continuación se abrirá en el visor inferior derecho, en la pestaña *Help* toda la información sobre el uso de dicha función (Figura 1).</span>
-<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 1. Búsqueda de ayuda en R con comandos](images/Help_comm.jpg)</span></span>
-<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a>b)  **Interactivamente** Debemos ir al panel inferior derecho y en la pestaña *Help*, buscar en la lupa el nombre de nuestra función de interés, tal y como se indica en la Figura 2.</span>
-<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-123"><a href="#cb20-123" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 2. Búsqueda de ayuda en R.](images/Help.jpg)</span></span>
-<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a>c)  Buscar en **Google u otro buscador** la documentación oficial.</span>
-<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a>Toda la información que nos da el comando *?* o el panel de ayuda (opciones **a** y **b**) está disponible en Google, y en foros de grandísima utilidad como [**Stack overflow**](https://stackoverflow.com/questions).</span>
-<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a>d)  **Inteligencia Artificial**</span>
-<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a>Se desaconseja enormemente el uso de cualquier tipo de chatbot para búsquedas sencillas que Google u otros buscadores pueden realizar. ¡Ahorremos energía!</span>
-<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a><span class="fu"># 1. Instalación de paquetes de R</span></span>
-<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a>R base incluye varios paquetes con funciones básicas, pero no son suficientes para nuestros análisis. Por ello, necesitamos instalar **paquetes** (conjuntos de funciones con un objetivo similar) que han sido desarrollados por otros usuarios (o por nosotros mismos) que están disponibles en repositorios públicos, como <span class="co">[</span><span class="ot">CRAN</span><span class="co">](https://cran.r-project.org/ "Web del repositorio CRAN")</span>. La descarga e instalación de los paquetes puede realizarse de dos maneras:</span>
-<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a>a)  Mediante **código**</span>
-<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
-<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a><span class="in">install.packages("ggplot2") #incluir el nombre del paquete siempre entre " "</span></span>
-<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a>Una vez que hemos instalado de los repositorios los paquetes, debemos cargar las librerías y todo su contenido. Para ello:</span>
-<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)<span class="co">#OJO! Aquí no es necesario entrecomillar el nombre del paquete</span></span>
-<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a>::: callout-warning</span>
-<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a>Cada vez que habramos una sesión de R Studio, debemos cargar las librerías, de lo contrario, no encontrará las funciones cuando las llamemos. Pero *NO* es necesario que instalemos de nuevo los paquetes. Una vez que hemos instalado los paquetes estos ya quedan en nuestro ordenador, y aunque cerremos la sesión de R Studio, los paquetes quedarán en nuestro PC.</span>
-<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a>b)  **Interactivamente** Para ello, iremos al panel inferior derecho y haremos click en la pestaña *Packages*. Haremos click en el botón *Install* (debado de la cinta de pestañas, a la izquierda). Se nos abrirá una pantalla (Figura 3).</span>
-<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 3. Panel de instalación de paquetes de R.](images/Install.jpg)</span></span>
-<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a>En la opción *packages* introduciremos el nombre del paquete a instalar. Dejaremos seleccionada la opción *install dependencies*.</span>
-<span id="cb20-160"><a href="#cb20-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-161"><a href="#cb20-161" aria-hidden="true" tabindex="-1"></a>Una vez instalados, debemos cargar los paquetes. Para ello, buscaremos el nombre de nuestro paquete en el listado. Si no lo encontramos, lo buscamos con la lupa, tal y como se muestra en la Figura 4.</span>
-<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-163"><a href="#cb20-163" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 4. Búsqueda de los paquetes instalados y selección de los mismos.](images/LoadPackages.jpg)</span></span>
-<span id="cb20-164"><a href="#cb20-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-165"><a href="#cb20-165" aria-hidden="true" tabindex="-1"></a>Es importante que seleccioneis el paquete que buscabais para que se cargue la librería. Para comprobar que se ha cargado, podéis comprobar que en la consola os sale la orden '*library(paquetecargado)*', tal y como se hace por código.</span>
-<span id="cb20-166"><a href="#cb20-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a><span class="fu"># 2. Clases en R</span></span>
-<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-169"><a href="#cb20-169" aria-hidden="true" tabindex="-1"></a>En R tenemos muchas clases o tipos de datos diferentes. La Tabla 1 resume las clases principales.</span>
-<span id="cb20-170"><a href="#cb20-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-171"><a href="#cb20-171" aria-hidden="true" tabindex="-1"></a>| Clase                      | Ejemplo              |</span>
-<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a>|----------------------------|----------------------|</span>
-<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a>| **Numérico** (*numeric*)   | 2.5                  |</span>
-<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a>| **Entero** (*integer*)     | 2                    |</span>
-<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a>| **Carácter** (*character*) | Hola                 |</span>
-<span id="cb20-176"><a href="#cb20-176" aria-hidden="true" tabindex="-1"></a>| **Factor** (*factor*)      | Color (Blanco/negro) |</span>
-<span id="cb20-177"><a href="#cb20-177" aria-hidden="true" tabindex="-1"></a>| **Lógico** (*logic*)       | TRUE/FALSE           |</span>
-<span id="cb20-178"><a href="#cb20-178" aria-hidden="true" tabindex="-1"></a>| **Perdido** (*na*)         | NA                   |</span>
-<span id="cb20-179"><a href="#cb20-179" aria-hidden="true" tabindex="-1"></a>| **Vacío** (*null*)         | NULL                 |</span>
-<span id="cb20-180"><a href="#cb20-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-181"><a href="#cb20-181" aria-hidden="true" tabindex="-1"></a>: Tabla 1. Clases en R. Entre paréntesis se indica la nomenclatura de cada clase en R.</span>
-<span id="cb20-182"><a href="#cb20-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-183"><a href="#cb20-183" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.1 Numérico (*integer*) y entero (*integer*)</span></span>
-<span id="cb20-184"><a href="#cb20-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-185"><a href="#cb20-185" aria-hidden="true" tabindex="-1"></a>**Entero**: datos numéricos sin parte decimal. **Numérico**: contienen una parte decimal, fraccionaria</span>
-<span id="cb20-186"><a href="#cb20-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-187"><a href="#cb20-187" aria-hidden="true" tabindex="-1"></a>No es objeto de este curso repasar las operaciones matemáticas en R, pero se pueden consultar en <span class="co">[</span><span class="ot">este link</span><span class="co">](https://posit.cloud/learn/recipes/basics/BasicB1 "Operaciones matemáticas")</span>.</span>
-<span id="cb20-188"><a href="#cb20-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-189"><a href="#cb20-189" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.2 Carácter (*character*)</span></span>
-<span id="cb20-190"><a href="#cb20-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-191"><a href="#cb20-191" aria-hidden="true" tabindex="-1"></a>Se encuentran compuestos por letras, números, espacios, signos de puntuación y/o símbolos especiales. A las cadenas de caracteres se les conoce como **strings**.</span>
-<span id="cb20-192"><a href="#cb20-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-193"><a href="#cb20-193" aria-hidden="true" tabindex="-1"></a>Aparecen y se indican entrecomillados.</span>
-<span id="cb20-194"><a href="#cb20-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-195"><a href="#cb20-195" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb20-196"><a href="#cb20-196" aria-hidden="true" tabindex="-1"></a>Una única cifra (o un conjunto de cifras) pueden ser de tipo carácter. Debemos tener cuidado con esto, ya que podemos querer que R trate a una(s) cifra(s) como carácter(es), por ejemplo, para que no sea posible aplicar operaciones matemáticas sobre ellas. Puede ser interesante en el caso de tratar los **nombres de las muestras** en un proyecto de microbiota/bioinformática.</span>
-<span id="cb20-197"><a href="#cb20-197" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-198"><a href="#cb20-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-199"><a href="#cb20-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.3 Factor</span></span>
-<span id="cb20-200"><a href="#cb20-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-201"><a href="#cb20-201" aria-hidden="true" tabindex="-1"></a>Se trata de variables categóricas, es decir, que tienen un número concreto de **niveles** (*levels*). Es decir, son clasificadores, variables de agrupación. Un ejemplo: etapa de desarrollo (factor), con 5 niveles: semilla, plántula, joven, adulto, senescente.</span>
-<span id="cb20-202"><a href="#cb20-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-203"><a href="#cb20-203" aria-hidden="true" tabindex="-1"></a>::: collout-note</span>
-<span id="cb20-204"><a href="#cb20-204" aria-hidden="true" tabindex="-1"></a>No nos debemos dejar llevar por la apariencia. A simple vista, podemos ver que el contenido de una columna aparenta que se trata de variables de tipo carácter porque están compuestas por letras y/o números, pero puede que se trate de factores. Al fin y al cabo, las variables de tipo factor pueden estar compuestas por caracteres.</span>
-<span id="cb20-205"><a href="#cb20-205" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-206"><a href="#cb20-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-207"><a href="#cb20-207" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.4 Lógico</span></span>
-<span id="cb20-208"><a href="#cb20-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-209"><a href="#cb20-209" aria-hidden="true" tabindex="-1"></a>Se trata de clases que solo pueden tomar dos valores: *TRUE* o *FALSE*, es decir, si cumplen o no una condición. También se conocen como **clases booleanas**.</span>
-<span id="cb20-210"><a href="#cb20-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-211"><a href="#cb20-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.5 Perdido y vacío</span></span>
-<span id="cb20-212"><a href="#cb20-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-213"><a href="#cb20-213" aria-hidden="true" tabindex="-1"></a>**Perdido** (*na*): se trata de datos perdidos, por ejemplo, datos que no han sido registrados o que han sido omitidos. Son datos faltantes. Se suelen representar como NA.</span>
-<span id="cb20-214"><a href="#cb20-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-215"><a href="#cb20-215" aria-hidden="true" tabindex="-1"></a>**Vacío** (*null*): representan la ausencia de datos, es decir, un comando nos puede devolver NULL cuando intente recuperar un dato y no lo encuentre (por ejemplo, porque lo hemos borrado).</span>
-<span id="cb20-216"><a href="#cb20-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-217"><a href="#cb20-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## Asignaciones, cambios de clase y determinación del tipo de clase</span></span>
-<span id="cb20-218"><a href="#cb20-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-219"><a href="#cb20-219" aria-hidden="true" tabindex="-1"></a>Cuando queramos crear una variable y asignarle un valor, usaremos el operador '*=*' o '*&lt;-*'</span>
-<span id="cb20-220"><a href="#cb20-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-223"><a href="#cb20-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-224"><a href="#cb20-224" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">"hola que tal"</span> <span class="co">#creo una variable que contiene ese texto</span></span>
-<span id="cb20-225"><a href="#cb20-225" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="st">"hola que tal"</span> <span class="co">#idem</span></span>
-<span id="cb20-226"><a href="#cb20-226" aria-hidden="true" tabindex="-1"></a><span class="co">#NOTA: no importa si antes y después de los operadores incluimos un espacio.</span></span>
-<span id="cb20-227"><a href="#cb20-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-228"><a href="#cb20-228" aria-hidden="true" tabindex="-1"></a>a<span class="sc">==</span>b <span class="co">#¡¡¡OJO!!! Dos simbolos '=' seguidos NO es para realizar una asignacion, sino para preguntarle si los dos elementos son iguales</span></span>
-<span id="cb20-229"><a href="#cb20-229" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(a,b) <span class="co">#a==b es equivalente a identical(a,b)</span></span>
-<span id="cb20-230"><a href="#cb20-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-231"><a href="#cb20-231" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span><span class="sc">==</span><span class="dv">8</span> <span class="co">#le estamos preguntando si 7 es igual a 8, nos debe devolver FALSE</span></span>
-<span id="cb20-232"><a href="#cb20-232" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">!=</span> <span class="dv">8</span> <span class="co">#el operador '!=' significa "diferente de". En este caso debe devolver TRUE</span></span>
-<span id="cb20-233"><a href="#cb20-233" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-234"><a href="#cb20-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-235"><a href="#cb20-235" aria-hidden="true" tabindex="-1"></a>Para saber de qué clase es nuestro objeto:</span>
-<span id="cb20-236"><a href="#cb20-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-239"><a href="#cb20-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-240"><a href="#cb20-240" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span>
-<span id="cb20-241"><a href="#cb20-241" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(b)</span>
-<span id="cb20-242"><a href="#cb20-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-243"><a href="#cb20-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-244"><a href="#cb20-244" aria-hidden="true" tabindex="-1"></a>Para determinar o cambiar de clase:</span>
-<span id="cb20-245"><a href="#cb20-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-248"><a href="#cb20-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-249"><a href="#cb20-249" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fu">as.character</span>(<span class="st">"hola"</span>)</span>
-<span id="cb20-250"><a href="#cb20-250" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="fu">as.factor</span>(<span class="st">"hola"</span>)</span>
-<span id="cb20-251"><a href="#cb20-251" aria-hidden="true" tabindex="-1"></a>desarrollo<span class="ot">=</span><span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"semilla"</span>,<span class="st">"semilla"</span>,<span class="st">"plantula"</span>,<span class="st">"joven"</span>,<span class="st">"adulto"</span>,<span class="st">"joven"</span>,<span class="st">"senescente"</span>))<span class="co"># 'c' indica que vamos a introducir un vector, donde cada elemento del mismo equivale a un nivel del factor. Lo veremos en el apartado 3.</span></span>
-<span id="cb20-252"><a href="#cb20-252" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(desarrollo)<span class="co">#nos muestra los niveles de un factor</span></span>
-<span id="cb20-253"><a href="#cb20-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-254"><a href="#cb20-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-255"><a href="#cb20-255" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fu">as.integer</span>(<span class="fl">2.1+3.2</span>)<span class="co">#vemos que al llamar a la variable 'a' nos devuelve el valor 5</span></span>
-<span id="cb20-256"><a href="#cb20-256" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="fu">as.numeric</span>(<span class="fl">2.1+3.2</span>)<span class="co">#ahora, la variable nos devuelve 5.3</span></span>
-<span id="cb20-257"><a href="#cb20-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-258"><a href="#cb20-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-259"><a href="#cb20-259" aria-hidden="true" tabindex="-1"></a>Si quieres conocer más cosas sobre los **operadores en R**, haz click en <span class="co">[</span><span class="ot">este link</span><span class="co">]</span> (https://bookdown.org/jboscomendoza/r-principiantes4/operadores.html) donde vienen muchos más detalles.</span>
-<span id="cb20-260"><a href="#cb20-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-261"><a href="#cb20-261" aria-hidden="true" tabindex="-1"></a><span class="fu"># 3. Tipos de objetos o estructuras en R</span></span>
-<span id="cb20-262"><a href="#cb20-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-263"><a href="#cb20-263" aria-hidden="true" tabindex="-1"></a>Las clases son tipos de datos, pero estos pueden estar almacenados en diferentes tipos de **objetos** o **elementos**. Así pues, podemos tener diferentes tipos de objetos que almacenen diferentes datos de diferentes clases. Veamos los ejemplos.</span>
-<span id="cb20-264"><a href="#cb20-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-265"><a href="#cb20-265" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.1 Vectores</span></span>
-<span id="cb20-266"><a href="#cb20-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-267"><a href="#cb20-267" aria-hidden="true" tabindex="-1"></a>Se trata de una colección de elementos o conjunto de datos **del mismo tipo** o clase. Es la estructura mínima de R.</span>
-<span id="cb20-268"><a href="#cb20-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-269"><a href="#cb20-269" aria-hidden="true" tabindex="-1"></a>Para crearlos, debemos preceder a la lista de elementos del vector la letra *c*, y los elementos tienen que estar entrecomillados:</span>
-<span id="cb20-270"><a href="#cb20-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-273"><a href="#cb20-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-274"><a href="#cb20-274" aria-hidden="true" tabindex="-1"></a>compra <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"pan"</span>, <span class="st">"harina"</span>, <span class="st">"pollo"</span>)</span>
-<span id="cb20-275"><a href="#cb20-275" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(compra)</span>
-<span id="cb20-276"><a href="#cb20-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-277"><a href="#cb20-277" aria-hidden="true" tabindex="-1"></a>precios<span class="ot">=</span><span class="fu">c</span>(<span class="st">"1.50"</span>,<span class="st">"3.75"</span>,<span class="st">"6.98"</span>)</span>
-<span id="cb20-278"><a href="#cb20-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-279"><a href="#cb20-279" aria-hidden="true" tabindex="-1"></a>mixto<span class="ot">=</span><span class="fu">c</span>(<span class="st">"7.4"</span>,<span class="st">"hola"</span>)</span>
-<span id="cb20-280"><a href="#cb20-280" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mixto)<span class="co">#OJO! el valor 7.4 lo toma como carácter, pues todos los elementos han de ser del mismo tipo/clase</span></span>
-<span id="cb20-281"><a href="#cb20-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-282"><a href="#cb20-282" aria-hidden="true" tabindex="-1"></a>boo<span class="ot">=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>)<span class="co">#como no están entrecomillados, los toma como booleano</span></span>
-<span id="cb20-283"><a href="#cb20-283" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(boo)</span>
-<span id="cb20-284"><a href="#cb20-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-285"><a href="#cb20-285" aria-hidden="true" tabindex="-1"></a>no_boo<span class="ot">=</span><span class="fu">c</span>(<span class="st">"TRUE"</span>,<span class="st">"FALSE"</span>,<span class="st">"FALSE"</span>)</span>
-<span id="cb20-286"><a href="#cb20-286" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(no_boo)<span class="co">#es para preguntarle directamente si es un vector</span></span>
-<span id="cb20-287"><a href="#cb20-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-288"><a href="#cb20-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-289"><a href="#cb20-289" aria-hidden="true" tabindex="-1"></a>Para saber de forma rápida y visual de qué tipo son mis vectores, basta con buscarlos en el panel de Environment, tal y como se aprecia en la Figura 5:</span>
-<span id="cb20-290"><a href="#cb20-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-291"><a href="#cb20-291" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 5. Apariencia de Environment.](images/Vectors.jpg)</span></span>
-<span id="cb20-292"><a href="#cb20-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-293"><a href="#cb20-293" aria-hidden="true" tabindex="-1"></a>Podemos fusionar vectores, incluso de diferentes tipos. R de forma automática realizará una **coerción**, una *fusión* de los mismos. R determina automáticamente la clase resultante, que será la más universal (generalmente, caracter). Comprobémoslo:</span>
-<span id="cb20-294"><a href="#cb20-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-297"><a href="#cb20-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-298"><a href="#cb20-298" aria-hidden="true" tabindex="-1"></a>precios_compra<span class="ot">=</span><span class="fu">c</span>(precios,compra)</span>
-<span id="cb20-299"><a href="#cb20-299" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(precios_compra)</span>
-<span id="cb20-300"><a href="#cb20-300" aria-hidden="true" tabindex="-1"></a>precios_compra <span class="co">#coloca uno inmediatamente después del otro.</span></span>
-<span id="cb20-301"><a href="#cb20-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-302"><a href="#cb20-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-303"><a href="#cb20-303" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.1.1 Operaciones con vectores</span></span>
-<span id="cb20-304"><a href="#cb20-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-305"><a href="#cb20-305" aria-hidden="true" tabindex="-1"></a>a) Podemos conocer la **longitud** de los vectores:</span>
-<span id="cb20-306"><a href="#cb20-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-309"><a href="#cb20-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-310"><a href="#cb20-310" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(precios_compra) <span class="co">#longitud: 6</span></span>
-<span id="cb20-311"><a href="#cb20-311" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-312"><a href="#cb20-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-313"><a href="#cb20-313" aria-hidden="true" tabindex="-1"></a>b) Conocer el elemento que ocupa una **posición** del vector. Basta con poner la posición entre corchetes, tras el nombre del vector</span>
-<span id="cb20-314"><a href="#cb20-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-317"><a href="#cb20-317" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-318"><a href="#cb20-318" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>] <span class="co">#que acceda al elemento en la posición 2</span></span>
-<span id="cb20-319"><a href="#cb20-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-320"><a href="#cb20-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-321"><a href="#cb20-321" aria-hidden="true" tabindex="-1"></a>c) **Modificar** un vector. Debemos asignar el nuevo valor a la posición que queremos modificar:</span>
-<span id="cb20-322"><a href="#cb20-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-325"><a href="#cb20-325" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-326"><a href="#cb20-326" aria-hidden="true" tabindex="-1"></a><span class="co">#queremos cambiar el segundo precio, por 0.49:</span></span>
-<span id="cb20-327"><a href="#cb20-327" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>]<span class="ot">=</span><span class="st">"0.49"</span></span>
-<span id="cb20-328"><a href="#cb20-328" aria-hidden="true" tabindex="-1"></a>precios_compra <span class="co">#comprobamos todo el contenido del vector</span></span>
-<span id="cb20-329"><a href="#cb20-329" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>] <span class="co">#comprobamos el contenido en la posición 2</span></span>
-<span id="cb20-330"><a href="#cb20-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-331"><a href="#cb20-331" aria-hidden="true" tabindex="-1"></a><span class="co">#añadir elementos a un vector (añadir también es 'modificar' un vector)</span></span>
-<span id="cb20-332"><a href="#cb20-332" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">7</span>]<span class="ot">=</span> <span class="st">"gelducha"</span></span>
-<span id="cb20-333"><a href="#cb20-333" aria-hidden="true" tabindex="-1"></a>precios_compra</span>
-<span id="cb20-334"><a href="#cb20-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-335"><a href="#cb20-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-336"><a href="#cb20-336" aria-hidden="true" tabindex="-1"></a>c) Preguntas al vector</span>
-<span id="cb20-337"><a href="#cb20-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-338"><a href="#cb20-338" aria-hidden="true" tabindex="-1"></a>Podemos interaccionar con los vectores, y preguntarles si un elemento es igual, mayor, menos que otro valor; cuál es la cifra máxima y mínima de un vector numérico, entre otras.</span>
-<span id="cb20-339"><a href="#cb20-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-342"><a href="#cb20-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-343"><a href="#cb20-343" aria-hidden="true" tabindex="-1"></a>precios[<span class="dv">3</span>] <span class="sc">&gt;</span>  <span class="fl">6.97</span></span>
-<span id="cb20-344"><a href="#cb20-344" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(precios) <span class="co">#NO nos devuelve el valor máximo, sino la POSICIÓN que ocupa el valor máximo</span></span>
-<span id="cb20-345"><a href="#cb20-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-346"><a href="#cb20-346" aria-hidden="true" tabindex="-1"></a><span class="co">#Ejercicio: escribe en UNA sola línea de código el valor máximo del 'precios'</span></span>
-<span id="cb20-347"><a href="#cb20-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-348"><a href="#cb20-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-349"><a href="#cb20-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-350"><a href="#cb20-350" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb20-351"><a href="#cb20-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-352"><a href="#cb20-352" aria-hidden="true" tabindex="-1"></a><span class="in">precios[which.max(precios)]</span></span>
-<span id="cb20-353"><a href="#cb20-353" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-354"><a href="#cb20-354" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.2 Matrices</span></span>
-<span id="cb20-355"><a href="#cb20-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-356"><a href="#cb20-356" aria-hidden="true" tabindex="-1"></a><span class="fu">## Array</span></span>
-<span id="cb20-357"><a href="#cb20-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-358"><a href="#cb20-358" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dataframes</span></span>
-<span id="cb20-359"><a href="#cb20-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-360"><a href="#cb20-360" aria-hidden="true" tabindex="-1"></a><span class="fu">## Listas</span></span>
-<span id="cb20-361"><a href="#cb20-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-362"><a href="#cb20-362" aria-hidden="true" tabindex="-1"></a><span class="fu">## objetos phyloseq</span></span>
-<span id="cb20-363"><a href="#cb20-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-364"><a href="#cb20-364" aria-hidden="true" tabindex="-1"></a><span class="fu"># read tables, excels, etc</span></span>
-<span id="cb20-365"><a href="#cb20-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-366"><a href="#cb20-366" aria-hidden="true" tabindex="-1"></a>#guardar objetos, rds, rdata</span>
-<span id="cb20-367"><a href="#cb20-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-368"><a href="#cb20-368" aria-hidden="true" tabindex="-1"></a><span class="fu"># X. Guardar</span></span>
+<div class="sourceCode" id="cb41" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Principios básicos y estructuras de datos"</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: false</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># 0. Consideraciones previas</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.1 Ejecución de código</span></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>Para **ejecutar el código** escrito en el editor de código, podemos hacerlo de dos maneras:</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>a.  Seleccionando la línea de código a ejecutar o poniendo el cursor en dicha linea, y pulsando el botón *run* situado en la parte superior derecha del editor.</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>b.  Poniendo el cursor en la línea a ejecutar y pulsando *ctrl* + *enter*</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.2 Comentar scripts</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>Para poder comentar código, pondremos el símbolo **\#** delante del comentario a realizar. Así pues, todo el texto y símbolos precedidos por **\#** no serán ejecutados. Veamos un ejemplo:</span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a><span class="co">#a=2+32 podemos ver en nuestro Environment que la variable 'a' no se ha creado</span></span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span> <span class="co">#si corremos esta línea, veremos que la variable b si se ha creado</span></span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.3 Recuperar comandos ejecutados</span></span>
+<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a>En R podemos saber qué comandos hemos ejecutado anteriormente de dos maneras:</span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a>a)  Si nos situamos en la consola y le damos al botón *\^* de nuestro teclado, podremos ver la orden inmediatamente anterior</span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>b)  ¿otra forma?</span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.4 Directorio de trabajo</span></span>
+<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a>En nuestro directorio de trabajo es donde quedarán todos los archivos que guardemos (si lo hacemos con código).</span>
+<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a>Antes de empezar a trabajar es **MUY IMPORTANTE** establecer el directorio de trabajo. Debemos tener cuidado, de lo contrario, podemos trabajar en otro directorio y sobreescribir ficheros, variables, etc.</span>
+<span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a>Podemos establecer nuestro lugar de trabajo de dos maneras:</span>
+<span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a>a)  Click en *Session* (panel superior) \&gt; *Set working directory* \&gt; *Choose directory*, y elegimos la carpeta de trabajo.</span>
+<span id="cb41-50"><a href="#cb41-50" aria-hidden="true" tabindex="-1"></a>b)  Con el siguiente comando:</span>
+<span id="cb41-51"><a href="#cb41-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-54"><a href="#cb41-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-55"><a href="#cb41-55" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/radik/Desktop/Curso Microbiota R/CursoMicrobiota"</span>)<span class="co">#setwd(directoriodeinteres)</span></span>
+<span id="cb41-56"><a href="#cb41-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-57"><a href="#cb41-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-58"><a href="#cb41-58" aria-hidden="true" tabindex="-1"></a>Para comprobar en qué directorio nos encontramos, lo haremos por código:</span>
+<span id="cb41-59"><a href="#cb41-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-62"><a href="#cb41-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-63"><a href="#cb41-63" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()<span class="co">#no introducimos ningun argumento</span></span>
+<span id="cb41-64"><a href="#cb41-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-65"><a href="#cb41-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-66"><a href="#cb41-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.5 Visualizar elementos</span></span>
+<span id="cb41-67"><a href="#cb41-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-68"><a href="#cb41-68" aria-hidden="true" tabindex="-1"></a>Durante el desarrollo de nuestros scripts nos puede resultar útil y necesario visualizar el contenido de los elementos que tenemos en nuestro ambiente.</span>
+<span id="cb41-69"><a href="#cb41-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-70"><a href="#cb41-70" aria-hidden="true" tabindex="-1"></a>Si queremos visualizar los elementos en la pantalla del editor de scripts, lo haremos así</span>
+<span id="cb41-71"><a href="#cb41-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-74"><a href="#cb41-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-75"><a href="#cb41-75" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(b)<span class="co">#podemos visualizar todo tipo de variables</span></span>
+<span id="cb41-76"><a href="#cb41-76" aria-hidden="true" tabindex="-1"></a>       <span class="co">#¡OJO! la 'V' tiene que ir en mayuscula; R es sensible a las mayusculas y minusculas</span></span>
+<span id="cb41-77"><a href="#cb41-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-78"><a href="#cb41-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-79"><a href="#cb41-79" aria-hidden="true" tabindex="-1"></a>Si queremos visualizar el elemento **completo**, escribiremos el nombre del elemento directamente **en la consola**:</span>
+<span id="cb41-80"><a href="#cb41-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-83"><a href="#cb41-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-84"><a href="#cb41-84" aria-hidden="true" tabindex="-1"></a>b</span>
+<span id="cb41-85"><a href="#cb41-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-86"><a href="#cb41-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-87"><a href="#cb41-87" aria-hidden="true" tabindex="-1"></a>Si nos enfrentamos a un elemento de gran tamaño (una lista, una tabla con muchas filas), y **solo** queremos ver el **encabezamiento**, usaremos este comando:</span>
+<span id="cb41-88"><a href="#cb41-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-91"><a href="#cb41-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-92"><a href="#cb41-92" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(b)</span>
+<span id="cb41-93"><a href="#cb41-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-94"><a href="#cb41-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-95"><a href="#cb41-95" aria-hidden="true" tabindex="-1"></a>Si queremos solo visualizar el final del elemento, lo haremos con el comando *tail()*, tal que así:</span>
+<span id="cb41-96"><a href="#cb41-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-99"><a href="#cb41-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-100"><a href="#cb41-100" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(b)</span>
+<span id="cb41-101"><a href="#cb41-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-102"><a href="#cb41-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-103"><a href="#cb41-103" aria-hidden="true" tabindex="-1"></a><span class="fu">## 0.6 Búsqueda de ayuda</span></span>
+<span id="cb41-104"><a href="#cb41-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-105"><a href="#cb41-105" aria-hidden="true" tabindex="-1"></a>Habrá ocasiones en las que deseemos conocer información sobre un comando o una función concreta de un paquete (por ejemplo, qué tipo de variables de entrada acepta, cómo funciona, valores de salida, etc.). Para acceder a la *documentación* de la función concreta, existen varias maneras de proceder:</span>
+<span id="cb41-106"><a href="#cb41-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-107"><a href="#cb41-107" aria-hidden="true" tabindex="-1"></a>a)  Con **comandos**</span>
+<span id="cb41-108"><a href="#cb41-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-109"><a href="#cb41-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=F}</span></span>
+<span id="cb41-110"><a href="#cb41-110" aria-hidden="true" tabindex="-1"></a><span class="in">?install.packages() #despues del simbolo '?' escribimos el nombre de la funcion de interes</span></span>
+<span id="cb41-111"><a href="#cb41-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-112"><a href="#cb41-112" aria-hidden="true" tabindex="-1"></a><span class="in">help("install.packages")#es exactamente lo mismo, nos devuelve la misma información</span></span>
+<span id="cb41-113"><a href="#cb41-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-114"><a href="#cb41-114" aria-hidden="true" tabindex="-1"></a><span class="in">help(package="vegan")#nos proporciona toda la informacion de un paquete de interes (su descripcion, versiones y listado de funciones que incluye)</span></span>
+<span id="cb41-115"><a href="#cb41-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-116"><a href="#cb41-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-117"><a href="#cb41-117" aria-hidden="true" tabindex="-1"></a>A continuación se abrirá en el visor inferior derecho, en la pestaña *Help* toda la información sobre el uso de dicha función (Figura 1).</span>
+<span id="cb41-118"><a href="#cb41-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-119"><a href="#cb41-119" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 1. Búsqueda de ayuda en R con comandos](images/Help_comm.jpg)</span></span>
+<span id="cb41-120"><a href="#cb41-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-121"><a href="#cb41-121" aria-hidden="true" tabindex="-1"></a>b)  **Interactivamente** Debemos ir al panel inferior derecho y en la pestaña *Help*, buscar en la lupa el nombre de nuestra función de interés, tal y como se indica en la Figura 2.</span>
+<span id="cb41-122"><a href="#cb41-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-123"><a href="#cb41-123" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 2. Búsqueda de ayuda en R.](images/Help.jpg)</span></span>
+<span id="cb41-124"><a href="#cb41-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-125"><a href="#cb41-125" aria-hidden="true" tabindex="-1"></a>c)  Buscar en **Google u otro buscador** la documentación oficial.</span>
+<span id="cb41-126"><a href="#cb41-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-127"><a href="#cb41-127" aria-hidden="true" tabindex="-1"></a>Toda la información que nos da el comando *?* o el panel de ayuda (opciones **a** y **b**) está disponible en Google, y en foros de grandísima utilidad como [**Stack overflow**](https://stackoverflow.com/questions).</span>
+<span id="cb41-128"><a href="#cb41-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-129"><a href="#cb41-129" aria-hidden="true" tabindex="-1"></a>d)  **Inteligencia Artificial**</span>
+<span id="cb41-130"><a href="#cb41-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-131"><a href="#cb41-131" aria-hidden="true" tabindex="-1"></a>Se desaconseja enormemente el uso de cualquier tipo de chatbot para búsquedas sencillas que Google u otros buscadores pueden realizar. ¡Ahorremos energía!</span>
+<span id="cb41-132"><a href="#cb41-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-133"><a href="#cb41-133" aria-hidden="true" tabindex="-1"></a><span class="fu"># 1. Instalación de paquetes de R</span></span>
+<span id="cb41-134"><a href="#cb41-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-135"><a href="#cb41-135" aria-hidden="true" tabindex="-1"></a>R base incluye varios paquetes con funciones básicas, pero no son suficientes para nuestros análisis. Por ello, necesitamos instalar **paquetes** (conjuntos de funciones con un objetivo similar) que han sido desarrollados por otros usuarios (o por nosotros mismos) que están disponibles en repositorios públicos, como <span class="co">[</span><span class="ot">CRAN</span><span class="co">](https://cran.r-project.org/ "Web del repositorio CRAN")</span>. La descarga e instalación de los paquetes puede realizarse de dos maneras:</span>
+<span id="cb41-136"><a href="#cb41-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-137"><a href="#cb41-137" aria-hidden="true" tabindex="-1"></a>a)  Mediante **código**</span>
+<span id="cb41-138"><a href="#cb41-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-139"><a href="#cb41-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
+<span id="cb41-140"><a href="#cb41-140" aria-hidden="true" tabindex="-1"></a><span class="in">install.packages("ggplot2") #incluir el nombre del paquete siempre entre " "</span></span>
+<span id="cb41-141"><a href="#cb41-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-142"><a href="#cb41-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-143"><a href="#cb41-143" aria-hidden="true" tabindex="-1"></a>Una vez que hemos instalado de los repositorios los paquetes, debemos cargar las librerías y todo su contenido. Para ello:</span>
+<span id="cb41-144"><a href="#cb41-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-147"><a href="#cb41-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-148"><a href="#cb41-148" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)<span class="co">#OJO! Aquí no es necesario entrecomillar el nombre del paquete</span></span>
+<span id="cb41-149"><a href="#cb41-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-150"><a href="#cb41-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-151"><a href="#cb41-151" aria-hidden="true" tabindex="-1"></a>::: callout-warning</span>
+<span id="cb41-152"><a href="#cb41-152" aria-hidden="true" tabindex="-1"></a>Cada vez que habramos una sesión de R Studio, debemos cargar las librerías, de lo contrario, no encontrará las funciones cuando las llamemos. Pero *NO* es necesario que instalemos de nuevo los paquetes. Una vez que hemos instalado los paquetes estos ya quedan en nuestro ordenador, y aunque cerremos la sesión de R Studio, los paquetes quedarán en nuestro PC.</span>
+<span id="cb41-153"><a href="#cb41-153" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb41-154"><a href="#cb41-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-155"><a href="#cb41-155" aria-hidden="true" tabindex="-1"></a>b)  **Interactivamente** Para ello, iremos al panel inferior derecho y haremos click en la pestaña *Packages*. Haremos click en el botón *Install* (debado de la cinta de pestañas, a la izquierda). Se nos abrirá una pantalla (Figura 3).</span>
+<span id="cb41-156"><a href="#cb41-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-157"><a href="#cb41-157" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 3. Panel de instalación de paquetes de R.](images/Install.jpg)</span></span>
+<span id="cb41-158"><a href="#cb41-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-159"><a href="#cb41-159" aria-hidden="true" tabindex="-1"></a>En la opción *packages* introduciremos el nombre del paquete a instalar. Dejaremos seleccionada la opción *install dependencies*.</span>
+<span id="cb41-160"><a href="#cb41-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-161"><a href="#cb41-161" aria-hidden="true" tabindex="-1"></a>Una vez instalados, debemos cargar los paquetes. Para ello, buscaremos el nombre de nuestro paquete en el listado. Si no lo encontramos, lo buscamos con la lupa, tal y como se muestra en la Figura 4.</span>
+<span id="cb41-162"><a href="#cb41-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-163"><a href="#cb41-163" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 4. Búsqueda de los paquetes instalados y selección de los mismos.](images/LoadPackages.jpg)</span></span>
+<span id="cb41-164"><a href="#cb41-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-165"><a href="#cb41-165" aria-hidden="true" tabindex="-1"></a>Es importante que seleccioneis el paquete que buscabais para que se cargue la librería. Para comprobar que se ha cargado, podéis comprobar que en la consola os sale la orden '*library(paquetecargado)*', tal y como se hace por código.</span>
+<span id="cb41-166"><a href="#cb41-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-167"><a href="#cb41-167" aria-hidden="true" tabindex="-1"></a><span class="fu"># 2. Clases en R</span></span>
+<span id="cb41-168"><a href="#cb41-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-169"><a href="#cb41-169" aria-hidden="true" tabindex="-1"></a>En R tenemos muchas clases o tipos de datos diferentes. La Tabla 1 resume las clases principales.</span>
+<span id="cb41-170"><a href="#cb41-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-171"><a href="#cb41-171" aria-hidden="true" tabindex="-1"></a>| Clase                      | Ejemplo              |</span>
+<span id="cb41-172"><a href="#cb41-172" aria-hidden="true" tabindex="-1"></a>|----------------------------|----------------------|</span>
+<span id="cb41-173"><a href="#cb41-173" aria-hidden="true" tabindex="-1"></a>| **Numérico** (*numeric*)   | 2.5                  |</span>
+<span id="cb41-174"><a href="#cb41-174" aria-hidden="true" tabindex="-1"></a>| **Entero** (*integer*)     | 2                    |</span>
+<span id="cb41-175"><a href="#cb41-175" aria-hidden="true" tabindex="-1"></a>| **Carácter** (*character*) | Hola                 |</span>
+<span id="cb41-176"><a href="#cb41-176" aria-hidden="true" tabindex="-1"></a>| **Factor** (*factor*)      | Color (Blanco/negro) |</span>
+<span id="cb41-177"><a href="#cb41-177" aria-hidden="true" tabindex="-1"></a>| **Lógico** (*logic*)       | TRUE/FALSE           |</span>
+<span id="cb41-178"><a href="#cb41-178" aria-hidden="true" tabindex="-1"></a>| **Perdido** (*na*)         | NA                   |</span>
+<span id="cb41-179"><a href="#cb41-179" aria-hidden="true" tabindex="-1"></a>| **Vacío** (*null*)         | NULL                 |</span>
+<span id="cb41-180"><a href="#cb41-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-181"><a href="#cb41-181" aria-hidden="true" tabindex="-1"></a>: Tabla 1. Clases en R. Entre paréntesis se indica la nomenclatura de cada clase en R.</span>
+<span id="cb41-182"><a href="#cb41-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-183"><a href="#cb41-183" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.1 Numérico (*integer*) y entero (*integer*)</span></span>
+<span id="cb41-184"><a href="#cb41-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-185"><a href="#cb41-185" aria-hidden="true" tabindex="-1"></a>**Entero**: datos numéricos sin parte decimal. **Numérico**: contienen una parte decimal, fraccionaria</span>
+<span id="cb41-186"><a href="#cb41-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-187"><a href="#cb41-187" aria-hidden="true" tabindex="-1"></a>No es objeto de este curso repasar las operaciones matemáticas en R, pero se pueden consultar en <span class="co">[</span><span class="ot">este link</span><span class="co">](https://posit.cloud/learn/recipes/basics/BasicB1 "Operaciones matemáticas")</span>.</span>
+<span id="cb41-188"><a href="#cb41-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-189"><a href="#cb41-189" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.2 Carácter (*character*)</span></span>
+<span id="cb41-190"><a href="#cb41-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-191"><a href="#cb41-191" aria-hidden="true" tabindex="-1"></a>Se encuentran compuestos por letras, números, espacios, signos de puntuación y/o símbolos especiales. A las cadenas de caracteres se les conoce como **strings**.</span>
+<span id="cb41-192"><a href="#cb41-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-193"><a href="#cb41-193" aria-hidden="true" tabindex="-1"></a>Aparecen y se indican entrecomillados.</span>
+<span id="cb41-194"><a href="#cb41-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-195"><a href="#cb41-195" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb41-196"><a href="#cb41-196" aria-hidden="true" tabindex="-1"></a>Una única cifra (o un conjunto de cifras) pueden ser de tipo carácter. Debemos tener cuidado con esto, ya que podemos querer que R trate a una(s) cifra(s) como carácter(es), por ejemplo, para que no sea posible aplicar operaciones matemáticas sobre ellas. Puede ser interesante en el caso de tratar los **nombres de las muestras** en un proyecto de microbiota/bioinformática.</span>
+<span id="cb41-197"><a href="#cb41-197" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb41-198"><a href="#cb41-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-199"><a href="#cb41-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.3 Factor</span></span>
+<span id="cb41-200"><a href="#cb41-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-201"><a href="#cb41-201" aria-hidden="true" tabindex="-1"></a>Se trata de variables categóricas, es decir, que tienen un número concreto de **niveles** (*levels*). Es decir, son clasificadores, variables de agrupación. Un ejemplo: etapa de desarrollo (factor), con 5 niveles: semilla, plántula, joven, adulto, senescente.</span>
+<span id="cb41-202"><a href="#cb41-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-203"><a href="#cb41-203" aria-hidden="true" tabindex="-1"></a>::: collout-note</span>
+<span id="cb41-204"><a href="#cb41-204" aria-hidden="true" tabindex="-1"></a>No nos debemos dejar llevar por la apariencia. A simple vista, podemos ver que el contenido de una columna aparenta que se trata de variables de tipo carácter porque están compuestas por letras y/o números, pero puede que se trate de factores. Al fin y al cabo, las variables de tipo factor pueden estar compuestas por caracteres.</span>
+<span id="cb41-205"><a href="#cb41-205" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb41-206"><a href="#cb41-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-207"><a href="#cb41-207" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.4 Lógico</span></span>
+<span id="cb41-208"><a href="#cb41-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-209"><a href="#cb41-209" aria-hidden="true" tabindex="-1"></a>Se trata de clases que solo pueden tomar dos valores: *TRUE* o *FALSE*, es decir, si cumplen o no una condición. También se conocen como **clases booleanas**.</span>
+<span id="cb41-210"><a href="#cb41-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-211"><a href="#cb41-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.5 Perdido y vacío</span></span>
+<span id="cb41-212"><a href="#cb41-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-213"><a href="#cb41-213" aria-hidden="true" tabindex="-1"></a>**Perdido** (*na*): se trata de datos perdidos, por ejemplo, datos que no han sido registrados o que han sido omitidos. Son datos faltantes. Se suelen representar como NA.</span>
+<span id="cb41-214"><a href="#cb41-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-215"><a href="#cb41-215" aria-hidden="true" tabindex="-1"></a>**Vacío** (*null*): representan la ausencia de datos, es decir, un comando nos puede devolver NULL cuando intente recuperar un dato y no lo encuentre (por ejemplo, porque lo hemos borrado).</span>
+<span id="cb41-216"><a href="#cb41-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-217"><a href="#cb41-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## Asignaciones, cambios de clase y determinación del tipo de clase</span></span>
+<span id="cb41-218"><a href="#cb41-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-219"><a href="#cb41-219" aria-hidden="true" tabindex="-1"></a>Cuando queramos crear una variable y asignarle un valor, usaremos el operador '*=*' o '*\&lt;-*'</span>
+<span id="cb41-220"><a href="#cb41-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-223"><a href="#cb41-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-224"><a href="#cb41-224" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">"hola que tal"</span> <span class="co">#creo una variable que contiene ese texto</span></span>
+<span id="cb41-225"><a href="#cb41-225" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="st">"hola que tal"</span> <span class="co">#idem</span></span>
+<span id="cb41-226"><a href="#cb41-226" aria-hidden="true" tabindex="-1"></a><span class="co">#NOTA: no importa si antes y después de los operadores incluimos un espacio.</span></span>
+<span id="cb41-227"><a href="#cb41-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-228"><a href="#cb41-228" aria-hidden="true" tabindex="-1"></a>a<span class="sc">==</span>b <span class="co">#¡¡¡OJO!!! Dos simbolos '=' seguidos NO es para realizar una asignacion, sino para preguntarle si los dos elementos son iguales</span></span>
+<span id="cb41-229"><a href="#cb41-229" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(a,b) <span class="co">#a==b es equivalente a identical(a,b)</span></span>
+<span id="cb41-230"><a href="#cb41-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-231"><a href="#cb41-231" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span><span class="sc">==</span><span class="dv">8</span> <span class="co">#le estamos preguntando si 7 es igual a 8, nos debe devolver FALSE</span></span>
+<span id="cb41-232"><a href="#cb41-232" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">!=</span> <span class="dv">8</span> <span class="co">#el operador '!=' significa "diferente de". En este caso debe devolver TRUE</span></span>
+<span id="cb41-233"><a href="#cb41-233" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-234"><a href="#cb41-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-235"><a href="#cb41-235" aria-hidden="true" tabindex="-1"></a>Para saber de qué clase es nuestro objeto:</span>
+<span id="cb41-236"><a href="#cb41-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-239"><a href="#cb41-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-240"><a href="#cb41-240" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span>
+<span id="cb41-241"><a href="#cb41-241" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(b)</span>
+<span id="cb41-242"><a href="#cb41-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-243"><a href="#cb41-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-244"><a href="#cb41-244" aria-hidden="true" tabindex="-1"></a>Para determinar o cambiar de clase:</span>
+<span id="cb41-245"><a href="#cb41-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-248"><a href="#cb41-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-249"><a href="#cb41-249" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fu">as.character</span>(<span class="st">"hola"</span>)</span>
+<span id="cb41-250"><a href="#cb41-250" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="fu">as.factor</span>(<span class="st">"hola"</span>)</span>
+<span id="cb41-251"><a href="#cb41-251" aria-hidden="true" tabindex="-1"></a>desarrollo<span class="ot">=</span><span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"semilla"</span>,<span class="st">"semilla"</span>,<span class="st">"plantula"</span>,<span class="st">"joven"</span>,<span class="st">"adulto"</span>,<span class="st">"joven"</span>,<span class="st">"senescente"</span>))<span class="co"># 'c' indica que vamos a introducir un vector, donde cada elemento del mismo equivale a un nivel del factor. Lo veremos en el apartado 3.</span></span>
+<span id="cb41-252"><a href="#cb41-252" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(desarrollo)<span class="co">#nos muestra los niveles de un factor</span></span>
+<span id="cb41-253"><a href="#cb41-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-254"><a href="#cb41-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-255"><a href="#cb41-255" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fu">as.integer</span>(<span class="fl">2.1+3.2</span>)<span class="co">#vemos que al llamar a la variable 'a' nos devuelve el valor 5</span></span>
+<span id="cb41-256"><a href="#cb41-256" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="fu">as.numeric</span>(<span class="fl">2.1+3.2</span>)<span class="co">#ahora, la variable nos devuelve 5.3</span></span>
+<span id="cb41-257"><a href="#cb41-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-258"><a href="#cb41-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-259"><a href="#cb41-259" aria-hidden="true" tabindex="-1"></a>Si quieres conocer más cosas sobre los **operadores en R**, haz click en <span class="sc">\[</span>este link<span class="sc">\]</span> (https://bookdown.org/jboscomendoza/r-principiantes4/operadores.html) donde vienen muchos más detalles.</span>
+<span id="cb41-260"><a href="#cb41-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-261"><a href="#cb41-261" aria-hidden="true" tabindex="-1"></a><span class="fu"># 3. Tipos de objetos o estructuras en R</span></span>
+<span id="cb41-262"><a href="#cb41-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-263"><a href="#cb41-263" aria-hidden="true" tabindex="-1"></a>Las clases son tipos de datos, pero estos pueden estar almacenados en diferentes tipos de **objetos** o **elementos**. Así pues, podemos tener diferentes tipos de objetos que almacenen diferentes datos de diferentes clases. Veamos los ejemplos.</span>
+<span id="cb41-264"><a href="#cb41-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-265"><a href="#cb41-265" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.1 Vectores</span></span>
+<span id="cb41-266"><a href="#cb41-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-267"><a href="#cb41-267" aria-hidden="true" tabindex="-1"></a>Se trata de una colección de elementos o conjunto de datos **del mismo tipo** o clase. Es la estructura mínima de R.</span>
+<span id="cb41-268"><a href="#cb41-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-269"><a href="#cb41-269" aria-hidden="true" tabindex="-1"></a>Para crearlos, debemos preceder a la lista de elementos del vector la letra *c*, y los elementos tienen que estar entrecomillados:</span>
+<span id="cb41-270"><a href="#cb41-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-273"><a href="#cb41-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-274"><a href="#cb41-274" aria-hidden="true" tabindex="-1"></a>compra <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"pan"</span>, <span class="st">"harina"</span>, <span class="st">"pollo"</span>)</span>
+<span id="cb41-275"><a href="#cb41-275" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(compra)</span>
+<span id="cb41-276"><a href="#cb41-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-277"><a href="#cb41-277" aria-hidden="true" tabindex="-1"></a>precios<span class="ot">=</span><span class="fu">c</span>(<span class="st">"1.50"</span>,<span class="st">"3.75"</span>,<span class="st">"6.98"</span>)</span>
+<span id="cb41-278"><a href="#cb41-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-279"><a href="#cb41-279" aria-hidden="true" tabindex="-1"></a>mixto<span class="ot">=</span><span class="fu">c</span>(<span class="st">"7.4"</span>,<span class="st">"hola"</span>)</span>
+<span id="cb41-280"><a href="#cb41-280" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mixto)<span class="co">#OJO! el valor 7.4 lo toma como carácter, pues todos los elementos han de ser del mismo tipo/clase</span></span>
+<span id="cb41-281"><a href="#cb41-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-282"><a href="#cb41-282" aria-hidden="true" tabindex="-1"></a>boo<span class="ot">=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>)<span class="co">#como no están entrecomillados, los toma como booleano</span></span>
+<span id="cb41-283"><a href="#cb41-283" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(boo)</span>
+<span id="cb41-284"><a href="#cb41-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-285"><a href="#cb41-285" aria-hidden="true" tabindex="-1"></a>no_boo<span class="ot">=</span><span class="fu">c</span>(<span class="st">"TRUE"</span>,<span class="st">"FALSE"</span>,<span class="st">"FALSE"</span>)</span>
+<span id="cb41-286"><a href="#cb41-286" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(no_boo)<span class="co">#es para preguntarle directamente si es un vector</span></span>
+<span id="cb41-287"><a href="#cb41-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-288"><a href="#cb41-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-289"><a href="#cb41-289" aria-hidden="true" tabindex="-1"></a>Para saber de forma rápida y visual de qué tipo son mis vectores, basta con buscarlos en el panel de Environment, tal y como se aprecia en la Figura 5:</span>
+<span id="cb41-290"><a href="#cb41-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-291"><a href="#cb41-291" aria-hidden="true" tabindex="-1"></a><span class="al">![Figura 5. Apariencia de Environment.](images/Vectors.jpg)</span></span>
+<span id="cb41-292"><a href="#cb41-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-293"><a href="#cb41-293" aria-hidden="true" tabindex="-1"></a>Podemos fusionar vectores, incluso de diferentes tipos. R de forma automática realizará una **coerción**, una *fusión* de los mismos. R determina automáticamente la clase resultante, que será la más universal (generalmente, caracter). Comprobémoslo:</span>
+<span id="cb41-294"><a href="#cb41-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-297"><a href="#cb41-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-298"><a href="#cb41-298" aria-hidden="true" tabindex="-1"></a>precios_compra<span class="ot">=</span><span class="fu">c</span>(precios,compra)</span>
+<span id="cb41-299"><a href="#cb41-299" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(precios_compra)</span>
+<span id="cb41-300"><a href="#cb41-300" aria-hidden="true" tabindex="-1"></a>precios_compra <span class="co">#coloca uno inmediatamente después del otro.</span></span>
+<span id="cb41-301"><a href="#cb41-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-302"><a href="#cb41-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-303"><a href="#cb41-303" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.1.1 Operaciones con vectores</span></span>
+<span id="cb41-304"><a href="#cb41-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-305"><a href="#cb41-305" aria-hidden="true" tabindex="-1"></a>a)  Podemos conocer la **longitud** de los vectores:</span>
+<span id="cb41-306"><a href="#cb41-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-309"><a href="#cb41-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-310"><a href="#cb41-310" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(precios_compra) <span class="co">#longitud: 6</span></span>
+<span id="cb41-311"><a href="#cb41-311" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-312"><a href="#cb41-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-313"><a href="#cb41-313" aria-hidden="true" tabindex="-1"></a>b)  Conocer el elemento que ocupa una **posición** del vector. Basta con poner la posición entre corchetes, tras el nombre del vector</span>
+<span id="cb41-314"><a href="#cb41-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-317"><a href="#cb41-317" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-318"><a href="#cb41-318" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>] <span class="co">#que acceda al elemento en la posición 2</span></span>
+<span id="cb41-319"><a href="#cb41-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-320"><a href="#cb41-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-321"><a href="#cb41-321" aria-hidden="true" tabindex="-1"></a>c)  **Modificar** un vector. Debemos asignar el nuevo valor a la posición que queremos modificar:</span>
+<span id="cb41-322"><a href="#cb41-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-325"><a href="#cb41-325" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-326"><a href="#cb41-326" aria-hidden="true" tabindex="-1"></a><span class="co">#queremos cambiar el segundo precio, por 0.49:</span></span>
+<span id="cb41-327"><a href="#cb41-327" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>]<span class="ot">=</span><span class="st">"0.49"</span></span>
+<span id="cb41-328"><a href="#cb41-328" aria-hidden="true" tabindex="-1"></a>precios_compra <span class="co">#comprobamos todo el contenido del vector</span></span>
+<span id="cb41-329"><a href="#cb41-329" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">2</span>] <span class="co">#comprobamos el contenido en la posición 2</span></span>
+<span id="cb41-330"><a href="#cb41-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-331"><a href="#cb41-331" aria-hidden="true" tabindex="-1"></a><span class="co">#añadir elementos a un vector (añadir también es 'modificar' un vector)</span></span>
+<span id="cb41-332"><a href="#cb41-332" aria-hidden="true" tabindex="-1"></a>precios_compra[<span class="dv">7</span>]<span class="ot">=</span> <span class="st">"gelducha"</span></span>
+<span id="cb41-333"><a href="#cb41-333" aria-hidden="true" tabindex="-1"></a>precios_compra</span>
+<span id="cb41-334"><a href="#cb41-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-335"><a href="#cb41-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-336"><a href="#cb41-336" aria-hidden="true" tabindex="-1"></a>c)  Preguntas al vector</span>
+<span id="cb41-337"><a href="#cb41-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-338"><a href="#cb41-338" aria-hidden="true" tabindex="-1"></a>Podemos interaccionar con los vectores, y preguntarles si un elemento es igual, mayor, menos que otro valor; cuál es la cifra máxima y mínima de un vector numérico, entre otras.</span>
+<span id="cb41-339"><a href="#cb41-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-342"><a href="#cb41-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-343"><a href="#cb41-343" aria-hidden="true" tabindex="-1"></a>precios[<span class="dv">3</span>] <span class="sc">&gt;</span>  <span class="fl">6.97</span></span>
+<span id="cb41-344"><a href="#cb41-344" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(precios) <span class="co">#NO nos devuelve el valor máximo, sino la POSICIÓN que ocupa el valor máximo</span></span>
+<span id="cb41-345"><a href="#cb41-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-346"><a href="#cb41-346" aria-hidden="true" tabindex="-1"></a><span class="co">#Ejercicio: escribe en UNA sola línea de código el valor máximo del 'precios'</span></span>
+<span id="cb41-347"><a href="#cb41-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-348"><a href="#cb41-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-349"><a href="#cb41-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-350"><a href="#cb41-350" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb41-351"><a href="#cb41-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-352"><a href="#cb41-352" aria-hidden="true" tabindex="-1"></a><span class="in">precios[which.max(precios)]</span></span>
+<span id="cb41-353"><a href="#cb41-353" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-354"><a href="#cb41-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-355"><a href="#cb41-355" aria-hidden="true" tabindex="-1"></a>d)  Operaciones matemáticas: puesto que no emplearemos demasiadas operaciones matemáticas, no procede explicarlas en detalle. Tan solo que para aplicar una función matemática a todos los elementos de un vector basta con indicarlo tal que así:</span>
+<span id="cb41-356"><a href="#cb41-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-359"><a href="#cb41-359" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-360"><a href="#cb41-360" aria-hidden="true" tabindex="-1"></a>resta<span class="ot">=</span> precios <span class="sc">-</span> <span class="dv">1</span> <span class="co">#debe guardarse el resultado en un nuevo vector</span></span>
+<span id="cb41-361"><a href="#cb41-361" aria-hidden="true" tabindex="-1"></a>precios</span>
+<span id="cb41-362"><a href="#cb41-362" aria-hidden="true" tabindex="-1"></a>resta</span>
+<span id="cb41-363"><a href="#cb41-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-364"><a href="#cb41-364" aria-hidden="true" tabindex="-1"></a>log_todos<span class="ot">=</span><span class="fu">log</span>(precios) <span class="co">#hay funciones que se aplican al conjunto de elementos</span></span>
+<span id="cb41-365"><a href="#cb41-365" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-366"><a href="#cb41-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-367"><a href="#cb41-367" aria-hidden="true" tabindex="-1"></a>Ejercicio: crea un vector llamado 'productos' que contenga estos elementos: manzanas, pan, leche, huevos, queso. Crea otro llamado 'importe' que contenga estos elementos numéricos: 1.2, 2.5, 1.0, 3.0, 4.5. Calcula el importe de la compra total si compramos de unidades de cada producto, y dime cuál es el producto más barato.</span>
+<span id="cb41-368"><a href="#cb41-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-369"><a href="#cb41-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb41-370"><a href="#cb41-370" aria-hidden="true" tabindex="-1"></a><span class="in">productos = c("manzanas", "pan", "leche", "huevos", "queso")</span></span>
+<span id="cb41-371"><a href="#cb41-371" aria-hidden="true" tabindex="-1"></a><span class="in">precios=c(1.2, 2.5, 1.0, 3.0, 4.5)</span></span>
+<span id="cb41-372"><a href="#cb41-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-373"><a href="#cb41-373" aria-hidden="true" tabindex="-1"></a><span class="in">compra= sum(precios * 2)</span></span>
+<span id="cb41-374"><a href="#cb41-374" aria-hidden="true" tabindex="-1"></a><span class="in">productos[which.max(precios)]</span></span>
+<span id="cb41-375"><a href="#cb41-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-376"><a href="#cb41-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-377"><a href="#cb41-377" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.2 Matrices y arrays</span></span>
+<span id="cb41-378"><a href="#cb41-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-379"><a href="#cb41-379" aria-hidden="true" tabindex="-1"></a><span class="sc">\-</span>**Matrices**: se pueden considerar como **vectores multidimensionales**. Tienen una estructura *rectangular*, y no *lineal* como la que tienen los vectores. Todos los elementos de la matriz han de ser de la misma clase. Solo tienen dos dimensiones: ancho x largo</span>
+<span id="cb41-380"><a href="#cb41-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-381"><a href="#cb41-381" aria-hidden="true" tabindex="-1"></a><span class="sc">\-</span>**Arrays**: son matrices de múltiples dimensiones, por ejemplo, cúbicas. No trabajaremos con arrays.</span>
+<span id="cb41-382"><a href="#cb41-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-383"><a href="#cb41-383" aria-hidden="true" tabindex="-1"></a>Creemos una matriz:</span>
+<span id="cb41-384"><a href="#cb41-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-387"><a href="#cb41-387" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-388"><a href="#cb41-388" aria-hidden="true" tabindex="-1"></a>matriz_34<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">4</span>)<span class="co"># 3 filas y 4 columnas</span></span>
+<span id="cb41-389"><a href="#cb41-389" aria-hidden="true" tabindex="-1"></a>matriz_34 <span class="co">#podemos observar que va ordenando en columnas en vez de en filas.</span></span>
+<span id="cb41-390"><a href="#cb41-390" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-391"><a href="#cb41-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-392"><a href="#cb41-392" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.2.1 Creación de matriz por fusión de vectores</span></span>
+<span id="cb41-393"><a href="#cb41-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-394"><a href="#cb41-394" aria-hidden="true" tabindex="-1"></a>Existen dos funciones muy comunes para crear matrices a partir de vectores: **cbind** y **rbind**</span>
+<span id="cb41-395"><a href="#cb41-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-396"><a href="#cb41-396" aria-hidden="true" tabindex="-1"></a><span class="sc">\-</span>**cbind**: *column binding*, esta función fusiona vectores por columnas, es decir, anexando una columna **al lado** de la otra</span>
+<span id="cb41-397"><a href="#cb41-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-398"><a href="#cb41-398" aria-hidden="true" tabindex="-1"></a><span class="sc">\-</span>**rbind**: *row binding*, fusiona vectores por filas, es decir, anexando un vector **debajo** de otro</span>
+<span id="cb41-399"><a href="#cb41-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-402"><a href="#cb41-402" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-403"><a href="#cb41-403" aria-hidden="true" tabindex="-1"></a>altura<span class="ot">=</span><span class="fu">c</span>(<span class="fl">7.5</span>, <span class="fl">12.8</span>, <span class="fl">11.7</span>, <span class="fl">7.1</span>)</span>
+<span id="cb41-404"><a href="#cb41-404" aria-hidden="true" tabindex="-1"></a>peso<span class="ot">=</span><span class="fu">c</span>(<span class="dv">96</span>, <span class="dv">74</span>, <span class="dv">85</span>, <span class="fl">75.3</span>)</span>
+<span id="cb41-405"><a href="#cb41-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-406"><a href="#cb41-406" aria-hidden="true" tabindex="-1"></a>col_fusion<span class="ot">=</span><span class="fu">cbind</span>(altura,peso)</span>
+<span id="cb41-407"><a href="#cb41-407" aria-hidden="true" tabindex="-1"></a>col_fusion <span class="co">#vemos que la columna 1 equivale a la altura, y la segunda al peso</span></span>
+<span id="cb41-408"><a href="#cb41-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-409"><a href="#cb41-409" aria-hidden="true" tabindex="-1"></a>row_fusion<span class="ot">=</span><span class="fu">rbind</span>(altura, peso)<span class="co">#justo se disponen al reves</span></span>
+<span id="cb41-410"><a href="#cb41-410" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(col_fusion);<span class="fu">class</span>(row_fusion) <span class="co">#nos dice "matrix" y "array" porque una matrix no es más que un array de 2dim</span></span>
+<span id="cb41-411"><a href="#cb41-411" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-412"><a href="#cb41-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-413"><a href="#cb41-413" aria-hidden="true" tabindex="-1"></a>Podemos **renombrar** los nombres de las columnas y/o las filas, puesto que en este ejemplo vemos que no son muy explicativos.</span>
+<span id="cb41-414"><a href="#cb41-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-417"><a href="#cb41-417" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-418"><a href="#cb41-418" aria-hidden="true" tabindex="-1"></a><span class="co">#comprobamos los nombres de columna y fila en cada variable</span></span>
+<span id="cb41-419"><a href="#cb41-419" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(col_fusion)</span>
+<span id="cb41-420"><a href="#cb41-420" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(col_fusion)<span class="co">#NULL</span></span>
+<span id="cb41-421"><a href="#cb41-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-422"><a href="#cb41-422" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(row_fusion)</span>
+<span id="cb41-423"><a href="#cb41-423" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(row_fusion)</span>
+<span id="cb41-424"><a href="#cb41-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-425"><a href="#cb41-425" aria-hidden="true" tabindex="-1"></a><span class="co">#Cambiamos el nombre de las filas/columnas por unos más definitorios:</span></span>
+<span id="cb41-426"><a href="#cb41-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-427"><a href="#cb41-427" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(col_fusion)<span class="ot">=</span><span class="fu">c</span>(<span class="st">"Arbol1"</span>, <span class="st">"Arbol2"</span>, <span class="st">"Arbol3"</span>, <span class="st">"Arbol4"</span>); col_fusion</span>
+<span id="cb41-428"><a href="#cb41-428" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(row_fusion)<span class="ot">=</span><span class="fu">c</span>(<span class="st">"Arbol1"</span>, <span class="st">"Arbol2"</span>, <span class="st">"Arbol3"</span>, <span class="st">"Arbol4"</span>); row_fusion</span>
+<span id="cb41-429"><a href="#cb41-429" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-430"><a href="#cb41-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-431"><a href="#cb41-431" aria-hidden="true" tabindex="-1"></a>La notación de las posiciones en una matriz será, **siempre**: <span class="sc">\[</span>filas,columnas<span class="sc">\]</span></span>
+<span id="cb41-432"><a href="#cb41-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-435"><a href="#cb41-435" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-436"><a href="#cb41-436" aria-hidden="true" tabindex="-1"></a>row_fusion[<span class="dv">1</span>,<span class="dv">2</span>]<span class="co"># fila 1, columna 2: valor 12.8</span></span>
+<span id="cb41-437"><a href="#cb41-437" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-438"><a href="#cb41-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-439"><a href="#cb41-439" aria-hidden="true" tabindex="-1"></a>Si queremos designar todas las filas o todas las columnas, podemos poner dejar la posición vacía, tal que:</span>
+<span id="cb41-440"><a href="#cb41-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-443"><a href="#cb41-443" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-444"><a href="#cb41-444" aria-hidden="true" tabindex="-1"></a><span class="co">#quiero ver toda la primera fila (todas sus columnas)</span></span>
+<span id="cb41-445"><a href="#cb41-445" aria-hidden="true" tabindex="-1"></a>row_fusion[<span class="dv">1</span>,]</span>
+<span id="cb41-446"><a href="#cb41-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-447"><a href="#cb41-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-448"><a href="#cb41-448" aria-hidden="true" tabindex="-1"></a>Para seleccionar posiciones en un rango concreto, basta con indicar el rango separado por dos puntos:</span>
+<span id="cb41-449"><a href="#cb41-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-452"><a href="#cb41-452" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-453"><a href="#cb41-453" aria-hidden="true" tabindex="-1"></a><span class="co">#quiero ver las columnas 2 y 3 de row_fusion</span></span>
+<span id="cb41-454"><a href="#cb41-454" aria-hidden="true" tabindex="-1"></a>row_fusion[,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb41-455"><a href="#cb41-455" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-456"><a href="#cb41-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-457"><a href="#cb41-457" aria-hidden="true" tabindex="-1"></a>Para **no seleccionar** columnas o filas concretas, debemos indicarlo con el signo **-** delante de la posición de las columnas o filas correspondientes:</span>
+<span id="cb41-458"><a href="#cb41-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-461"><a href="#cb41-461" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-462"><a href="#cb41-462" aria-hidden="true" tabindex="-1"></a><span class="co">#quiero quitar la columna 1 de row_fusion</span></span>
+<span id="cb41-463"><a href="#cb41-463" aria-hidden="true" tabindex="-1"></a>row_fusion2<span class="ot">=</span>row_fusion[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb41-464"><a href="#cb41-464" aria-hidden="true" tabindex="-1"></a>row_fusion2 <span class="co">#vemos que falta la columna 1</span></span>
+<span id="cb41-465"><a href="#cb41-465" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-466"><a href="#cb41-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-467"><a href="#cb41-467" aria-hidden="true" tabindex="-1"></a>Podemos conocer las **dimensiones** de una matriz/array del siguiente modo</span>
+<span id="cb41-468"><a href="#cb41-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-471"><a href="#cb41-471" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-472"><a href="#cb41-472" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(row_fusion) <span class="co">#MUY interesante: nos devuelve el numero de filas, y el numero de columnas. Esta estructura se repetirá en el apartado 3.3 Dataframes</span></span>
+<span id="cb41-473"><a href="#cb41-473" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(col_fusion)</span>
+<span id="cb41-474"><a href="#cb41-474" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-475"><a href="#cb41-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-476"><a href="#cb41-476" aria-hidden="true" tabindex="-1"></a>Ejercicio: Crea una matriz de 4 filas (una por estudiante) y 3 columnas (una por asignatura) que contenga las calificaciones de unos alumnos: 7, 8, 6, 5, 9, 7, 8, 6, 9, 6, 7, 8. Añade el nombre a los estudiantes (Rafa, Lazaro, Patricia, Carmen), y a las materias (RStudio, Estadistica, Ecologia). Calcula el promedio de las notas de Rafa Calcula el promedio de las notas de todos los alumnos en Estadistica</span>
+<span id="cb41-477"><a href="#cb41-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-478"><a href="#cb41-478" aria-hidden="true" tabindex="-1"></a>¿Qué estudiante obtuvo la mejor nota en Ecologia?</span>
+<span id="cb41-479"><a href="#cb41-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-480"><a href="#cb41-480" aria-hidden="true" tabindex="-1"></a>Descalificamos a todos los alumnos con 1 punto por llegar tarde a clase, ¿qué notas tendrán los alumnos en todas las asignaturas?</span>
+<span id="cb41-481"><a href="#cb41-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-482"><a href="#cb41-482" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb41-483"><a href="#cb41-483" aria-hidden="true" tabindex="-1"></a><span class="in">notas &lt;- matrix(</span></span>
+<span id="cb41-484"><a href="#cb41-484" aria-hidden="true" tabindex="-1"></a><span class="in">  c(7, 8, 6, 5, 9, 7, 8, 6, 9, 6, 7, 8),</span></span>
+<span id="cb41-485"><a href="#cb41-485" aria-hidden="true" tabindex="-1"></a><span class="in">  nrow = 4, ncol=3</span></span>
+<span id="cb41-486"><a href="#cb41-486" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb41-487"><a href="#cb41-487" aria-hidden="true" tabindex="-1"></a><span class="in">colnames(notas)= c("RStudio", "Estadistica", "Ecologia")</span></span>
+<span id="cb41-488"><a href="#cb41-488" aria-hidden="true" tabindex="-1"></a><span class="in">rownames(notas)=c("Rafa", "Lazaro", "Patricia", "Carmen")</span></span>
+<span id="cb41-489"><a href="#cb41-489" aria-hidden="true" tabindex="-1"></a><span class="in">rafa_mean=mean(notas[1,]);rafa_mean=mean(notas["Rafa",]);rowMeans(notas)[1]</span></span>
+<span id="cb41-490"><a href="#cb41-490" aria-hidden="true" tabindex="-1"></a><span class="in">esta_mean=mean(notas[,2]);esta_mean=mean(notas[,"Estadistica"]);colMeans(notas)[2]</span></span>
+<span id="cb41-491"><a href="#cb41-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-492"><a href="#cb41-492" aria-hidden="true" tabindex="-1"></a><span class="in">which.max(notas[,"Ecologia"])#es otra forma de indicar los indices</span></span>
+<span id="cb41-493"><a href="#cb41-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-494"><a href="#cb41-494" aria-hidden="true" tabindex="-1"></a><span class="in">descalific=notas -1</span></span>
+<span id="cb41-495"><a href="#cb41-495" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-496"><a href="#cb41-496" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-497"><a href="#cb41-497" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.3 Dataframes</span></span>
+<span id="cb41-498"><a href="#cb41-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-499"><a href="#cb41-499" aria-hidden="true" tabindex="-1"></a>Son estructuras de datos rectangulares (2 dimensiones) que pueden estar compuestas por datos **heterogéneos**, es decir, por datos de cualquier clase. Podrían considerarse como la agrupación de vectores, pues los datos incluidos en la misma columna (considerando cada columna como si fuera un vector) han de ser de la misma clase. Son una de las estructuras más empleadas en ciencias de datos.</span>
+<span id="cb41-500"><a href="#cb41-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-501"><a href="#cb41-501" aria-hidden="true" tabindex="-1"></a>Generalmente, los datos se distribuyen de la siguiente manera: -**Filas**: en cada fila tendremos las **instancias**, esto es, los datos relativos a cada individuo objeto de estudio. En el caso de comunidades microbianas, cada fila corresponde a la información de cada uno de los taxones. -**Columnas**: en cada columna se indican los valores de cada una de las variables medida o registrada para cada individuo. En el caso de comunidades microbianas, en cada columna tendremos el recuento o número de secuencias detectadas en cada una de las réplicas.</span>
+<span id="cb41-502"><a href="#cb41-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-505"><a href="#cb41-505" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-506"><a href="#cb41-506" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)<span class="co">#dataframe incluido en todas las distribuciones de R</span></span>
+<span id="cb41-507"><a href="#cb41-507" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(iris)</span>
+<span id="cb41-508"><a href="#cb41-508" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(iris)</span>
+<span id="cb41-509"><a href="#cb41-509" aria-hidden="true" tabindex="-1"></a><span class="co">#vemos que contiene los valores de 5 variables determinadas para 150 plantas</span></span>
+<span id="cb41-510"><a href="#cb41-510" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-511"><a href="#cb41-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-512"><a href="#cb41-512" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.3.1 Acceso a los elementos del dataframe</span></span>
+<span id="cb41-513"><a href="#cb41-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-514"><a href="#cb41-514" aria-hidden="true" tabindex="-1"></a>Existen varias maneras de acceder a cada uno de los vectores que componen el dataframe:</span>
+<span id="cb41-515"><a href="#cb41-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-516"><a href="#cb41-516" aria-hidden="true" tabindex="-1"></a>a)  Mediante el signo **\$**, precediendo el nombre de la columna deseada:</span>
+<span id="cb41-517"><a href="#cb41-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-520"><a href="#cb41-520" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-521"><a href="#cb41-521" aria-hidden="true" tabindex="-1"></a>especie<span class="ot">=</span>iris<span class="sc">$</span>Species</span>
+<span id="cb41-522"><a href="#cb41-522" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-523"><a href="#cb41-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-524"><a href="#cb41-524" aria-hidden="true" tabindex="-1"></a>b)  Mediante *corchetes*, incluyendo el número de columna concreta:</span>
+<span id="cb41-525"><a href="#cb41-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-528"><a href="#cb41-528" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-529"><a href="#cb41-529" aria-hidden="true" tabindex="-1"></a>sepalo_l<span class="ot">=</span>iris[<span class="dv">1</span>]</span>
+<span id="cb41-530"><a href="#cb41-530" aria-hidden="true" tabindex="-1"></a>sepalos<span class="ot">=</span>iris[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb41-531"><a href="#cb41-531" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-532"><a href="#cb41-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-533"><a href="#cb41-533" aria-hidden="true" tabindex="-1"></a>c)  Mediante *corchetes*, incluyendo el nombre de la columna concreta entrecomillado:</span>
+<span id="cb41-534"><a href="#cb41-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-537"><a href="#cb41-537" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-538"><a href="#cb41-538" aria-hidden="true" tabindex="-1"></a>sepalo_w<span class="ot">=</span>iris[<span class="st">"Sepal.Width"</span>]</span>
+<span id="cb41-539"><a href="#cb41-539" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-540"><a href="#cb41-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-541"><a href="#cb41-541" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.3.2 Crear dataframes</span></span>
+<span id="cb41-542"><a href="#cb41-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-543"><a href="#cb41-543" aria-hidden="true" tabindex="-1"></a>Se pueden crear de muchas maneras:</span>
+<span id="cb41-544"><a href="#cb41-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-547"><a href="#cb41-547" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-548"><a href="#cb41-548" aria-hidden="true" tabindex="-1"></a><span class="co">#a partir de una matriz:</span></span>
+<span id="cb41-549"><a href="#cb41-549" aria-hidden="true" tabindex="-1"></a>df1<span class="ot">=</span><span class="fu">as.data.frame</span>(matriz_34)</span>
+<span id="cb41-550"><a href="#cb41-550" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df1)<span class="ot">=</span><span class="fu">c</span>(<span class="st">"Pan"</span>,<span class="st">"Huevos"</span>,<span class="st">"Leche"</span>,<span class="st">"Mejillones"</span>)</span>
+<span id="cb41-551"><a href="#cb41-551" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-552"><a href="#cb41-552" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-553"><a href="#cb41-553" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.3.3 Subset de elementos</span></span>
+<span id="cb41-554"><a href="#cb41-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-555"><a href="#cb41-555" aria-hidden="true" tabindex="-1"></a>Podemos crear una nueva variable seleccionando elementos concretos de un dataframe.</span>
+<span id="cb41-556"><a href="#cb41-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-559"><a href="#cb41-559" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-560"><a href="#cb41-560" aria-hidden="true" tabindex="-1"></a><span class="co">#ejemplo: seleccionar todos aquellos individuos clasificados como 'setosa'</span></span>
+<span id="cb41-561"><a href="#cb41-561" aria-hidden="true" tabindex="-1"></a>setosa<span class="ot">=</span><span class="fu">subset</span>(iris, Species<span class="sc">==</span> <span class="st">"setosa"</span>)<span class="co">#se queda con todos los valores de todas las variables de aquellas filas que cumplen una condicion concreta</span></span>
+<span id="cb41-562"><a href="#cb41-562" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-563"><a href="#cb41-563" aria-hidden="true" tabindex="-1"></a><span class="co">#ejemplo: seleccionar todos aquellos individuos clasificados como 'virginica', y que ademas, la longitud del sepalo sea &gt; 6.5</span></span>
+<span id="cb41-564"><a href="#cb41-564" aria-hidden="true" tabindex="-1"></a>v_65<span class="ot">=</span> <span class="fu">subset</span>(iris, Species<span class="sc">==</span> <span class="st">"virginica"</span> <span class="sc">&amp;</span> Sepal.Length <span class="sc">&gt;</span> <span class="fl">6.5</span>)<span class="co"># el simbolo '&amp;' se emplea para indicar una 'adición' de condiciones</span></span>
+<span id="cb41-565"><a href="#cb41-565" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-566"><a href="#cb41-566" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-567"><a href="#cb41-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-568"><a href="#cb41-568" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.3.4 Otras operaciones</span></span>
+<span id="cb41-569"><a href="#cb41-569" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-570"><a href="#cb41-570" aria-hidden="true" tabindex="-1"></a>Los dataframes se pueden manipular en multitud de maneras diferentes:</span>
+<span id="cb41-571"><a href="#cb41-571" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-574"><a href="#cb41-574" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-575"><a href="#cb41-575" aria-hidden="true" tabindex="-1"></a><span class="co">#trasposición: </span></span>
+<span id="cb41-576"><a href="#cb41-576" aria-hidden="true" tabindex="-1"></a>t_v_65<span class="ot">=</span><span class="fu">t</span>(v_65)<span class="co">#vemos que las columnas pasan ahora a ser filas</span></span>
+<span id="cb41-577"><a href="#cb41-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-578"><a href="#cb41-578" aria-hidden="true" tabindex="-1"></a><span class="co">#reemplazo de caracteres:</span></span>
+<span id="cb41-579"><a href="#cb41-579" aria-hidden="true" tabindex="-1"></a>v_65<span class="sc">$</span>Species<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"virginica"</span>, <span class="st">"virgi."</span>, v_65<span class="sc">$</span>Species)<span class="co">#gsub atributos: caracter a reemplazar, reemplazo, elemento donde realizar el reemplazo</span></span>
+<span id="cb41-580"><a href="#cb41-580" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-581"><a href="#cb41-581" aria-hidden="true" tabindex="-1"></a><span class="co">#concatenacion de strings:</span></span>
+<span id="cb41-582"><a href="#cb41-582" aria-hidden="true" tabindex="-1"></a>v_65<span class="sc">$</span>full_sepal<span class="ot">=</span><span class="fu">paste0</span>(v_65<span class="sc">$</span>Sepal.Length, <span class="st">"_"</span>,v_65<span class="sc">$</span>Sepal.Width)</span>
+<span id="cb41-583"><a href="#cb41-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-584"><a href="#cb41-584" aria-hidden="true" tabindex="-1"></a><span class="co">#aplicar operaciones matematicas a una seleccion de objetos:</span></span>
+<span id="cb41-585"><a href="#cb41-585" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-586"><a href="#cb41-586" aria-hidden="true" tabindex="-1"></a><span class="co">#que calcule la media de todas las variables en base a un factor de agrupacion concreto (por ejemplo, la media de las 4 variables para cada tipo de planta)</span></span>
+<span id="cb41-587"><a href="#cb41-587" aria-hidden="true" tabindex="-1"></a>media_todas<span class="ot">=</span><span class="fu">aggregate</span>(<span class="fu">cbind</span>(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) <span class="sc">~</span> Species,</span>
+<span id="cb41-588"><a href="#cb41-588" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> iris,</span>
+<span id="cb41-589"><a href="#cb41-589" aria-hidden="true" tabindex="-1"></a>          <span class="at">FUN =</span> mean)</span>
+<span id="cb41-590"><a href="#cb41-590" aria-hidden="true" tabindex="-1"></a>mediana_petal_w_3<span class="ot">=</span><span class="fu">aggregate</span>(Petal.Width <span class="sc">~</span> Species,<span class="co">#indicamos la variable numerica y el factor de agrupacion</span></span>
+<span id="cb41-591"><a href="#cb41-591" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> <span class="fu">subset</span>(iris, Sepal.Width <span class="sc">&lt;</span> <span class="dv">3</span>), <span class="co">#en este punto selecciona los individuos que cumplen la condicion dada</span></span>
+<span id="cb41-592"><a href="#cb41-592" aria-hidden="true" tabindex="-1"></a>          <span class="at">FUN =</span> median)</span>
+<span id="cb41-593"><a href="#cb41-593" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-594"><a href="#cb41-594" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-595"><a href="#cb41-595" aria-hidden="true" tabindex="-1"></a>Ejercicio: Filtra el conjunto iris para quedarte solo con las flores que tienen un Petal.Length mayor a 4.5. Luego, calcula la media de Sepal.Width para cada especie (Species) en este subconjunto filtrado.</span>
+<span id="cb41-596"><a href="#cb41-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-597"><a href="#cb41-597" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb41-598"><a href="#cb41-598" aria-hidden="true" tabindex="-1"></a><span class="in">petalo_l_45=subset(iris, Petal.Length &gt; 4.5)</span></span>
+<span id="cb41-599"><a href="#cb41-599" aria-hidden="true" tabindex="-1"></a><span class="in">sep_media_petalo_45=aggregate(Sepal.Width ~ Species, data=petalo_l_45, FUN=mean)</span></span>
+<span id="cb41-600"><a href="#cb41-600" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-601"><a href="#cb41-601" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-602"><a href="#cb41-602" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.3.5 Operadores 'Pipes'</span></span>
+<span id="cb41-603"><a href="#cb41-603" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-604"><a href="#cb41-604" aria-hidden="true" tabindex="-1"></a>En el ejercicio anterior hemos realizado las operaciones en dos líneas, generando una nueva variable de filtrado. Para evitar la creación de nuevas variables que quizá nunca más las vamos a utilizar, se suelen usar los operadores de tipo 'tubería' o **'pipes'** (**%\&gt;%**)</span>
+<span id="cb41-605"><a href="#cb41-605" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-606"><a href="#cb41-606" aria-hidden="true" tabindex="-1"></a>Estos permiten encadenar varias operaciones de manera clara, de tal forma que el resultado de la primera operación, es el *input* o la entrada de la segunda operación, y así sucesivamente:</span>
+<span id="cb41-607"><a href="#cb41-607" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-610"><a href="#cb41-610" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-611"><a href="#cb41-611" aria-hidden="true" tabindex="-1"></a>seto<span class="ot">=</span><span class="fu">subset</span>(iris, Species <span class="sc">==</span> <span class="st">"setosa"</span>)</span>
+<span id="cb41-612"><a href="#cb41-612" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(seto)<span class="co">#obtenemos un resumen detallado de los estadisticos descriptivos principales</span></span>
+<span id="cb41-613"><a href="#cb41-613" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-614"><a href="#cb41-614" aria-hidden="true" tabindex="-1"></a><span class="co">#en una sola linea podriamos tambien escribirlo asi:</span></span>
+<span id="cb41-615"><a href="#cb41-615" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">subset</span>(iris, Species <span class="sc">==</span> <span class="st">"setosa"</span>))</span>
+<span id="cb41-616"><a href="#cb41-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-617"><a href="#cb41-617" aria-hidden="true" tabindex="-1"></a><span class="co">#de forma mas clara, en orden secuencial:</span></span>
+<span id="cb41-618"><a href="#cb41-618" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">subset</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span>) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()<span class="co">#primero, toma el dataframe 'iris'. Segundo, realiza una seleccion. Tercero, haz el resumen estadistico.</span></span>
+<span id="cb41-619"><a href="#cb41-619" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-620"><a href="#cb41-620" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-621"><a href="#cb41-621" aria-hidden="true" tabindex="-1"></a>Vemos que es una forma de evitar paréntesis anidados que pueden llevarnos a errores.</span>
+<span id="cb41-622"><a href="#cb41-622" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-623"><a href="#cb41-623" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.4 Listas</span></span>
+<span id="cb41-624"><a href="#cb41-624" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-625"><a href="#cb41-625" aria-hidden="true" tabindex="-1"></a>Las listas son los elementos más flexibles de R pues son estructuras que permiten almacenar todo tipo de datos diferentes, heterogéneos.</span>
+<span id="cb41-626"><a href="#cb41-626" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-627"><a href="#cb41-627" aria-hidden="true" tabindex="-1"></a>No tienen porqué tener estructura rectangular como los dataframes. Se asemejan más a un contenedor subdividido en diferentes compartimentos. Por lo tanto, una lista tiene **solamente una dimensión**.</span>
+<span id="cb41-628"><a href="#cb41-628" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-629"><a href="#cb41-629" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.4.1 Creación y acceso a las listas</span></span>
+<span id="cb41-630"><a href="#cb41-630" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-631"><a href="#cb41-631" aria-hidden="true" tabindex="-1"></a>Para tener un *índice* del contenido de la lista, usaremos paréntesis cuadrados:</span>
+<span id="cb41-632"><a href="#cb41-632" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-635"><a href="#cb41-635" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-636"><a href="#cb41-636" aria-hidden="true" tabindex="-1"></a><span class="co">#creamos la lista</span></span>
+<span id="cb41-637"><a href="#cb41-637" aria-hidden="true" tabindex="-1"></a>vector <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb41-638"><a href="#cb41-638" aria-hidden="true" tabindex="-1"></a>matriz <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb41-639"><a href="#cb41-639" aria-hidden="true" tabindex="-1"></a>df<span class="ot">=</span> <span class="fu">data.frame</span>(<span class="st">"num"</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">"letra"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
+<span id="cb41-640"><a href="#cb41-640" aria-hidden="true" tabindex="-1"></a>lista <span class="ot">=</span><span class="fu">list</span>(<span class="st">"un_vector"</span> <span class="ot">=</span> vector, <span class="st">"una_matriz"</span> <span class="ot">=</span> matriz, <span class="st">"un_df"</span> <span class="ot">=</span> df)</span>
+<span id="cb41-641"><a href="#cb41-641" aria-hidden="true" tabindex="-1"></a>lista<span class="co">#nos muestra el nombre de los tres elementos, y su contenido</span></span>
+<span id="cb41-642"><a href="#cb41-642" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(lista)<span class="co">#nos permite ver algo similar a un indice</span></span>
+<span id="cb41-643"><a href="#cb41-643" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-644"><a href="#cb41-644" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-645"><a href="#cb41-645" aria-hidden="true" tabindex="-1"></a>Para acceder a cada elemento de la lista, podemos:</span>
+<span id="cb41-646"><a href="#cb41-646" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-647"><a href="#cb41-647" aria-hidden="true" tabindex="-1"></a>a)  Indicar el número del elemento o el nombre del mismo entre corchetes:</span>
+<span id="cb41-648"><a href="#cb41-648" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-651"><a href="#cb41-651" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-652"><a href="#cb41-652" aria-hidden="true" tabindex="-1"></a>lista[<span class="dv">1</span>]<span class="co">#vemos el contenido y el nombre del vector. A veces, se le denomina 'sublista'</span></span>
+<span id="cb41-653"><a href="#cb41-653" aria-hidden="true" tabindex="-1"></a>lista[[<span class="dv">1</span>]]<span class="co">#vemos directamente el contenido del vector, sin el nombre del mismo</span></span>
+<span id="cb41-654"><a href="#cb41-654" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lista)<span class="co">#esta funcion nos permite ver el nombre de todos los elementos de la lista</span></span>
+<span id="cb41-655"><a href="#cb41-655" aria-hidden="true" tabindex="-1"></a>lista[<span class="st">"un_vector"</span>]</span>
+<span id="cb41-656"><a href="#cb41-656" aria-hidden="true" tabindex="-1"></a>lista[[<span class="st">"un_vector"</span>]]</span>
+<span id="cb41-657"><a href="#cb41-657" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-658"><a href="#cb41-658" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-659"><a href="#cb41-659" aria-hidden="true" tabindex="-1"></a>b)  Indicar el símbolo **\$** seguido del nombre del elemento de la lista</span>
+<span id="cb41-660"><a href="#cb41-660" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-663"><a href="#cb41-663" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-664"><a href="#cb41-664" aria-hidden="true" tabindex="-1"></a>lista<span class="sc">$</span>un_vector</span>
+<span id="cb41-665"><a href="#cb41-665" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-666"><a href="#cb41-666" aria-hidden="true" tabindex="-1"></a><span class="co">#si el elemento a visualizar es un dataframe, y queremos ver una columna concreta de dicho dataframe, usaremos el simbolo $ dos veces:</span></span>
+<span id="cb41-667"><a href="#cb41-667" aria-hidden="true" tabindex="-1"></a>lista<span class="sc">$</span>un_df<span class="sc">$</span>letra <span class="co">#nos muestra el contenido de la columna llamada 'letra' del dataframe llamado 'un_df'</span></span>
+<span id="cb41-668"><a href="#cb41-668" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-669"><a href="#cb41-669" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-670"><a href="#cb41-670" aria-hidden="true" tabindex="-1"></a>Ejercicio: Crea una lista llamada alumno que contenga:</span>
+<span id="cb41-671"><a href="#cb41-671" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-672"><a href="#cb41-672" aria-hidden="true" tabindex="-1"></a>Nombre: "Laura" Edad: 22 Notas: un vector de 3 notas: 8.5, 9.0, 7.8 Aprobado: TRUE</span>
+<span id="cb41-673"><a href="#cb41-673" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-674"><a href="#cb41-674" aria-hidden="true" tabindex="-1"></a>Luego, accede al vector de notas y calcula la media de las notas</span>
+<span id="cb41-675"><a href="#cb41-675" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-676"><a href="#cb41-676" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb41-677"><a href="#cb41-677" aria-hidden="true" tabindex="-1"></a><span class="in"># Crear la lista</span></span>
+<span id="cb41-678"><a href="#cb41-678" aria-hidden="true" tabindex="-1"></a><span class="in">alumno = list(</span></span>
+<span id="cb41-679"><a href="#cb41-679" aria-hidden="true" tabindex="-1"></a><span class="in">  nombre = "Laura",</span></span>
+<span id="cb41-680"><a href="#cb41-680" aria-hidden="true" tabindex="-1"></a><span class="in">  edad = 22,</span></span>
+<span id="cb41-681"><a href="#cb41-681" aria-hidden="true" tabindex="-1"></a><span class="in">  notas = c(8.5, 9.0, 7.8),</span></span>
+<span id="cb41-682"><a href="#cb41-682" aria-hidden="true" tabindex="-1"></a><span class="in">  aprobado = TRUE)</span></span>
+<span id="cb41-683"><a href="#cb41-683" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-684"><a href="#cb41-684" aria-hidden="true" tabindex="-1"></a><span class="in"># Acceder al vector de notas</span></span>
+<span id="cb41-685"><a href="#cb41-685" aria-hidden="true" tabindex="-1"></a><span class="in">notas_alumno = alumno$notas</span></span>
+<span id="cb41-686"><a href="#cb41-686" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-687"><a href="#cb41-687" aria-hidden="true" tabindex="-1"></a><span class="in"># Calcular la media de las notas</span></span>
+<span id="cb41-688"><a href="#cb41-688" aria-hidden="true" tabindex="-1"></a><span class="in">media_notas = mean(notas_alumno)</span></span>
+<span id="cb41-689"><a href="#cb41-689" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-690"><a href="#cb41-690" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-691"><a href="#cb41-691" aria-hidden="true" tabindex="-1"></a>Ejercicio: Crea una lista llamada empresa que contenga:</span>
+<span id="cb41-692"><a href="#cb41-692" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-693"><a href="#cb41-693" aria-hidden="true" tabindex="-1"></a>Nombre de la empresa: "EEZ-Spinoff" Años de funcionamiento: 5 Empleados: una sublista con los nombres de 3 empleados: "Ana", "Pedro", "Luis" Facturación anual: un vector con las facturaciones de los últimos 3 años: 1.5, 2.0, 2.8</span>
+<span id="cb41-694"><a href="#cb41-694" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-695"><a href="#cb41-695" aria-hidden="true" tabindex="-1"></a>Accede a la sublista de empleados y muestra el nombre del segundo empleado. Calcula la facturación media de los últimos 3 años.</span>
+<span id="cb41-696"><a href="#cb41-696" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-697"><a href="#cb41-697" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb41-698"><a href="#cb41-698" aria-hidden="true" tabindex="-1"></a><span class="in"># Crear la lista</span></span>
+<span id="cb41-699"><a href="#cb41-699" aria-hidden="true" tabindex="-1"></a><span class="in">empresa = list(</span></span>
+<span id="cb41-700"><a href="#cb41-700" aria-hidden="true" tabindex="-1"></a><span class="in">  nombre = "EEZ-Spinoff",</span></span>
+<span id="cb41-701"><a href="#cb41-701" aria-hidden="true" tabindex="-1"></a><span class="in">  años_funcionando = 5,</span></span>
+<span id="cb41-702"><a href="#cb41-702" aria-hidden="true" tabindex="-1"></a><span class="in">  empleados = list(</span></span>
+<span id="cb41-703"><a href="#cb41-703" aria-hidden="true" tabindex="-1"></a><span class="in">    empleado1 = "Ana",</span></span>
+<span id="cb41-704"><a href="#cb41-704" aria-hidden="true" tabindex="-1"></a><span class="in">    empleado2 = "Pedro",</span></span>
+<span id="cb41-705"><a href="#cb41-705" aria-hidden="true" tabindex="-1"></a><span class="in">    empleado3 = "Luis"</span></span>
+<span id="cb41-706"><a href="#cb41-706" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb41-707"><a href="#cb41-707" aria-hidden="true" tabindex="-1"></a><span class="in">  facturacion = c(1.5, 2.0, 2.8)</span></span>
+<span id="cb41-708"><a href="#cb41-708" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb41-709"><a href="#cb41-709" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-710"><a href="#cb41-710" aria-hidden="true" tabindex="-1"></a><span class="in"># Acceder al segundo empleado</span></span>
+<span id="cb41-711"><a href="#cb41-711" aria-hidden="true" tabindex="-1"></a><span class="in">segundo_empleado = empresa$empleados$empleado2</span></span>
+<span id="cb41-712"><a href="#cb41-712" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-713"><a href="#cb41-713" aria-hidden="true" tabindex="-1"></a><span class="in"># Calcular la facturación media</span></span>
+<span id="cb41-714"><a href="#cb41-714" aria-hidden="true" tabindex="-1"></a><span class="in">media_facturacion = mean(empresa$facturacion)</span></span>
+<span id="cb41-715"><a href="#cb41-715" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-716"><a href="#cb41-716" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-717"><a href="#cb41-717" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.5 Carga y guardado de objetos</span></span>
+<span id="cb41-718"><a href="#cb41-718" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-719"><a href="#cb41-719" aria-hidden="true" tabindex="-1"></a>Para cargar tablas o archivos en R, se emplean diferentes funciones de R base, las cuales dependerán del tipo de objeto.</span>
+<span id="cb41-720"><a href="#cb41-720" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-721"><a href="#cb41-721" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
+<span id="cb41-722"><a href="#cb41-722" aria-hidden="true" tabindex="-1"></a><span class="in">#Cargar objetos desde nuestro directorio:</span></span>
+<span id="cb41-723"><a href="#cb41-723" aria-hidden="true" tabindex="-1"></a><span class="in">datos_excel=read.csv("archivo.csv", header = T, sep = ",")#un csv separado por comas </span></span>
+<span id="cb41-724"><a href="#cb41-724" aria-hidden="true" tabindex="-1"></a><span class="in">datos_txt =read.table("ruta/al/archivo.txt", header = TRUE, sep = "\t")#un archivo de texto separado por tabuladores</span></span>
+<span id="cb41-725"><a href="#cb41-725" aria-hidden="true" tabindex="-1"></a><span class="in">objeto_rds = readRDS("ruta/al/archivo.rds") #un objeto RDS de R, guardado con el comando saveRDS()</span></span>
+<span id="cb41-726"><a href="#cb41-726" aria-hidden="true" tabindex="-1"></a><span class="in">load("ruta/al/archivo.RData") #cargar un objeto rda con todas sus variables</span></span>
+<span id="cb41-727"><a href="#cb41-727" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-728"><a href="#cb41-728" aria-hidden="true" tabindex="-1"></a><span class="in">#Guardar objetos</span></span>
+<span id="cb41-729"><a href="#cb41-729" aria-hidden="true" tabindex="-1"></a><span class="in">write.csv(iris, file = "iris.csv", row.names = FALSE)</span></span>
+<span id="cb41-730"><a href="#cb41-730" aria-hidden="true" tabindex="-1"></a><span class="in">write.table(iris, file = "iris.txt", sep = "\t", row.names = FALSE</span></span>
+<span id="cb41-731"><a href="#cb41-731" aria-hidden="true" tabindex="-1"></a><span class="in">saveRDS(mi_objeto, file = "mi_objeto.rds")</span></span>
+<span id="cb41-732"><a href="#cb41-732" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

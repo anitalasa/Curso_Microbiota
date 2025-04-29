@@ -20,7 +20,7 @@ b.  Poniendo el cursor en la línea a ejecutar y pulsando *ctrl* + *enter*
 
 ## 0.2 Comentar scripts
 
-Para poder comentar código, pondremos el símbolo **#** delante del comentario a realizar. Así pues, todo el texto y símbolos precedidos por **#** no serán ejecutados. Veamos un ejemplo:
+Para poder comentar código, pondremos el símbolo **\#** delante del comentario a realizar. Así pues, todo el texto y símbolos precedidos por **\#** no serán ejecutados. Veamos un ejemplo:
 
 ```{r}
 #a=2+32 podemos ver en nuestro Environment que la variable 'a' no se ha creado
@@ -200,7 +200,7 @@ Se trata de clases que solo pueden tomar dos valores: *TRUE* o *FALSE*, es decir
 
 ## Asignaciones, cambios de clase y determinación del tipo de clase
 
-Cuando queramos crear una variable y asignarle un valor, usaremos el operador '*=*' o '*<-*'
+Cuando queramos crear una variable y asignarle un valor, usaremos el operador '*=*' o '*\<-*'
 
 ```{r}
 a = "hola que tal" #creo una variable que contiene ese texto
@@ -234,7 +234,7 @@ a=as.integer(2.1+3.2)#vemos que al llamar a la variable 'a' nos devuelve el valo
 b=as.numeric(2.1+3.2)#ahora, la variable nos devuelve 5.3
 ```
 
-Si quieres conocer más cosas sobre los **operadores en R**, haz click en [este link] (https://bookdown.org/jboscomendoza/r-principiantes4/operadores.html) donde vienen muchos más detalles.
+Si quieres conocer más cosas sobre los **operadores en R**, haz click en \[este link\] (https://bookdown.org/jboscomendoza/r-principiantes4/operadores.html) donde vienen muchos más detalles.
 
 # 3. Tipos de objetos o estructuras en R
 
@@ -276,19 +276,19 @@ precios_compra #coloca uno inmediatamente después del otro.
 
 ### 3.1.1 Operaciones con vectores
 
-a) Podemos conocer la **longitud** de los vectores:
+a)  Podemos conocer la **longitud** de los vectores:
 
 ```{r}
 length(precios_compra) #longitud: 6
 ```
 
-b) Conocer el elemento que ocupa una **posición** del vector. Basta con poner la posición entre corchetes, tras el nombre del vector
+b)  Conocer el elemento que ocupa una **posición** del vector. Basta con poner la posición entre corchetes, tras el nombre del vector
 
 ```{r}
 precios_compra[2] #que acceda al elemento en la posición 2
 ```
 
-c) **Modificar** un vector. Debemos asignar el nuevo valor a la posición que queremos modificar:
+c)  **Modificar** un vector. Debemos asignar el nuevo valor a la posición que queremos modificar:
 
 ```{r}
 #queremos cambiar el segundo precio, por 0.49:
@@ -301,7 +301,7 @@ precios_compra[7]= "gelducha"
 precios_compra
 ```
 
-c) Preguntas al vector
+c)  Preguntas al vector
 
 Podemos interaccionar con los vectores, y preguntarles si un elemento es igual, mayor, menos que otro valor; cuál es la cifra máxima y mínima de un vector numérico, entre otras.
 
@@ -318,7 +318,7 @@ which.max(precios) #NO nos devuelve el valor máximo, sino la POSICIÓN que ocup
 precios[which.max(precios)]
 ```
 
-d) Operaciones matemáticas: puesto que no emplearemos demasiadas operaciones matemáticas, no procede explicarlas en detalle. Tan solo que para aplicar una función matemática a todos los elementos de un vector basta con indicarlo tal que así:
+d)  Operaciones matemáticas: puesto que no emplearemos demasiadas operaciones matemáticas, no procede explicarlas en detalle. Tan solo que para aplicar una función matemática a todos los elementos de un vector basta con indicarlo tal que así:
 
 ```{r}
 resta= precios - 1 #debe guardarse el resultado en un nuevo vector
@@ -327,7 +327,6 @@ resta
 
 log_todos=log(precios) #hay funciones que se aplican al conjunto de elementos
 ```
-
 
 Ejercicio: crea un vector llamado 'productos' que contenga estos elementos: manzanas, pan, leche, huevos, queso. Crea otro llamado 'importe' que contenga estos elementos numéricos: 1.2, 2.5, 1.0, 3.0, 4.5. Calcula el importe de la compra total si compramos de unidades de cada producto, y dime cuál es el producto más barato.
 
@@ -341,9 +340,9 @@ productos[which.max(precios)]
 
 ## 3.2 Matrices y arrays
 
--**Matrices**: se pueden considerar como **vectores multidimensionales**. Tienen una estructura *rectangular*, y no *lineal* como la que tienen los vectores. Todos los elementos de la matriz han de ser de la misma clase. Solo tienen dos dimensiones: ancho x largo
+\-**Matrices**: se pueden considerar como **vectores multidimensionales**. Tienen una estructura *rectangular*, y no *lineal* como la que tienen los vectores. Todos los elementos de la matriz han de ser de la misma clase. Solo tienen dos dimensiones: ancho x largo
 
--**Arrays**: son matrices de múltiples dimensiones, por ejemplo, cúbicas. No trabajaremos con arrays.
+\-**Arrays**: son matrices de múltiples dimensiones, por ejemplo, cúbicas. No trabajaremos con arrays.
 
 Creemos una matriz:
 
@@ -356,9 +355,9 @@ matriz_34 #podemos observar que va ordenando en columnas en vez de en filas.
 
 Existen dos funciones muy comunes para crear matrices a partir de vectores: **cbind** y **rbind**
 
--**cbind**: *column binding*, esta función fusiona vectores por columnas, es decir, anexando una columna **al lado** de la otra
+\-**cbind**: *column binding*, esta función fusiona vectores por columnas, es decir, anexando una columna **al lado** de la otra
 
--**rbind**: *row binding*, fusiona vectores por filas, es decir, anexando un vector **debajo** de otro
+\-**rbind**: *row binding*, fusiona vectores por filas, es decir, anexando un vector **debajo** de otro
 
 ```{r}
 altura=c(7.5, 12.8, 11.7, 7.1)
@@ -387,7 +386,7 @@ row.names(col_fusion)=c("Arbol1", "Arbol2", "Arbol3", "Arbol4"); col_fusion
 colnames(row_fusion)=c("Arbol1", "Arbol2", "Arbol3", "Arbol4"); row_fusion
 ```
 
-La notación de las posiciones en una matriz será, **siempre**: [filas,columnas]
+La notación de las posiciones en una matriz será, **siempre**: \[filas,columnas\]
 
 ```{r}
 row_fusion[1,2]# fila 1, columna 2: valor 12.8
@@ -422,10 +421,7 @@ dim(row_fusion) #MUY interesante: nos devuelve el numero de filas, y el numero d
 dim(col_fusion)
 ```
 
-Ejercicio: Crea una matriz de 4 filas (una por estudiante) y 3 columnas (una por asignatura) que contenga las calificaciones de unos alumnos: 7, 8, 6, 5, 9, 7, 8, 6, 9, 6, 7, 8. 
-Añade el nombre a los estudiantes (Rafa, Lazaro, Patricia, Carmen), y a las materias (RStudio, Estadistica, Ecologia).
-Calcula el promedio de las notas de Rafa
-Calcula el promedio de las notas de todos los alumnos en Estadistica
+Ejercicio: Crea una matriz de 4 filas (una por estudiante) y 3 columnas (una por asignatura) que contenga las calificaciones de unos alumnos: 7, 8, 6, 5, 9, 7, 8, 6, 9, 6, 7, 8. Añade el nombre a los estudiantes (Rafa, Lazaro, Patricia, Carmen), y a las materias (RStudio, Estadistica, Ecologia). Calcula el promedio de las notas de Rafa Calcula el promedio de las notas de todos los alumnos en Estadistica
 
 ¿Qué estudiante obtuvo la mejor nota en Ecologia?
 
@@ -446,15 +442,217 @@ which.max(notas[,"Ecologia"])#es otra forma de indicar los indices
 descalific=notas -1
 ```
 
-
 ## 3.3 Dataframes
+
+Son estructuras de datos rectangulares (2 dimensiones) que pueden estar compuestas por datos **heterogéneos**, es decir, por datos de cualquier clase. Podrían considerarse como la agrupación de vectores, pues los datos incluidos en la misma columna (considerando cada columna como si fuera un vector) han de ser de la misma clase. Son una de las estructuras más empleadas en ciencias de datos.
+
+Generalmente, los datos se distribuyen de la siguiente manera: -**Filas**: en cada fila tendremos las **instancias**, esto es, los datos relativos a cada individuo objeto de estudio. En el caso de comunidades microbianas, cada fila corresponde a la información de cada uno de los taxones. -**Columnas**: en cada columna se indican los valores de cada una de las variables medida o registrada para cada individuo. En el caso de comunidades microbianas, en cada columna tendremos el recuento o número de secuencias detectadas en cada una de las réplicas.
+
+```{r}
+head(iris)#dataframe incluido en todas las distribuciones de R
+tail(iris)
+dim(iris)
+#vemos que contiene los valores de 5 variables determinadas para 150 plantas
+```
+
+### 3.3.1 Acceso a los elementos del dataframe
+
+Existen varias maneras de acceder a cada uno de los vectores que componen el dataframe:
+
+a)  Mediante el signo **\$**, precediendo el nombre de la columna deseada:
+
+```{r}
+especie=iris$Species
+```
+
+b)  Mediante *corchetes*, incluyendo el número de columna concreta:
+
+```{r}
+sepalo_l=iris[1]
+sepalos=iris[,1:2]
+```
+
+c)  Mediante *corchetes*, incluyendo el nombre de la columna concreta entrecomillado:
+
+```{r}
+sepalo_w=iris["Sepal.Width"]
+```
+
+### 3.3.2 Crear dataframes
+
+Se pueden crear de muchas maneras:
+
+```{r}
+#a partir de una matriz:
+df1=as.data.frame(matriz_34)
+colnames(df1)=c("Pan","Huevos","Leche","Mejillones")
+```
+
+### 3.3.3 Subset de elementos
+
+Podemos crear una nueva variable seleccionando elementos concretos de un dataframe.
+
+```{r}
+#ejemplo: seleccionar todos aquellos individuos clasificados como 'setosa'
+setosa=subset(iris, Species== "setosa")#se queda con todos los valores de todas las variables de aquellas filas que cumplen una condicion concreta
+
+#ejemplo: seleccionar todos aquellos individuos clasificados como 'virginica', y que ademas, la longitud del sepalo sea > 6.5
+v_65= subset(iris, Species== "virginica" & Sepal.Length > 6.5)# el simbolo '&' se emplea para indicar una 'adición' de condiciones
+
+```
+
+### 3.3.4 Otras operaciones
+
+Los dataframes se pueden manipular en multitud de maneras diferentes:
+
+```{r}
+#trasposición: 
+t_v_65=t(v_65)#vemos que las columnas pasan ahora a ser filas
+
+#reemplazo de caracteres:
+v_65$Species=gsub("virginica", "virgi.", v_65$Species)#gsub atributos: caracter a reemplazar, reemplazo, elemento donde realizar el reemplazo
+
+#concatenacion de strings:
+v_65$full_sepal=paste0(v_65$Sepal.Length, "_",v_65$Sepal.Width)
+
+#aplicar operaciones matematicas a una seleccion de objetos:
+
+#que calcule la media de todas las variables en base a un factor de agrupacion concreto (por ejemplo, la media de las 4 variables para cada tipo de planta)
+media_todas=aggregate(cbind(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) ~ Species,
+          data = iris,
+          FUN = mean)
+mediana_petal_w_3=aggregate(Petal.Width ~ Species,#indicamos la variable numerica y el factor de agrupacion
+          data = subset(iris, Sepal.Width < 3), #en este punto selecciona los individuos que cumplen la condicion dada
+          FUN = median)
+```
+
+Ejercicio: Filtra el conjunto iris para quedarte solo con las flores que tienen un Petal.Length mayor a 4.5. Luego, calcula la media de Sepal.Width para cada especie (Species) en este subconjunto filtrado.
+
+```{r, echo=FALSE}
+petalo_l_45=subset(iris, Petal.Length > 4.5)
+sep_media_petalo_45=aggregate(Sepal.Width ~ Species, data=petalo_l_45, FUN=mean)
+```
+
+### 3.3.5 Operadores 'Pipes'
+
+En el ejercicio anterior hemos realizado las operaciones en dos líneas, generando una nueva variable de filtrado. Para evitar la creación de nuevas variables que quizá nunca más las vamos a utilizar, se suelen usar los operadores de tipo 'tubería' o **'pipes'** (**%\>%**)
+
+Estos permiten encadenar varias operaciones de manera clara, de tal forma que el resultado de la primera operación, es el *input* o la entrada de la segunda operación, y así sucesivamente:
+
+```{r}
+seto=subset(iris, Species == "setosa")
+summary(seto)#obtenemos un resumen detallado de los estadisticos descriptivos principales
+
+#en una sola linea podriamos tambien escribirlo asi:
+summary(subset(iris, Species == "setosa"))
+
+#de forma mas clara, en orden secuencial:
+iris %>% subset(Species == "setosa") %>% summary()#primero, toma el dataframe 'iris'. Segundo, realiza una seleccion. Tercero, haz el resumen estadistico.
+```
+
+Vemos que es una forma de evitar paréntesis anidados que pueden llevarnos a errores.
 
 ## 3.4 Listas
 
-## 3.5 objetos phyloseq
+Las listas son los elementos más flexibles de R pues son estructuras que permiten almacenar todo tipo de datos diferentes, heterogéneos.
 
-# read tables, excels, etc
+No tienen porqué tener estructura rectangular como los dataframes. Se asemejan más a un contenedor subdividido en diferentes compartimentos. Por lo tanto, una lista tiene **solamente una dimensión**.
 
-#guardar objetos, rds, rdata
+### 3.4.1 Creación y acceso a las listas
 
-# X. Guardar
+Para tener un *índice* del contenido de la lista, usaremos paréntesis cuadrados:
+
+```{r}
+#creamos la lista
+vector = 1:10
+matriz = matrix(1:4, nrow = 2)
+df= data.frame("num" = 1:3, "letra" = c("a", "b", "c"))
+lista =list("un_vector" = vector, "una_matriz" = matriz, "un_df" = df)
+lista#nos muestra el nombre de los tres elementos, y su contenido
+View(lista)#nos permite ver algo similar a un indice
+```
+
+Para acceder a cada elemento de la lista, podemos:
+
+a)  Indicar el número del elemento o el nombre del mismo entre corchetes:
+
+```{r}
+lista[1]#vemos el contenido y el nombre del vector. A veces, se le denomina 'sublista'
+lista[[1]]#vemos directamente el contenido del vector, sin el nombre del mismo
+names(lista)#esta funcion nos permite ver el nombre de todos los elementos de la lista
+lista["un_vector"]
+lista[["un_vector"]]
+```
+
+b)  Indicar el símbolo **\$** seguido del nombre del elemento de la lista
+
+```{r}
+lista$un_vector
+
+#si el elemento a visualizar es un dataframe, y queremos ver una columna concreta de dicho dataframe, usaremos el simbolo $ dos veces:
+lista$un_df$letra #nos muestra el contenido de la columna llamada 'letra' del dataframe llamado 'un_df'
+```
+
+Ejercicio: Crea una lista llamada alumno que contenga:
+
+Nombre: "Laura" Edad: 22 Notas: un vector de 3 notas: 8.5, 9.0, 7.8 Aprobado: TRUE
+
+Luego, accede al vector de notas y calcula la media de las notas
+
+```{r, echo=FALSE}
+# Crear la lista
+alumno = list(
+  nombre = "Laura",
+  edad = 22,
+  notas = c(8.5, 9.0, 7.8),
+  aprobado = TRUE)
+
+# Acceder al vector de notas
+notas_alumno = alumno$notas
+
+# Calcular la media de las notas
+media_notas = mean(notas_alumno)
+```
+
+Ejercicio: Crea una lista llamada empresa que contenga:
+
+Nombre de la empresa: "EEZ-Spinoff" Años de funcionamiento: 5 Empleados: una sublista con los nombres de 3 empleados: "Ana", "Pedro", "Luis" Facturación anual: un vector con las facturaciones de los últimos 3 años: 1.5, 2.0, 2.8
+
+Accede a la sublista de empleados y muestra el nombre del segundo empleado. Calcula la facturación media de los últimos 3 años.
+
+```{r, echo=FALSE}
+# Crear la lista
+empresa = list(
+  nombre = "EEZ-Spinoff",
+  años_funcionando = 5,
+  empleados = list(
+    empleado1 = "Ana",
+    empleado2 = "Pedro",
+    empleado3 = "Luis"
+  ),
+  facturacion = c(1.5, 2.0, 2.8)
+)
+
+# Acceder al segundo empleado
+segundo_empleado = empresa$empleados$empleado2
+
+# Calcular la facturación media
+media_facturacion = mean(empresa$facturacion)
+```
+
+## 3.5 Carga y guardado de objetos
+
+Para cargar tablas o archivos en R, se emplean diferentes funciones de R base, las cuales dependerán del tipo de objeto.
+
+```{r, eval=FALSE}
+#Cargar objetos desde nuestro directorio:
+datos_excel=read.csv("archivo.csv", header = T, sep = ",")#un csv separado por comas 
+datos_txt =read.table("ruta/al/archivo.txt", header = TRUE, sep = "\t")#un archivo de texto separado por tabuladores
+objeto_rds = readRDS("ruta/al/archivo.rds") #un objeto RDS de R, guardado con el comando saveRDS()
+load("ruta/al/archivo.RData") #cargar un objeto rda con todas sus variables
+
+#Guardar objetos
+write.csv(iris, file = "iris.csv", row.names = FALSE)
+write.table(iris, file = "iris.txt", sep = "\t", row.names = FALSE
+saveRDS(mi_objeto, file = "mi_objeto.rds")
+```

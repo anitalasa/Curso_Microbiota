@@ -8,3 +8,58 @@ execute:
 editor_options: 
   chunk_output_type: console
 ---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = FALSE)
+```
+
+El análisis de las comunidades fúngicas es prácticamente idéntico al de las comunidades bacterianas, si bien debemos tener presente varios aspectos:
+
+1.**Base de datos de clasificación**: la base de datos UNITE añade un código delante del nombre de cada uno de los taxones. Este código ayuda a conocer con qué rango taxonómico estamos trabajando (por ejemplo, para el rengo Phylum, añade la expresión **p__**, para cada familia añade **f__**, etc), pero puede resultar incómodo. Se sugiere eliminarlo.
+
+2. **Variabilidad en el tamaño de los amplicones**: como vimos, la región ITS2 es variable en cuanto a su longitud, lo que resta robusted a los árboles filogenéticos. Esto tiene varias implicaciones a la hora de desarrollar nuestros scripts:
+  
+  a) Debemos tener cuidado al crear el objeto *phyloseq*
+  b) No podremos trabajar con medidas de disimilitud o distancia basadas en relaciones filogéneticas. Es decir, para los análisis de diversidad beta, no usaremos ni Weighted-UniFrac ni Unweighted-UniFrac.
+  
+Se propone como ejercicio realizar de forma completa el análisis de las comunidades fúngicas.
+
+A modo de ayuda, se proporciona el código para elaborar el objeto *phyloseq*:
+
+```{r}
+#Entrada de datos----------------------------------------------------------
+data=read.table("ASV_final_fung.txt", header = T, sep="\t")
+
+#eliminamos los código extras que proporciona UNITE
+data$Kingdom=gsub("k__","",data$Kingdom)
+data$Phylum=gsub("p__","",data$Phylum)
+data$Class=gsub("c__","",data$Class)
+data$Order=gsub("o__","",data$Order)
+data$Family=gsub("f__","",data$Family)
+data$Genus=gsub("g__","",data$Genus)
+colnames_data=colnames(data)
+
+mt=read.table("metadata.txt",sep="\t", header=T)
+mt$replicate=as.character(mt$replicate)
+row.names(mt)=mt$sample
+
+tax =data[,2:8]
+ASV=data[,9:ncol(data)]
+
+dna=Biostrings::DNAStringSet(data$ASV_seqs) 
+names(dna)= data$ASV_names
+
+row.names(tax)=data$ASV_names
+row.names(ASV)=data$ASV_names
+
+identical(rownames(ASV), rownames(tax))
+
+#Convertir a formato phyloseq
+phy_OTUtable=otu_table(ASV, taxa_are_rows = T)
+phy_taxonomy=tax_table(as.matrix(tax))
+phy_metadata=sample_data(mt) 
+
+#Ponerlo todo en un objeto phyloseq
+phy_fungi=phyloseq(phy_OTUtable,phy_taxonomy,phy_metadata)
+```

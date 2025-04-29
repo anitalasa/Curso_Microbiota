@@ -127,7 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Intro.qmd"> 
+    <a class="nav-link" href="./Instalacion.html"> 
 <span class="menu-text">Introducción a R y RStudio</span></a>
   </li>  
   <li class="nav-item">
@@ -200,6 +200,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>El análisis de las comunidades fúngicas es prácticamente idéntico al de las comunidades bacterianas, si bien debemos tener presente varios aspectos:</p>
+<p>1.<strong>Base de datos de clasificación</strong>: la base de datos UNITE añade un código delante del nombre de cada uno de los taxones. Este código ayuda a conocer con qué rango taxonómico estamos trabajando (por ejemplo, para el rengo Phylum, añade la expresión **p__<strong>, para cada familia añade </strong>f__**, etc), pero puede resultar incómodo. Se sugiere eliminarlo.</p>
+<ol start="2" type="1">
+<li><strong>Variabilidad en el tamaño de los amplicones</strong>: como vimos, la región ITS2 es variable en cuanto a su longitud, lo que resta robusted a los árboles filogenéticos. Esto tiene varias implicaciones a la hora de desarrollar nuestros scripts:</li>
+</ol>
+<ol type="a">
+<li>Debemos tener cuidado al crear el objeto <em>phyloseq</em></li>
+<li>No podremos trabajar con medidas de disimilitud o distancia basadas en relaciones filogéneticas. Es decir, para los análisis de diversidad beta, no usaremos ni Weighted-UniFrac ni Unweighted-UniFrac.</li>
+</ol>
+<p>Se propone como ejercicio realizar de forma completa el análisis de las comunidades fúngicas.</p>
+<p>A modo de ayuda, se proporciona el código para elaborar el objeto <em>phyloseq</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Entrada de datos----------------------------------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"ASV_final_fung.txt"</span>, <span class="at">header =</span> T, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#eliminamos los código extras que proporciona UNITE</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Kingdom<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"k__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Kingdom)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Phylum<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"p__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Phylum)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Class<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"c__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Class)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Order<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"o__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Order)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Family<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"f__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Family)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Genus<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"g__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Genus)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>colnames_data<span class="ot">=</span><span class="fu">colnames</span>(data)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>mt<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"metadata.txt"</span>,<span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">header=</span>T)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>mt<span class="sc">$</span>replicate<span class="ot">=</span><span class="fu">as.character</span>(mt<span class="sc">$</span>replicate)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(mt)<span class="ot">=</span>mt<span class="sc">$</span>sample</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>tax <span class="ot">=</span>data[,<span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>ASV<span class="ot">=</span>data[,<span class="dv">9</span><span class="sc">:</span><span class="fu">ncol</span>(data)]</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>dna<span class="ot">=</span>Biostrings<span class="sc">::</span><span class="fu">DNAStringSet</span>(data<span class="sc">$</span>ASV_seqs) </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dna)<span class="ot">=</span> data<span class="sc">$</span>ASV_names</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(tax)<span class="ot">=</span>data<span class="sc">$</span>ASV_names</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(ASV)<span class="ot">=</span>data<span class="sc">$</span>ASV_names</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">rownames</span>(ASV), <span class="fu">rownames</span>(tax))</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">#Convertir a formato phyloseq</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>phy_OTUtable<span class="ot">=</span><span class="fu">otu_table</span>(ASV, <span class="at">taxa_are_rows =</span> T)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>phy_taxonomy<span class="ot">=</span><span class="fu">tax_table</span>(<span class="fu">as.matrix</span>(tax))</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>phy_metadata<span class="ot">=</span><span class="fu">sample_data</span>(mt) </span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">#Ponerlo todo en un objeto phyloseq</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>phy_fungi<span class="ot">=</span><span class="fu">phyloseq</span>(phy_OTUtable,phy_taxonomy,phy_metadata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 <!-- -->
@@ -677,16 +724,72 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Análisis comunidades fúngicas"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: false</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Análisis comunidades fúngicas"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: false</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(collapse = FALSE)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>El análisis de las comunidades fúngicas es prácticamente idéntico al de las comunidades bacterianas, si bien debemos tener presente varios aspectos:</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>1.**Base de datos de clasificación**: la base de datos UNITE añade un código delante del nombre de cada uno de los taxones. Este código ayuda a conocer con qué rango taxonómico estamos trabajando (por ejemplo, para el rengo Phylum, añade la expresión **p__**, para cada familia añade **f__**, etc), pero puede resultar incómodo. Se sugiere eliminarlo.</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Variabilidad en el tamaño de los amplicones**: como vimos, la región ITS2 es variable en cuanto a su longitud, lo que resta robusted a los árboles filogenéticos. Esto tiene varias implicaciones a la hora de desarrollar nuestros scripts:</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  a) Debemos tener cuidado al crear el objeto *phyloseq*</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  b) No podremos trabajar con medidas de disimilitud o distancia basadas en relaciones filogéneticas. Es decir, para los análisis de diversidad beta, no usaremos ni Weighted-UniFrac ni Unweighted-UniFrac.</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>Se propone como ejercicio realizar de forma completa el análisis de las comunidades fúngicas.</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>A modo de ayuda, se proporciona el código para elaborar el objeto *phyloseq*:</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co">#Entrada de datos----------------------------------------------------------</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>data<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"ASV_final_fung.txt"</span>, <span class="at">header =</span> T, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">#eliminamos los código extras que proporciona UNITE</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Kingdom<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"k__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Kingdom)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Phylum<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"p__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Phylum)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Class<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"c__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Class)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Order<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"o__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Order)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Family<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"f__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Family)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Genus<span class="ot">=</span><span class="fu">gsub</span>(<span class="st">"g__"</span>,<span class="st">""</span>,data<span class="sc">$</span>Genus)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>colnames_data<span class="ot">=</span><span class="fu">colnames</span>(data)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>mt<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"metadata.txt"</span>,<span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">header=</span>T)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>mt<span class="sc">$</span>replicate<span class="ot">=</span><span class="fu">as.character</span>(mt<span class="sc">$</span>replicate)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(mt)<span class="ot">=</span>mt<span class="sc">$</span>sample</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>tax <span class="ot">=</span>data[,<span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>]</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>ASV<span class="ot">=</span>data[,<span class="dv">9</span><span class="sc">:</span><span class="fu">ncol</span>(data)]</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>dna<span class="ot">=</span>Biostrings<span class="sc">::</span><span class="fu">DNAStringSet</span>(data<span class="sc">$</span>ASV_seqs) </span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dna)<span class="ot">=</span> data<span class="sc">$</span>ASV_names</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(tax)<span class="ot">=</span>data<span class="sc">$</span>ASV_names</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(ASV)<span class="ot">=</span>data<span class="sc">$</span>ASV_names</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">rownames</span>(ASV), <span class="fu">rownames</span>(tax))</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="co">#Convertir a formato phyloseq</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>phy_OTUtable<span class="ot">=</span><span class="fu">otu_table</span>(ASV, <span class="at">taxa_are_rows =</span> T)</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>phy_taxonomy<span class="ot">=</span><span class="fu">tax_table</span>(<span class="fu">as.matrix</span>(tax))</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>phy_metadata<span class="ot">=</span><span class="fu">sample_data</span>(mt) </span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="co">#Ponerlo todo en un objeto phyloseq</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>phy_fungi<span class="ot">=</span><span class="fu">phyloseq</span>(phy_OTUtable,phy_taxonomy,phy_metadata)</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
