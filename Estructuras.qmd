@@ -328,13 +328,13 @@ resta
 log_todos=log(precios) #hay funciones que se aplican al conjunto de elementos
 ```
 
-Ejercicio: crea un vector llamado 'productos' que contenga estos elementos: manzanas, pan, leche, huevos, queso. Crea otro llamado 'importe' que contenga estos elementos numéricos: 1.2, 2.5, 1.0, 3.0, 4.5. Calcula el importe de la compra total si compramos de unidades de cada producto, y dime cuál es el producto más barato.
+Ejercicio: crea un vector llamado 'productos' que contenga estos elementos: manzanas, pan, leche, huevos, queso. Crea otro llamado 'importe' que contenga estos elementos numéricos: 1.2, 2.5, 1.0, 3.0, 4.5. Calcula el importe de la compra total si compramos dos unidades de cada producto, y dime cuál es el producto más caro.
 
 ```{r, echo=FALSE}
 productos = c("manzanas", "pan", "leche", "huevos", "queso")
-precios=c(1.2, 2.5, 1.0, 3.0, 4.5)
+importe=c(1.2, 2.5, 1.0, 3.0, 4.5)
 
-compra= sum(precios * 2)
+compra= sum(importe * 2)
 productos[which.max(precios)]
 ```
 
@@ -421,7 +421,7 @@ dim(row_fusion) #MUY interesante: nos devuelve el numero de filas, y el numero d
 dim(col_fusion)
 ```
 
-Ejercicio: Crea una matriz de 4 filas (una por estudiante) y 3 columnas (una por asignatura) que contenga las calificaciones de unos alumnos: 7, 8, 6, 5, 9, 7, 8, 6, 9, 6, 7, 8. Añade el nombre a los estudiantes (Rafa, Lazaro, Patricia, Carmen), y a las materias (RStudio, Estadistica, Ecologia). Calcula el promedio de las notas de Rafa Calcula el promedio de las notas de todos los alumnos en Estadistica
+Ejercicio: Crea una matriz de 4 filas (una por estudiante) y 3 columnas (una por asignatura) que contenga las calificaciones de unos alumnos: 7, 8, 6, 5, 9, 7, 8, 6, 9, 6, 7, 8. Añade el nombre a los estudiantes (Rafa, Lazaro, Patricia, Carmen), y a las materias (RStudio, Estadistica, Ecologia). Calcula el promedio de las notas de Rafa. Calcula el promedio de las notas de todos los alumnos en Estadistica.
 
 ¿Qué estudiante obtuvo la mejor nota en Ecologia?
 
@@ -446,7 +446,10 @@ descalific=notas -1
 
 Son estructuras de datos rectangulares (2 dimensiones) que pueden estar compuestas por datos **heterogéneos**, es decir, por datos de cualquier clase. Podrían considerarse como la agrupación de vectores, pues los datos incluidos en la misma columna (considerando cada columna como si fuera un vector) han de ser de la misma clase. Son una de las estructuras más empleadas en ciencias de datos.
 
-Generalmente, los datos se distribuyen de la siguiente manera: -**Filas**: en cada fila tendremos las **instancias**, esto es, los datos relativos a cada individuo objeto de estudio. En el caso de comunidades microbianas, cada fila corresponde a la información de cada uno de los taxones. -**Columnas**: en cada columna se indican los valores de cada una de las variables medida o registrada para cada individuo. En el caso de comunidades microbianas, en cada columna tendremos el recuento o número de secuencias detectadas en cada una de las réplicas.
+Generalmente, los datos se distribuyen de la siguiente manera:
+
+-**Filas**: en cada fila tendremos las **instancias**, esto es, los datos relativos a cada individuo objeto de estudio. En el caso de comunidades microbianas, cada fila corresponde a la información de cada uno de los taxones. 
+-**Columnas**: en cada columna se indican los valores de cada una de las variables medida o registrada para cada individuo. En el caso de comunidades microbianas, en cada columna tendremos el recuento o número de secuencias detectadas en cada una de las réplicas.
 
 ```{r}
 head(iris)#dataframe incluido en todas las distribuciones de R
