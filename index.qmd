@@ -46,3 +46,8 @@ En este repositorio encontrarás información para seguir las clases impartidas 
 \-**Análisis ecológico de comunidades bacterianas**: en [este apartado](AnalisisBacterias.qmd) describiremos todos los pasos a seguir para analizar diferentes aspectos ecológicos de las comunidades bacterianas.
 
 \-**Análisis ecológico de comunidades fúngicas**: en [este apartado](AnalisisHongos) describiremos todos los pasos a seguir para analizar diferentes aspectos ecológicos de las comunidades fúngicas.
+
+
+# 4. LICENCIA
+ Curso Microbiota (CSIC) © 2025 by Ana V. Lasa is licensed under CC BY-NC 4.0 
+
